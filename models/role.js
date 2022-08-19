@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   Role.init({
     id: {
       allowNull: false,
+      primaryKey: true,
       autoIncrement: true,
       type: DataTypes.INTEGER
     },
