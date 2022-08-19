@@ -17,7 +17,11 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       type: DataTypes.INTEGER
     },
-    name: DataTypes.STRING,
+    name: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.STRING(50)
+    },
     description: DataTypes.STRING,
     deletedAt: DataTypes.DATE
   }, {
