@@ -25,3 +25,7 @@ const sendMail = async (email, subject = null, text = null) => {
 }
 
 // sendMail('msmarinip@gmail.com');
+
+module.exports = {
+    sendMail
+}
