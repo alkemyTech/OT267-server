@@ -6,6 +6,8 @@ const logger = require('morgan');
 const cors = require('cors')
 require('dotenv').config()
 
+
+// Routers imports
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const newsRouter = require('./routes/news');
