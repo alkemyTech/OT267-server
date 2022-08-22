@@ -10,10 +10,11 @@ require('dotenv').config()
 // Routers imports
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+
 const rolesRouter = require('./routes/roles');
 const activitiesRouter = require("./routes/activities");
 const organizationsRouter = require('./routes/organizations');
-
+const testimonialsRouter= require('./routes/testimonials')
 
 const app = express();
 app.use(cors());
@@ -33,6 +34,7 @@ app.use("/users", usersRouter);
 app.use("/activities", activitiesRouter);
 app.use('/roles', rolesRouter);
 app.use('/organizations', organizationsRouter);
+app.use('/testimonials', testimonialsRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
