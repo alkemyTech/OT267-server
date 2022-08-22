@@ -312,7 +312,7 @@ module.exports.htmlTemplate = `
                               <td style="width: 312px">
                                 <img
                                   height="auto"
-                                  src="./LOGO-SOMOS MAS.png"
+                                  src="https://i.ibb.co/BthyHrh/LOGO-SOMOS-MAS.png"
                                   style="
                                     border: 0;
                                     display: block;
