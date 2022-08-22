@@ -34,7 +34,7 @@ app.use("/users", usersRouter);
 app.use("/activities", activitiesRouter);
 app.use('/roles', rolesRouter);
 app.use('/organizations', organizationsRouter);
-app.use('/news', newsRouter);
+app.use('/testimonials', testimonialsRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
