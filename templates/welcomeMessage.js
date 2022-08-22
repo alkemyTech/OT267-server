@@ -10,9 +10,9 @@ module.exports.htmlTemplate = `
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- icons-->
-    
-    <!-- icons-->
+    <!-- Font awesome icons-->
+    <script src="https://kit.fontawesome.com/99a0a96035.js" crossorigin="anonymous"></script>
+    <!-- End Font awesome icons-->
     <style type="text/css">
       #outlook a {
         padding: 0;
@@ -397,14 +397,20 @@ module.exports.htmlTemplate = `
                             color: #000000;
                           "
                         >
-                          <p style="text-align: center; display: flex; flex-direction: column; font-size: medium;">
+                        <h2 style="text-align: center;">Datos de contacto:</h2>
+                          <p style="text-align: center; display: flex; flex-direction: column; font-size: 16px;">
                             <a href="mailto:somosfunfacionmas@gmail.com">
+                                <i class="fa-solid fa-envelope"></i>
                                 somosfunfacionmas@gmail.com
                             </a>
-                            <i class="fa-brands fa-square-instagram"></i>
-                            <a href="#instragram"><span>Instragram: @SomosMás</span></a>
-                            <a href="#facebook"><span>Facebook: Somos_Más</span></a>
-                            <span>Contacto: 1160112988</span>
+                            <a href="#instragram">
+                                <i class="fa-brands fa-square-instagram"></i> @SomosMás
+                            </a>
+                            <a href="#facebook">
+                                <i class="fa-brands fa-square-facebook"></i>
+                                Somos_Más
+                            </a>
+                            <span><i class="fa-solid fa-phone"></i> 1160112988</span>
                           </p>
                         </div>
                       </td>
