@@ -1,6 +1,7 @@
 'use strict';
-const {  Model } = require('sequelize');
-/* const Categories = require(model directory)*/
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class News extends Model {
     /**
@@ -13,26 +14,22 @@ module.exports = (sequelize, DataTypes) => {
       const model = models.Categories;
       if ( model ){
 
-            model.hasMany(News, {
-              foreignKey : 'categoryId'
-            });
-            News.belongsTo(model)
-        }
-      
+        model.hasMany(News, {
+          foreignKey : 'categoryId'
+        });
+        News.belongsTo(model)
+      }
     }
   };
   News.init({
-    id : DataTypes.INTEGER,
-
     name: DataTypes.STRING,
     content: DataTypes.TEXT,
-    
     image: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'News',
     timestamps : true,
-    paranoid: true,
+    paranoid: true
   });
   return News;
 };
