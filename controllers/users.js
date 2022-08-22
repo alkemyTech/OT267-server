@@ -1,7 +1,7 @@
 const { findUsers } = require('../services/users');
 const { body, validationResult } = require('express-validator');
 const { comparePassword } = require('../helpers/bcrypt');
-const e = require('express');
+
 
 const login = async (req, res) => {
 
