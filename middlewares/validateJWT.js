@@ -12,7 +12,7 @@ const validateJWT = (req, res = response, next) => {
     }
 
     try {
-        const { uid, name } = jwt.verify(
+        const { uid, name, role, email } = jwt.verify(
             token,
             process.env.SECRET_JWT_SEED
         );
