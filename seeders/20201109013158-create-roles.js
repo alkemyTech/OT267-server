@@ -21,6 +21,6 @@ module.exports = {
     /**
      * Revert seed for the model Roles.
      */
-    return queryInterface.bulkDelete('Roles', null, {});
+    await queryInterface.bulkDelete('Roles', null, {});
   }
 };
