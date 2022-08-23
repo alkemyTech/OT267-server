@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const { getAllOrg } = require('../controllers/organizations');
+
 
 /* GET organizations listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource from organizations');
+router.get('/public', function(req, res, next) {
+  return getAllOrg(req, res);
 });
 
 module.exports = router;
