@@ -2,13 +2,9 @@ const { validateJWT } = require("../helpers/jwt");
 const { User } = require("../models/index");
 
 const isAuth = async (req, res, next) => {
-  // const token = req.header["x-token"];
+  const token = req.header["x-token"];
 
-  // const { uid, message, status } = validateJWT(token);
-
-  let uid = 11;
-  let message = "Hola";
-  let status = true;
+  const { uid, message, status } = validateJWT(token);
 
   if (status === false) {
     return res.status(403).json({
