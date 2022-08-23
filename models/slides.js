@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     organizationId: {
       type:DataTypes.INTEGER,
       references: {
-        model: Organization,
+        model: 'Organizations',
         key: "id"
       },
       allowNull: false
