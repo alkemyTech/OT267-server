@@ -24,7 +24,9 @@ const isAuth = async (req, res, next) => {
     });
   }
 
-  req.user = userExists;
+  req.uid = uid;
+  req.message = "User exists";
+  req.status = true;
 
   next();
 };
