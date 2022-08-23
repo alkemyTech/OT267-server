@@ -1,7 +1,7 @@
 const { findUsers } = require('../services/users');
+const {deleteUser} = require('../services/user')
 const { body, validationResult } = require('express-validator');
 const { comparePassword } = require('../helpers/bcrypt');
-
 
 const login = async (req, res) => {
 
@@ -54,6 +54,20 @@ const login = async (req, res) => {
     }
 }
 
+const deleteSingleUser = async (_req, res, next) => {
+    const {id} = _req.params
+    const response = await deleteUser(id)
+    
+    if(response === 0) return res.status(404).json({
+	status: 404,
+	message: 'user does not exist'
+    })
+
+    res.status(200).json({ 
+        message : 'user deleted'
+    })
+
 module.exports = {
     login
-}
+    deleteSingleUser
+}; 

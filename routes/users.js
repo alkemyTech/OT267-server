@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const { login } = require('../controllers/users');
+const { deleteSingleUser } = require('../controllers/users');
+const { getAllUsers } = require('../controllers/userController');
 
-/* GET users listing. */
-router.get('/', function(req, res) {
-  res.send('respond with a resource');
-}); 
+router.get('/', getAllUsers);
 
 router.post('/auth/login', login);
+
+router.delete('/:id', deleteSingleUser);
 
 module.exports = router;
