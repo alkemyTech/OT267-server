@@ -9,13 +9,12 @@ const isAuth = async (req, res, next) => {
   if (status === false) {
     return res.status(403).json({
       status,
-      message,
+      message
       data: {},
     });
   }
 
-  const userExists = await User.findByPk(uid, { includes: "roleId" });
-  console.log(userExists);
+  const userExists = await User.findByPk(uid);
 
   if (!userExists) {
     return res.status(403).json({
