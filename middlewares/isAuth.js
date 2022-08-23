@@ -1,11 +1,10 @@
-const { includes } = require("lodash");
 const { validateJWT } = require("../helpers/jwt");
-const { User } = require("../models/user");
+const { User } = require("../models/index");
 
 const isAuth = async (req, res, next) => {
   const token = req.header["x-token"];
 
-  const { uid, name, status, message } = validateJWT(token);
+  const { uid, message, status } = validateJWT(token);
 
   if (status === false) {
     return res.status(403).json({
@@ -15,7 +14,8 @@ const isAuth = async (req, res, next) => {
     });
   }
 
-  const userExists = await User.findByPk(id, { include: "roleId" });
+  const userExists = await User.findByPk(uid, { includes: "roleId" });
+  console.log(userExists);
 
   if (!userExists) {
     return res.status(403).json({
@@ -29,3 +29,5 @@ const isAuth = async (req, res, next) => {
 
   next();
 };
+
+module.exports = { isAuth };
