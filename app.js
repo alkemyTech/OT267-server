@@ -12,29 +12,31 @@ const app = express();
 // Routers imports
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
 
 const rolesRouter = require('./routes/roles');
-const activitiesRouter = require("./routes/activities");
+const activitiesRouter = require('./routes/activities');
 const organizationsRouter = require('./routes/organizations');
 const testimonialsRouter= require('./routes/testimonials');
 const newsRouter = require('./routes/news');
 
-
 // view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 //middlewares
-app.use(logger("dev"));
+app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors());
+cd3ff74e6edd25f9c385de20ebc7e86d39f846da;
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/activities", activitiesRouter);
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/auth', authRouter);
+app.use('/activities', activitiesRouter);
 app.use('/roles', rolesRouter);
 app.use('/organizations', organizationsRouter);
 app.use('/testimonials', testimonialsRouter)
