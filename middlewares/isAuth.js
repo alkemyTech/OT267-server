@@ -9,7 +9,7 @@ const isAuth = async (req, res, next) => {
   if (status === false) {
     return res.status(403).json({
       status,
-      message
+      message,
       data: {},
     });
   }
