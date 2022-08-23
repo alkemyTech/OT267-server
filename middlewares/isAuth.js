@@ -24,9 +24,9 @@ const isAuth = async (req, res, next) => {
     });
   }
 
-  req.uid = uid;
   req.message = "User exists";
   req.status = true;
+  req.roleId = userExists.dataValues.roleId;
 
   next();
 };
