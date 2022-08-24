@@ -7,7 +7,10 @@ module.exports={
             const allOrg = await Organization.findAll({
                 attributes : ['name', 'image', 'phone', 'address']
             });
-            return res.json(allOrg);
+            return res.json({
+                message : 'Public data',
+                data : allOrg
+            });
         } catch(e) {
             return res.sendStatus(500);
         }
