@@ -5,6 +5,11 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Categorie extends Model {
     static associate(models) {
+
+      Categorie.hasMany(models.News, {
+        foreignKey : 'categoryId',
+        sourceKey : 'id'
+      });
     }
   }
   Categorie.init({
