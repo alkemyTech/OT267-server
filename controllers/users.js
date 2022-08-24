@@ -1,19 +1,34 @@
-const {deleteUser} = require('../services/user')
+const { allUsers, deleteUser } = require('../services/user');
 
+const {} = require('../services/user');
+
+const getAllUsers = async (req, res) => {
+    try {
+        const data = await allUsers();
+
+        if (data) {
+            res.status(200).json({ message: 'all users', data });
+        } else {
+            res.status(400).send('users not found');
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+module.exports = {};
 const deleteSingleUser = async (_req, res, next) => {
-    const {id} = _req.params
-    const response = await deleteUser(id)
-    
-    if(response === 0) return res.status(404).json({
-	status: 404,
-	message: 'user does not exist'
-    })
+    const { id } = _req.params;
+    const data = await deleteUser(id);
 
-    res.status(200).json({ 
-        message : 'user deleted'
-    })
-}; 
+    if (data === 0)
+        return res.status(404).json({
+            message: 'user does not exist',
+        });
 
-module.exports = {
-    deleteSingleUser
-}
+    res.status(200).json({
+        message: 'user deleted',
+    });
+};
+
+module.exports = { getAllUsers, deleteSingleUser };

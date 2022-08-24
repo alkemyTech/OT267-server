@@ -1,8 +1,7 @@
 const { User } = require('../models/index');
 
-// getAllUsers,
 const allUsers = async () => {
-    const allUsers = await User.findAll({
+    const users = await User.findAll({
         attributes: [
             'id',
             'firstName',
@@ -13,15 +12,16 @@ const allUsers = async () => {
             'roleId',
         ],
     });
-    return allUsers;
+    return users;
 };
 
 const deleteUser = async (id) => {
     return await User.destroy({
-        where: { id }
+        where: { id },
     });
-}
+};
 
 module.exports = {
-    allUsers, deleteUser
+    allUsers,
+    deleteUser,
 };

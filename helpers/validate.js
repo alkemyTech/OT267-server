@@ -1,6 +1,16 @@
 const { User } = require('../models/index');
 const { check } = require('express-validator');
-const { validateResult } = require('../helpers/validateHelper');
+const { validationResult } = require('express-validator');
+
+const handleResult = (req, res, next) => {
+    try {
+        validationResult(req).throw();
+        return next();
+    } catch (err) {
+        res.status(403);
+        res.send({ errors: err.array() });
+    }
+};
 
 const validateUser = [
     check('firstName', 'Escriba su nombre por favor')
@@ -59,7 +69,7 @@ const validateUser = [
             }
         }),
     (req, res, next) => {
-        validateResult(req, res, next);
+        handleResult(req, res, next);
     },
 ];
 

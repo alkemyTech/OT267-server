@@ -1,7 +1,7 @@
 const { User } = require('../models/index');
 const { Role } = require('../models/index');
 
-const { encryptPassword } = require('../helpers/bcryptHelper');
+const { encryptPassword } = require('../helpers/index');
 
 const createUser = async (req, res) => {
     try {
@@ -23,7 +23,7 @@ const createUser = async (req, res) => {
                 where: { id: roleId },
             });
             if (matchedRole === null) {
-                res.status(400).json({ msg: 'Rol no existente' });
+                res.status(400).json({ message: 'role non-existent' });
             } else {
                 const newUser = await User.create({
                     firstName,
@@ -31,46 +31,35 @@ const createUser = async (req, res) => {
                     email,
                     password: encrypted,
                     image,
+                    roleId,
                 });
-                newUser.setRole(roleId);
-                const response = {
-                    nombre: newUser.firstName,
-                    apellido: newUser.lastName,
-                    correo: newUser.email,
-                    rol:
-                        newUser.roleId === 1
-                            ? 'Usuario administrador'
-                            : 'Usuario regular',
-                    foto: newUser.image,
-                };
+
+                const data = await User.findOne({
+                    where: { email },
+                    attributes: { exclude: ['password'] },
+                });
                 res.status(201).json({
-                    msg: 'Su usuario se ha creado exitosamente',
-                    response,
+                    message: 'user created',
+                    data,
                 });
             }
         } else {
+            //role undefined
             const newUser = await User.create({
                 firstName,
                 lastName,
                 email,
                 password: encrypted,
                 image,
+                roleId: 2,
             });
-
-            //rol undefined - default assigment
-            newUser.setRole(2);
-
-            const response = {
-                nombre: newUser.firstName,
-                apellido: newUser.lastName,
-                correo: newUser.email,
-                rol: 'Usuario regular',
-                foto: newUser.image,
-            };
-
+            const data = await User.findOne({
+                where: { email },
+                attributes: { exclude: ['password'] },
+            });
             res.status(201).json({
-                msg: 'Su usuario se ha creado exitosamente',
-                response,
+                message: 'user created',
+                data,
             });
         }
     } catch (error) {
