@@ -1,15 +1,5 @@
 'use strict';
-/*
-  Add once Categories model exists
-  categoryId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Categories',
-          key: 'id',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
-    }, */
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('News', {
@@ -30,6 +20,15 @@ module.exports = {
       image: {
         type: Sequelize.STRING,
         allowNull : false,
+      },
+      categoryId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Categories',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
       },
       createdAt: {
         allowNull: false,
