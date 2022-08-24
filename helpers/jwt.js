@@ -1,24 +1,22 @@
-const jwt = require("jsonwebtoken"); 
+const jwt = require("jsonwebtoken");
 const { response } = require("express")
 
-const generateJWT = ( uid, name ) => {
-    return new Promise((resolve, reject ) => {
-        const payload = { uid, name };
+const generateJWT = (uid, name, role) => {
+    return new Promise((resolve, reject) => {
+        const payload = { uid, name, role };
 
-        jwt.sign(payload, process.env.SECRET_JWT_SEED,{
+        jwt.sign(payload, process.env.SECRET_JWT_SEED, {
             expiresIn: '72h'
-        }, ( err, token ) => {
-            if ( err ) {
+        }, (err, token) => {
+            if (err) {
                 console.log(err);
-                reject( 'Err: No se pudo generar el token' );
+                reject('Err: No se pudo generar el token');
             }
-            
-            resolve( token ); 
+
+            resolve(token);
         })
     })
 }
-
-
 
 const validateJWT = (token) => {
     if (!token) {
@@ -29,7 +27,7 @@ const validateJWT = (token) => {
         }
     }
     try {
-        const { uid, name } = jwt.verify(
+        const { uid, name, role } = jwt.verify(
             token,
             process.env.SECRET_JWT_SEED
         );
@@ -38,7 +36,8 @@ const validateJWT = (token) => {
             message: 'success',
             data: {
                 uid,
-                name
+                name,
+                role
             }
         }
 
@@ -46,7 +45,7 @@ const validateJWT = (token) => {
         return {
             status: false,
             message: 'Not valid Token',
-            data:{}
+            data: {}
         };
     }
 }
