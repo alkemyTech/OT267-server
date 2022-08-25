@@ -1,3 +1,5 @@
+
+
 /* eslint-disable no-unused-vars */
 
 const { body, validationResult } = require('express-validator');
@@ -8,6 +10,7 @@ const login = async (req, res) => {
   const { email, password } = req.body;
 
   body(email).isEmail(),
+
   body(password)
     .isLength({ min: 8 })
     .matches(/\d/)
@@ -55,6 +58,7 @@ const login = async (req, res) => {
   }
 };
 
+
 const getAllUsers = async (req, res) => {
   try {
     const data = await allUsers();
@@ -84,4 +88,7 @@ const deleteSingleUser = async (_req, res, next) => {
   });
 };
 
-module.exports = { login, getAllUsers, deleteSingleUser };
+module.exports = {
+  login,
+  deleteSingleUser,
+};
