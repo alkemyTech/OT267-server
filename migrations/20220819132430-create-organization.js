@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Organizations', {
@@ -42,7 +44,7 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-      }
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {

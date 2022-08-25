@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Roles', {

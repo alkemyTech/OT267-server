@@ -1,5 +1,5 @@
-'use strict';
 const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Role extends Model {
     /**
@@ -9,18 +9,18 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Role.hasMany(models.User, { 
-        foreignKey: "roleId",
-        sourceKey: "id"
-      }); 
+      Role.hasMany(models.User, {
+        foreignKey: 'roleId',
+        sourceKey: 'id',
+      });
     }
-  };
+  }
   Role.init({
     id: {
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
     },
     name: {
       allowNull: false,
@@ -28,19 +28,19 @@ module.exports = (sequelize, DataTypes) => {
       require: true,
       type: DataTypes.STRING(50),
       validate: {
-        notEmpty: { msg: "The name field must not be empty." },
-        notNull: { msg: "The name field does't support null values." }
-      }
+        notEmpty: { msg: 'The name field must not be empty.' },
+        notNull: { msg: "The name field does't support null values." },
+      },
     },
     description: DataTypes.STRING,
-    deletedAt: DataTypes.DATE
+    deletedAt: DataTypes.DATE,
   }, {
     sequelize,
     modelName: 'Role',
     paranoid: true,
     timestamps: true,
     createdAt: true,
-    updatedAt: true
+    updatedAt: true,
   });
   return Role;
 };

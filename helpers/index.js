@@ -1,10 +1,8 @@
 const { generateJWT, validateJWT } = require('./jwt');
-const { validateUser } = require('./validate');
-const { encryptPassword } = require('./encrypt');
+const { encryptPassword } = require('./bcrypt');
 
 module.exports = {
-    generateJWT,
-    validateJWT,
-    validateUser,
-    encryptPassword,
+  generateJWT,
+  validateJWT,
+  encryptPassword,
 };

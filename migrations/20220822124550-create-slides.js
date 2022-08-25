@@ -1,4 +1,5 @@
-'use strict';
+/* eslint-disable no-unused-vars */
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Slides', {
@@ -6,43 +7,43 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       imageURL: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       text: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       order: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
       },
       organizationId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Organizations',
-          key: 'id'
+          key: 'id',
         },
         allowNull: false,
         onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
       },
       deletedAt: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Slides');
-  }
+  },
 };

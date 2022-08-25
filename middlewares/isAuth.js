@@ -1,8 +1,8 @@
-const { validateJWT } = require("../helpers/jwt");
-const { User } = require("../models/index");
+const { validateJWT } = require('../helpers/jwt');
+const { User } = require('../models/index');
 
 const isAuth = async (req, res, next) => {
-  const token = req.header["x-token"];
+  const token = req.header['x-token'];
 
   const { uid, message, status } = validateJWT(token);
 
@@ -19,12 +19,12 @@ const isAuth = async (req, res, next) => {
   if (!userExists) {
     return res.status(403).json({
       status: false,
-      message: "User not exists",
+      message: 'User not exists',
       data: {},
     });
   }
 
-  req.message = "User exists";
+  req.message = 'User exists';
   req.status = true;
   req.roleId = userExists.dataValues.roleId;
 
