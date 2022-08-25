@@ -6,14 +6,14 @@ const { deleteSingleUser } = require('../controllers/users');
 const { getAllUsers } = require('../controllers/userController');
 
 // Middlewares prepared for use
-const { isAuth } = require('../middlewares/isAuth');
-const { isAdmin } = require('../middlewares/isAdmin');
+// const { isAuth } = require('../middlewares/isAuth');
+// const { isAdmin } = require('../middlewares/isAdmin');
 
 router.get('/', getAllUsers);
 
 router.post('/auth/login', login);
 
-router.delete('/:id', isAuth, isAdmin, deleteSingleUser);
+router.delete('/:id', deleteSingleUser);
 
 router.get('/', getAllUsers);
 
