@@ -2,19 +2,16 @@
 const express = require('express');
 
 const router = express.Router();
-const { login } = require('../controllers/users');
-const { deleteSingleUser } = require('../controllers/users');
-const { getAllUsers } = require('../controllers/userController');
+const { getAllUsers, deleteSingleUser } = require('../controllers/users');
 
 // Middlewares prepared for use
 
-const { getAllUsers, deleteSingleUser } = require('../controllers/users');
 const { isAuth } = require('../middlewares/isAuth');
 const { isAdmin } = require('../middlewares/isAdmin');
 
-router.get('/', getAllUsers);
+router.get('/', [isAuth, isAdmin], getAllUsers);
 
-router.post('/auth/login', login);
+
 
 router.delete('/:id', deleteSingleUser);
 
