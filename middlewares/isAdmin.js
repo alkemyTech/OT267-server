@@ -8,12 +8,12 @@ const isAdmin = async (req, res, next) => {
   try {
     role = await Role.findByPk(roleId);
   } catch (error) {
-    return res.status(400).json({ message: 'Something went wrong', data: {} });
+    return res.status(500).json({ message: 'Something went wrong', data: {} });
   }
 
   if (role.dataValues.name !== 'Admin') return res.status(404).json({ message: 'Role not founded or not valid', data: {} });
 
-  return next();
+  next();
 };
 
 module.exports = { isAdmin };
