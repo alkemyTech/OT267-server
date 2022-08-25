@@ -2,7 +2,7 @@
 
 /* eslint-disable no-unused-vars */
 const { body, validationResult } = require('express-validator');
-const { allUsers, deleteUser, findUsers } = require('../services/user');
+const { allUsers, deleteUser, findUsers, updatebyPk } = require('../services/user');
 const { comparePassword } = require('../helpers/bcrypt');
 
 const login = async (req, res) => {
@@ -87,7 +87,24 @@ const deleteSingleUser = async (_req, res, next) => {
   });
 };
 
+const updateUser = async (req, res) => {
+  try {
+
+    const { id } = req.params;
+    const response = await updatebyPk(id, req.body)
+    
+    return response 
+      ? res.status(200).json({message : 'User updated successfully'}) 
+      : res.status(404).json({message : 'User not found'});
+
+  }catch(error) {
+    console.log(error)
+  }
+}
+
 module.exports = {
   login,
   deleteSingleUser,
+  getAllUsers,
+  updateUser
 };
