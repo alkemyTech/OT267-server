@@ -1,34 +1,28 @@
-const { validateJWT } = require("../helpers/jwt");
-const { User } = require("../models/index");
+const { validateJWT } = require('../helpers/jwt');
+const { User } = require('../models/index');
 
 const isAuth = async (req, res, next) => {
-  const token = req.header["x-token"];
+  const token = req.headers.authorization;
 
-  const { uid, message, status } = validateJWT(token);
+  const { uid, message } = validateJWT(token).data;
 
-  if (status === false) {
-    return res.status(403).json({
-      status,
-      message,
-      data: {},
-    });
+  if (!uid) return res.status(400).json({ message, data: {} });
+
+  // Averiguo si el usuario existe
+  let userExists;
+
+  try {
+    userExists = await User.findByPk(uid);
+  } catch (error) {
+    return res.status(400).json({ message: 'Something went wrong', data: {} });
   }
 
-  const userExists = await User.findByPk(uid);
+  if (!userExists) return res.status(404).json({ message: 'User not exists', data: {} });
 
-  if (!userExists) {
-    return res.status(403).json({
-      status: false,
-      message: "User not exists",
-      data: {},
-    });
-  }
-
-  req.message = "User exists";
-  req.status = true;
+  // Agrego al req el id del rol para el proximo middleware que lo necesite
   req.roleId = userExists.dataValues.roleId;
 
-  next();
+  return next();
 };
 
 module.exports = { isAuth };

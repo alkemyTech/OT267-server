@@ -1,27 +1,19 @@
-const { Role } = require("../models/index");
+const { Role } = require('../models/index');
 
 const isAdmin = async (req, res, next) => {
-  const { status, message, roleId } = req;
+  const { roleId } = req;
 
-  const role = await Role.findByPk(roleId);
+  let role;
 
-  if (!role) {
-    return res.status(400).json({
-      status: false,
-      message: "Something went wrong",
-      data: {},
-    });
+  try {
+    role = await Role.findByPk(roleId);
+  } catch (error) {
+    return res.status(400).json({ message: 'Something went wrong', data: {} });
   }
 
-  if (role.dataValues.name === "Admin") {
-    next();
-  } else {
-    return res.status(404).json({
-      status: false,
-      message: "Route not founded",
-      data: {},
-    });
-  }
+  if (role.dataValues.name !== 'Admin') return res.status(404).json({ message: 'Role not founded or not valid', data: {} });
+
+  return next();
 };
 
 module.exports = { isAdmin };
