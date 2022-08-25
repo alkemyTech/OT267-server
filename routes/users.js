@@ -3,8 +3,7 @@ const express = require('express');
 
 const router = express.Router();
 const { login } = require('../controllers/users');
-const { deleteSingleUser } = require('../controllers/users');
-const { getAllUsers } = require('../controllers/userController');
+
 
 // Middlewares prepared for use
 
@@ -17,8 +16,6 @@ router.get('/', getAllUsers);
 router.post('/auth/login', login);
 
 router.delete('/:id', deleteSingleUser);
-
-router.get('/', getAllUsers);
 
 router.delete('/:id', deleteSingleUser);
 

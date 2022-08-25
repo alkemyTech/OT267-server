@@ -1,9 +1,10 @@
 const express = require('express');
 
 const router = express.Router();
-const { getAllOrg } = require('../controllers/organizations');
+const { getAllOrg, editOrgData } = require('../controllers/organizations');
 
 /* GET organizations listing. */
-router.get('/public', (req, res, next) => getAllOrg(req, res));
+router.get('/public', getAllOrg);
+router.put("/public", editOrgData)
 
 module.exports = router;

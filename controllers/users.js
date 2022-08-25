@@ -91,4 +91,5 @@ const deleteSingleUser = async (_req, res, next) => {
 module.exports = {
   login,
   deleteSingleUser,
+  getAllUsers
 };
