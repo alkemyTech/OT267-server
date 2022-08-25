@@ -1,7 +1,7 @@
-'use strict';
 const {
-  Model
+  Model,
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Slides extends Model {
     /**
@@ -11,34 +11,34 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Slides.belongsTo(models.Organization, {foreignKey: 'organizationId'});
+      Slides.belongsTo(models.Organization, { foreignKey: 'organizationId' });
     }
-  };
+  }
   Slides.init({
     imageURL: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     text: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     order: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
     },
     organizationId: {
-      type:DataTypes.INTEGER,
+      type: DataTypes.INTEGER,
       references: {
         model: 'Organizations',
-        key: "id"
+        key: 'id',
       },
-      allowNull: false
-    }
+      allowNull: false,
+    },
   }, {
     sequelize,
     modelName: 'Slides',
     paranoid: true,
-    timestamps: true
+    timestamps: true,
   });
   return Slides;
 };

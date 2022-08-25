@@ -1,3 +1,6 @@
+// ESLINT TEMPORAL
+/* eslint-disable no-unused-vars */
+
 const { Role } = require('../models/index');
 
 const isAdmin = async (req, res, next) => {

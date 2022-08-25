@@ -1,6 +1,5 @@
-'use strict';
 const {
-  Model
+  Model,
 } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
@@ -12,40 +11,40 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Organization.hasMany(models.Slides, {foreignKey: 'organizationId'} );
+      Organization.hasMany(models.Slides, { foreignKey: 'organizationId' });
     }
-  };
+  }
   Organization.init({
     name: {
-      type: DataTypes.STRING, 
-      allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     image: {
-      type: DataTypes.STRING, 
-      allowNull: false
-    }, 
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     address: {
-      type: DataTypes.STRING
-    }, 
+      type: DataTypes.STRING,
+    },
     phone: {
-      type: DataTypes.INTEGER
-    }, 
+      type: DataTypes.INTEGER,
+    },
     email: {
-      type: DataTypes.STRING, 
-      allowNull: false
-    }, 
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     welcomeText: {
-      type: DataTypes.TEXT, 
-      allowNull: false
-    }, 
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
     aboutUsText: {
-      type: DataTypes.TEXT
-    }
+      type: DataTypes.TEXT,
+    },
   }, {
     sequelize,
     modelName: 'Organization',
     paranoid: true,
-    timestamps: true
+    timestamps: true,
   });
   return Organization;
 };

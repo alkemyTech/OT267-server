@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const express = require('express');
 
 const router = express.Router();
@@ -6,8 +7,10 @@ const { deleteSingleUser } = require('../controllers/users');
 const { getAllUsers } = require('../controllers/userController');
 
 // Middlewares prepared for use
-// const { isAuth } = require('../middlewares/isAuth');
-// const { isAdmin } = require('../middlewares/isAdmin');
+
+const { getAllUsers, deleteSingleUser } = require('../controllers/users');
+const { isAuth } = require('../middlewares/isAuth');
+const { isAdmin } = require('../middlewares/isAdmin');
 
 router.get('/', getAllUsers);
 

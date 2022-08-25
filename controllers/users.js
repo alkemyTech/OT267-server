@@ -1,13 +1,19 @@
+
+
+/* eslint-disable no-unused-vars */
 const { body, validationResult } = require('express-validator');
-const { findUsers } = require('../services/users');
-const { deleteUser } = require('../services/user');
+const { allUsers, deleteUser, findUsers } = require('../services/user');
 const { comparePassword } = require('../helpers/bcrypt');
 
 const login = async (req, res) => {
   const { email, password } = req.body;
 
   body(email).isEmail(),
-  body(password).isLength({ min: 8 }).matches(/\d/).matches('[A-Z]')
+
+  body(password)
+    .isLength({ min: 8 })
+    .matches(/\d/)
+    .matches('[A-Z]')
     .trim()
     .trim();
 
@@ -21,7 +27,7 @@ const login = async (req, res) => {
     const userFound = await findUsers(email);
 
     if (!userFound) {
-      return res.status(404).send('Email not registered');
+      res.status(404).send('Email not registered');
     }
 
     await comparePassword(password, userFound.password)
@@ -51,13 +57,27 @@ const login = async (req, res) => {
   }
 };
 
-const deleteSingleUser = async (_req, res) => {
-  const { id } = _req.params;
-  const response = await deleteUser(id);
 
-  if (response === 0) {
+const getAllUsers = async (req, res) => {
+  try {
+    const data = await allUsers();
+
+    if (data) {
+      res.status(200).json({ message: 'all users', data });
+    } else {
+      res.status(400).send('users not found');
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const deleteSingleUser = async (_req, res, next) => {
+  const { id } = _req.params;
+  const data = await deleteUser(id);
+
+  if (data === 0) {
     return res.status(404).json({
-      status: 404,
       message: 'user does not exist',
     });
   }
@@ -66,6 +86,7 @@ const deleteSingleUser = async (_req, res) => {
     message: 'user deleted',
   });
 };
+
 module.exports = {
   login,
   deleteSingleUser,
