@@ -1,5 +1,8 @@
-const list = async (_req, res) => await res.send('respond with a list of testimonials'); 
+/* eslint-disable no-return-await */
+const list = async (_req, res) => await res.send('respond with a list of testimonials');
 
 module.exports = {
-    list
-}
+  list,
+};
+
+// ESLINT TEMPORAL
