@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+
 const { body, validationResult } = require('express-validator');
 const { allUsers, deleteUser, findUsers } = require('../services/user');
 const { comparePassword } = require('../helpers/bcrypt');
@@ -27,7 +28,7 @@ const login = async (req, res) => {
       res.status(404).send('Email not registered');
     }
 
-    await comparePassword(password, user.password)
+    await comparePassword(password, userFound.password)
       .then((result) => {
         if (result) {
           res.status(201).json({
