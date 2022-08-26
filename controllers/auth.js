@@ -1,68 +1,38 @@
 /* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
-const { User } = require('../models/index');
-const { Role } = require('../models/index');
+const { createUser, findUserById } = require('../services/user');
 
-const { encryptPassword } = require('../helpers/index');
-
-const createUser = async (req, res) => {
+const register = async (req, res) => {
   try {
-    const {
+    const { firstName, lastName, email, password, image, roleId } = req.body;
+
+    const data = await createUser(
       firstName,
       lastName,
       email,
       password,
-      passwordConfirmation,
       image,
       roleId,
-    } = req.body;
+    );
+    res.status(201).json({
+      message: 'user created',
+      data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-    const encrypted = await encryptPassword(password);
+const getUser = async (req, res) => {
+  try {
+    const { userId } = req;
 
-    // rol defined validation
-    if (roleId) {
-      const matchedRole = await Role.findOne({
-        where: { id: roleId },
-      });
-      if (matchedRole === null) {
-        res.status(400).json({ message: 'role non-existent' });
-      } else {
-        const newUser = await User.create({
-          firstName,
-          lastName,
-          email,
-          password: encrypted,
-          image,
-          roleId,
-        });
+    const data = await findUserById(userId);
 
-        const data = await User.findOne({
-          where: { email },
-          attributes: { exclude: ['password'] },
-        });
-        res.status(201).json({
-          message: 'user created',
-          data,
-        });
-      }
+    if (data) {
+      res.status(200).json({ message: 'user', data });
     } else {
-      // role undefined
-      const newUser = await User.create({
-        firstName,
-        lastName,
-        email,
-        password: encrypted,
-        image,
-        roleId: 2,
-      });
-      const data = await User.findOne({
-        where: { email },
-        attributes: { exclude: ['password'] },
-      });
-      res.status(201).json({
-        message: 'user created',
-        data,
-      });
+      // si esta autenticado que error va?
+      res.status(400).send('user not found');
     }
   } catch (error) {
     console.log(error);
@@ -70,7 +40,8 @@ const createUser = async (req, res) => {
 };
 
 module.exports = {
-  createUser,
+  register,
+  getUser,
 };
 
 // ESLINT TEMPORAL

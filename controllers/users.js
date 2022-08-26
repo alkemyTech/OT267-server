@@ -1,6 +1,6 @@
-
-
 /* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
+
 const { body, validationResult } = require('express-validator');
 const { allUsers, deleteUser, findUsers } = require('../services/user');
 const { comparePassword } = require('../helpers/bcrypt');
@@ -9,13 +9,12 @@ const login = async (req, res) => {
   const { email, password } = req.body;
 
   body(email).isEmail(),
-
-  body(password)
-    .isLength({ min: 8 })
-    .matches(/\d/)
-    .matches('[A-Z]')
-    .trim()
-    .trim();
+    body(password)
+      .isLength({ min: 8 })
+      .matches(/\d/)
+      .matches('[A-Z]')
+      .trim()
+      .trim();
 
   const errors = validationResult(req);
 
@@ -57,7 +56,6 @@ const login = async (req, res) => {
   }
 };
 
-
 const getAllUsers = async (req, res) => {
   try {
     const data = await allUsers();
@@ -90,4 +88,5 @@ const deleteSingleUser = async (_req, res, next) => {
 module.exports = {
   login,
   deleteSingleUser,
+  getAllUsers,
 };
