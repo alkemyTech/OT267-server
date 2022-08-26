@@ -16,9 +16,10 @@ const allUsers = async () => {
 };
 
 const deleteUser = async (id) => {
-  await User.destroy({
+  const response = await User.destroy({
     where: { id },
   });
+  return response;
 };
 
 const findUsers = async (email) => {
