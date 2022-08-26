@@ -34,7 +34,7 @@ const register = async (req, res) => {
     });
 
     // Send mail of welcome
-    await sendMail(email, 'Bienvenido a Somos Más ONG', '', htmlTemplate);
+    await sendMail(email, 'Bienvenido a Somos Más ONG.', '', htmlTemplate);
   } catch (error) {
     console.log(error);
   }
