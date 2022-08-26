@@ -10,7 +10,6 @@ const allUsers = async () => {
       'lastName',
       'email',
       'image',
-      'password',
       'roleId',
     ],
   });
