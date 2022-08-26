@@ -20,7 +20,7 @@ const validateUser = [
     .exists()
     .isLength({ min: 1 })
     .withMessage('Su nombre debe tener entre 1-15 letras')
-    .isLength({ max: 15 })
+    .isLength({ max: 30 })
     .withMessage('Su nombre debe tener entre 1-15 letras')
     .trim()
     .escape(),
@@ -29,7 +29,7 @@ const validateUser = [
     .exists()
     .isLength({ min: 1 })
     .withMessage('Su apellido debe tener entre 1-15 letras')
-    .isLength({ max: 15 })
+    .isLength({ max: 30 })
     .withMessage('Su apellido debe tener entre 1-15 letras')
     .trim()
     .escape(),

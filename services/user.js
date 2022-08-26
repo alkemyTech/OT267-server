@@ -18,9 +18,10 @@ const allUsers = async () => {
 };
 
 const deleteUser = async (id) => {
-  await User.destroy({
+  const response = await User.destroy({
     where: { id },
   });
+  return response;
 };
 
 const findUsers = async (email) => {
@@ -49,11 +50,11 @@ const createUser = async (
   email,
   password,
   image,
-  roleId
+  roleId,
 ) => {
   const encrypted = await encryptPassword(password);
 
-  const newUser = await User.create({
+  await User.create({
     firstName,
     lastName,
     email,
@@ -62,13 +63,8 @@ const createUser = async (
     roleId: roleId || 2,
   });
 
-  const user = {
-    firstName: newUser.firstName,
-    lastName: newUser.firstName,
-    email: newUser.email,
-    image: newUser.image,
-    roleId: newUser.roleId,
-  };
+  const user = await findUserByMail(email);
+
   return user;
 };
 
