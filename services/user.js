@@ -1,5 +1,7 @@
 const { User } = require('../models/index');
 
+const { encryptPassword } = require('../helpers/index');
+
 const allUsers = async () => {
   const users = await User.findAll({
     attributes: [
@@ -8,7 +10,6 @@ const allUsers = async () => {
       'lastName',
       'email',
       'image',
-      'password',
       'roleId',
     ],
   });
@@ -16,9 +17,10 @@ const allUsers = async () => {
 };
 
 const deleteUser = async (id) => {
-  await User.destroy({
+  const response = await User.destroy({
     where: { id },
   });
+  return response;
 };
 
 const findUsers = async (email) => {
@@ -30,25 +32,62 @@ const findUsers = async (email) => {
 };
 
 const updatebyPk = async (id, body) => {
-
   const user = await User.findByPk(id);
-  
-  if( !user ) return 0;
-  
-  for(let i in body){
-    user[i] 
-    ? user[i] = body[i] 
-    : ''
+
+  if (!user) return 0;
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const i in body) {
+    if (user[i]) user[i] = body[i];
   }
-  
+
   await user.save();
-  
+
   return 1;
-} 
+};
+
+const findUserByMail = async (email) => {
+  const user = await User.findOne({ where: { email } });
+
+  return user;
+};
+
+const findUserById = async (id) => {
+  const user = await User.findByPk(id);
+
+  return user;
+};
+
+const createUser = async (
+  firstName,
+  lastName,
+  email,
+  password,
+  image,
+  roleId,
+) => {
+  const encrypted = await encryptPassword(password);
+
+  await User.create({
+    firstName,
+    lastName,
+    email,
+    password: encrypted,
+    image,
+    roleId: roleId || 2,
+  });
+
+  const user = await findUserByMail(email);
+
+  return user;
+};
 
 module.exports = {
   allUsers,
   deleteUser,
   findUsers,
-  updatebyPk
+  createUser,
+  findUserByMail,
+  findUserById,
+  updatebyPk,
 };

@@ -483,4 +483,4 @@ module.exports.htmlTemplate = `
     </div>
   </body>
 </html>
-`
+`;

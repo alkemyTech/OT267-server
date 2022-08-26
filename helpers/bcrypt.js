@@ -6,18 +6,14 @@ const encryptPassword = async (password) => {
   return encrypted;
 };
 
-const comparePassword = () => {
-  bcrypt.compare(password, passwordHashed, (err, result) => {
-    if (err) {
-      return err;
-    }
-    if (result) {
-      return true;
-    }
-    return false;
-  });
+const comparePassword = (password, passwordHashed) => {
+  const validPassword = bcrypt.compareSync(password, passwordHashed);
+
+  if (!validPassword) return false;
+  return true;
 };
 
 module.exports = {
-  encryptPassword, comparePassword,
+  encryptPassword,
+  comparePassword,
 };

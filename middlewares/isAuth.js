@@ -4,7 +4,10 @@ const { User } = require('../models/index');
 const isAuth = async (req, res, next) => {
   const token = req.headers.authorization;
 
-  const { message, data: { uid } } = validateJWT(token);
+  const {
+    message,
+    data: { uid },
+  } = validateJWT(token);
 
   if (!uid) return res.status(400).json({ message, data: {} });
 
@@ -17,10 +20,13 @@ const isAuth = async (req, res, next) => {
     return res.status(500).json({ message: 'Something went wrong', data: {} });
   }
 
-  if (!userExists) return res.status(404).json({ message: 'User not exists', data: {} });
+  if (!userExists) {
+    return res.status(404).json({ message: 'User not exists', data: {} });
+  }
 
   // Agrego al req el id del rol para el proximo middleware que lo necesite
   req.roleId = userExists.dataValues.roleId;
+  req.userId = userExists.dataValues.id;
 
   next();
 };
