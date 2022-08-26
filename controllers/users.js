@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
-
+/* eslint-disable no-console */
 const { allUsers, deleteUser } = require('../services/user');
-
 
 const getAllUsers = async (req, res) => {
   try {

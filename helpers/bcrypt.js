@@ -7,14 +7,13 @@ const encryptPassword = async (password) => {
 };
 
 const comparePassword = (password, passwordHashed) => {
-  
   const validPassword = bcrypt.compareSync(password, passwordHashed);
-  
+
   if (!validPassword) return false;
   return true;
-
 };
 
 module.exports = {
-  encryptPassword, comparePassword,
+  encryptPassword,
+  comparePassword,
 };
