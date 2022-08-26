@@ -1,6 +1,10 @@
 const { check } = require('express-validator');
+
 const { validationResult } = require('express-validator');
-const { User } = require('../models/index');
+
+const { findUserByMail } = require('../services/user');
+
+const { findRoleById } = require('../services/role');
 
 const handleResult = (req, res, next) => {
   try {
@@ -16,7 +20,7 @@ const validateUser = [
     .exists()
     .isLength({ min: 1 })
     .withMessage('Su nombre debe tener entre 1-15 letras')
-    .isLength({ max: 15 })
+    .isLength({ max: 30 })
     .withMessage('Su nombre debe tener entre 1-15 letras')
     .trim()
     .escape(),
@@ -25,7 +29,7 @@ const validateUser = [
     .exists()
     .isLength({ min: 1 })
     .withMessage('Su apellido debe tener entre 1-15 letras')
-    .isLength({ max: 15 })
+    .isLength({ max: 30 })
     .withMessage('Su apellido debe tener entre 1-15 letras')
     .trim()
     .escape(),
@@ -33,7 +37,7 @@ const validateUser = [
   check('email', 'Escriba un correo válido por favor')
     .exists()
     .custom(async (value) => {
-      const matchedMail = await User.findOne({ where: { email: value } });
+      const matchedMail = await findUserByMail(value);
       if (matchedMail) {
         throw new Error('Ya existe un usuario con este correo');
       } else {
@@ -67,6 +71,20 @@ const validateUser = [
         return true;
       }
     }),
+
+  check('roleId').custom(async (value) => {
+    if (value) {
+      const matchedRole = await findRoleById(value);
+      if (matchedRole === null) {
+        throw new Error('role non-existent');
+      } else {
+        return true;
+      }
+    } else {
+      return true;
+    }
+  }),
+
   (req, res, next) => {
     handleResult(req, res, next);
   },
