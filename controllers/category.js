@@ -2,6 +2,11 @@ const { deleteCategory } = require('../services/category');
 
 const deleteSingleCategory = async (req, res) => {
   const { id } = req.params;
+  
+  if (isNaN(id)) {
+    return res.status(400).send('The id must be a number')
+  }
+  
   try {
     const response = await deleteCategory(id);
 
