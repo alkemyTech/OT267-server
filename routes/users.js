@@ -15,8 +15,6 @@ router.get('/', [isAuth, isAdmin], getAllUsers);
 
 router.delete('/:id', deleteSingleUser);
 
-router.get('/', getAllUsers);
 
-router.delete('/:id', deleteSingleUser);
 
 module.exports = router;
