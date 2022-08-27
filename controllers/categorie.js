@@ -19,11 +19,11 @@ const createNewCategory = async (req, res) => {
     });
   }
 
-  if (!newCategory) return res.status(400).json({ message: 'Something was wrong during creating the category' });
+  if (newCategory[1] === false) return res.status(400).json({ message: 'Category already exists' });
 
   return res.status(201).json({
     message: 'Category created',
-    data: newCategory,
+    data: newCategory[0],
   });
 };
 
