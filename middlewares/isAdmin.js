@@ -14,7 +14,7 @@ const isAdmin = async (req, res, next) => {
     return res.status(500).json({ message: 'Something went wrong', data: {} });
   }
 
-  if (role.dataValues.name !== 'Admin') return res.status(404).json({ message: 'Role not founded or not valid', data: {} });
+  if (role?.dataValues.name !== 'Admin') return res.status(404).json({ message: 'Role not founded or not valid', data: {} });
 
   next();
 };

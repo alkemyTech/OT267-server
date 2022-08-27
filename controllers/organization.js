@@ -17,31 +17,34 @@ const getAllOrg = async (req, res) => {
 };
 
 const editOrgData = async (req, res) => {
-  const {name, image, phone, address} = req.body
+  const {
+    name, image, phone, address,
+  } = req.body;
 
-  const body = {name, image, phone, address}
-  
+  const body = {
+    name, image, phone, address,
+  };
+
   let allOrg;
 
   try {
     allOrg = await Organization.findOne({
-      attributes: ["id",'name', 'image', 'phone', 'address'],
+      attributes: ['id', 'name', 'image', 'phone', 'address'],
     });
   } catch (e) {
-    return res.status(500).json({ message: "Something went wrong", data: {} });
+    return res.status(500).json({ message: 'Something went wrong', data: {} });
   }
 
-  if(!allOrg) return res.status(404).json({message: "Org. data not founded", data: {} })
+  if (!allOrg) return res.status(404).json({ message: 'Org. data not founded', data: {} });
 
-  Object.assign(allOrg.dataValues, body)
+  Object.assign(allOrg.dataValues, body);
 
-  await allOrg.save()
+  await allOrg.save();
 
-  return res.status(200).json({message: "Org updated succesfully", data: allOrg})
-  
+  return res.status(200).json({ message: 'Org updated succesfully', data: allOrg });
 };
 
 module.exports = {
   getAllOrg,
-  editOrgData
+  editOrgData,
 };
