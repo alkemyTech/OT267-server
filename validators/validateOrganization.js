@@ -12,25 +12,52 @@ const handleResult = (req, res, next) => {
 };
 
 const validateOrganization = [
-  check('name', 'Debe ingresar el nombre de la organizacion')
-    .exists()
+  check('name', 'Ingrese el nombre de la organizacion')
+    .optional({ checkFalsy: true })
+    .trim()
+    .isString()
+    .escape(),
+
+  check('email', 'Ingrese un email')
+    .optional({ checkFalsy: true })
+    .isEmail()
+    .withMessage('Debe ingresar un email valido')
     .trim()
     .escape(),
 
-  check('phone', 'Debe ingresar un numero de telefono correcto')
-    .exists()
+  check('phone', 'Ingrese un numero de telefono')
+    .optional({ checkFalsy: true })
     .isMobilePhone()
+    .withMessage('Debe ingresar un numero de telefono correcto')
     .trim()
     .escape(),
 
-  check('address', 'Debe ingresar una direccion')
-    .exists()
+  check('address', 'Ingrese una direccion')
+    .optional({ checkFalsy: true })
+    .isString()
     .trim()
     .escape(),
 
-  check('image', 'Debe ingresar una imagen')
-    .exists()
+  check('image', 'Ingrese una URL de imagen')
+    .optional({ checkFalsy: true })
     .isURL()
+    .withMessage('Debe ingresar URL')
+    .escape(),
+
+  check('aboutUsText', 'Ingrese una descripcion')
+    .optional({ checkFalsy: true })
+    .isString()
+    .isLength({ min: 100 })
+    .withMessage('Debe ingresar una descripcion con un minimo de 100 caracteres')
+    .trim()
+    .escape(),
+
+  check('welcomeText', 'Ingrese un mensaje de bienvenida')
+    .optional({ checkFalsy: true })
+    .isString()
+    .isLength({ min: 12 })
+    .withMessage('Debe ingresar un mensaje con un minimo de 20 caracteres')
+    .trim()
     .escape(),
 
   (req, res, next) => {

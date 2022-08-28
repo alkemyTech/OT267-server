@@ -18,30 +18,32 @@ const getAllOrg = async (req, res) => {
 
 const editOrgData = async (req, res) => {
   const {
-    name, image, phone, address,
+    name, image, phone, address, welcomeText, email, aboutUsText,
   } = req.body;
-
-  const body = {
-    name, image, phone, address,
-  };
 
   let allOrg;
 
   try {
     allOrg = await Organization.findOne({
-      attributes: ['id', 'name', 'image', 'phone', 'address'],
+      attributes: ['id', 'name', 'image', 'phone', 'address', 'welcomeText', 'email', 'aboutUsText'],
     });
   } catch (e) {
     return res.status(500).json({ message: 'Something went wrong', data: {} });
   }
 
-  if (!allOrg) return res.status(404).json({ message: 'Org. data not founded', data: {} });
+  if (!allOrg) return res.status(404).json({ message: 'Org. to edit not found', data: {} });
 
-  Object.assign(allOrg.dataValues, body);
+  allOrg.name = name || allOrg.dataValues.name;
+  allOrg.image = image || allOrg.dataValues.image;
+  allOrg.phone = phone || allOrg.dataValues.phone;
+  allOrg.address = address || allOrg.dataValues.address;
+  allOrg.welcomeText = welcomeText || allOrg.dataValues.welcomeText;
+  allOrg.aboutUsText = aboutUsText || allOrg.dataValues.aboutUsText;
+  allOrg.email = email || allOrg.dataValues.email;
 
-  await allOrg.save();
-
-  return res.status(200).json({ message: 'Org updated succesfully', data: allOrg });
+  await allOrg.save()
+    .then((data) => res.status(200).json({ message: 'Org updated succesfully', data }))
+    .catch((error) => res.status(500).json({ message: error.message, data: {} }));
 };
 
 module.exports = {
