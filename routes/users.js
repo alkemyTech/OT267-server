@@ -10,8 +10,6 @@ const { isAdmin } = require('../middlewares/isAdmin');
 
 router.get('/', [isAuth, isAdmin], getAllUsers);
 
-
 router.delete('/:id', deleteSingleUser);
-
 
 module.exports = router;

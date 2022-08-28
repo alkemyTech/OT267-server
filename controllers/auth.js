@@ -11,7 +11,9 @@ const { createUser, findUserById, findUsers } = require('../services/user');
 
 const register = async (req, res) => {
   try {
-    const { firstName, lastName, email, password, image, roleId } = req.body;
+    const {
+      firstName, lastName, email, password, image, roleId,
+    } = req.body;
 
     const user = await createUser(
       firstName,
@@ -29,7 +31,7 @@ const register = async (req, res) => {
       data: { user, token },
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({ message: 'server error', error });
   }
 };
 
@@ -39,14 +41,9 @@ const getUser = async (req, res) => {
 
     const data = await findUserById(userId);
 
-    if (data) {
-      res.status(200).json({ message: 'user', data });
-    } else {
-      // si esta autenticado que error va?
-      res.status(400).send('user not found');
-    }
+    res.status(200).json({ message: 'user', data });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({ message: 'server error', error });
   }
 };
 
@@ -54,7 +51,8 @@ const login = async (req, res) => {
   const { email, password } = req.body;
 
   body(email).isEmail(),
-    body(password).isLength({ min: 8 }).matches(/\d/).matches('[A-Z]').trim();
+  body(password).isLength({ min: 8 }).matches(/\d/).matches('[A-Z]')
+    .trim();
 
   const errors = validationResult(req);
 

@@ -1,13 +1,18 @@
 /* eslint-disable no-unused-vars */
-// Default imports
-const { query } = require('express');
+
 const express = require('express');
 
 const router = express.Router();
 
-/* GET users listing. */
-router.get('/', async (req, res, next) => {
-  res.send('respond with a resource');
-});
+const { validateActivity } = require('../middlewares/validateActivity');
+
+const { getAllActivities, createActivity } = require('../controllers/activities');
+
+const { isAdmin } = require('../middlewares/isAdmin');
+const { isAuth } = require('../middlewares/isAuth');
+
+router.get('/', isAuth, isAdmin, getAllActivities);
+
+router.post('/', isAuth, isAdmin, validateActivity, createActivity);
 
 module.exports = router;

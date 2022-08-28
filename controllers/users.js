@@ -7,10 +7,9 @@ const getAllUsers = async (req, res) => {
     const data = await allUsers();
 
     if (data) res.status(200).json({ message: 'All users', data });
-    else res.status(404).json({message: 'Users not found'});
-    
+    else res.status(404).json({ message: 'Users not found' });
   } catch (error) {
-    res.status(500).json({message: 'Error: Something went wrong, please try again later.'})
+    res.status(500).json({ message: 'Error: Something went wrong, please try again later.' });
   }
 };
 
