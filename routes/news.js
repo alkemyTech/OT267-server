@@ -2,6 +2,10 @@ const express = require('express');
 
 const router = express.Router();
 
-router.get('/', (req, res) => res.json('respond with a resource from news'));
+const { getNewById } = require('../controllers/news');
+const { isAuth } = require('../middlewares/isAuth');
+const { isAdmin } = require('../middlewares/isAdmin');
+
+router.get('/:id', [isAuth, isAdmin], getNewById);
 
 module.exports = router;
