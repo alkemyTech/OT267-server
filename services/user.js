@@ -30,6 +30,21 @@ const findUsers = async (email) => {
 
 const findUserByMail = async (email) => User.findOne({ where: { email } });
 
+const updatebyPk = async (id, body) => {
+  const user = await User.findByPk(id);
+
+  if (!user) return 0;
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const i in body) {
+    if (user[i]) user[i] = body[i];
+  }
+
+  await user.save();
+
+  return 1;
+};
+
 const findUserById = async (id) => User.findByPk(id);
 
 const createUser = async (
@@ -59,4 +74,5 @@ module.exports = {
   createUser,
   findUserByMail,
   findUserById,
+  updatebyPk,
 };

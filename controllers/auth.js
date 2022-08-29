@@ -9,6 +9,10 @@ const { comparePassword } = require('../helpers/bcrypt');
 
 const { createUser, findUserById, findUsers } = require('../services/user');
 
+const { sendMail } = require('../helpers/sendMail');
+
+const { htmlTemplate } = require('../templates/welcomeMessage');
+
 const register = async (req, res) => {
   try {
     const {
@@ -30,6 +34,9 @@ const register = async (req, res) => {
       message: 'user created',
       data: { user, token },
     });
+
+    // Send mail of welcome
+    await sendMail(email, 'Bienvenido a Somos Más ONG.', '', htmlTemplate);
   } catch (error) {
     res.status(500).json({ message: 'server error', error });
   }
