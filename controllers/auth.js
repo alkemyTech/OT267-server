@@ -1,72 +1,56 @@
 /* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
+const { body } = require('express-validator');
 
-const { User } = require('../models/index');
-const { Role } = require('../models/index');
-const { body, validationResult } = require('express-validator');
+const { validationResult } = require('express-validator');
+
+const { generateJWT } = require('../helpers/jwt');
+
 const { comparePassword } = require('../helpers/bcrypt');
-const { findUsers } = require('../services/user');
-const { encryptPassword } = require('../helpers/index');
-const { generateJWT } = require('../helpers');
 
-const createUser = async (req, res) => {
+const { createUser, findUserById, findUsers } = require('../services/user');
+
+const { sendMail } = require('../helpers/sendMail');
+
+const { htmlTemplate } = require('../templates/welcomeMessage');
+
+const register = async (req, res) => {
   try {
-    const {
+    const { firstName, lastName, email, password, image, roleId } = req.body;
+
+    const user = await createUser(
       firstName,
       lastName,
       email,
       password,
-      passwordConfirmation,
       image,
       roleId,
-    } = req.body;
+    );
 
-    const encrypted = await encryptPassword(password);
+    const token = await generateJWT(user.id, user.firstName, user.roleId);
 
-    // rol defined validation
-    if (roleId) {
-      const matchedRole = await Role.findOne({
-        where: { id: roleId },
-      });
-      if (matchedRole === null) {
-        res.status(400).json({ message: 'role non-existent' });
-      } else {
-        const newUser = await User.create({
-          firstName,
-          lastName,
-          email,
-          password: encrypted,
-          image,
-          roleId,
-        });
+    res.status(201).json({
+      message: 'user created',
+      data: { user, token },
+    });
 
-        const data = await User.findOne({
-          where: { email },
-          attributes: { exclude: ['password'] },
-        });
-        res.status(201).json({
-          message: 'user created',
-          data,
-        });
-      }
+    // Send mail of welcome
+    await sendMail(email, 'Bienvenido a Somos Más ONG.', '', htmlTemplate);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getUser = async (req, res) => {
+  try {
+    const { userId } = req;
+
+    const data = await findUserById(userId);
+
+    if (data) {
+      res.status(200).json({ message: 'user', data });
     } else {
-      // role undefined
-      const newUser = await User.create({
-        firstName,
-        lastName,
-        email,
-        password: encrypted,
-        image,
-        roleId: 2,
-      });
-      const data = await User.findOne({
-        where: { email },
-        attributes: { exclude: ['password'] },
-      });
-      res.status(201).json({
-        message: 'user created',
-        data,
-      });
+      // si esta autenticado que error va?
+      res.status(400).send('user not found');
     }
   } catch (error) {
     console.log(error);
@@ -77,12 +61,7 @@ const login = async (req, res) => {
   const { email, password } = req.body;
 
   body(email).isEmail(),
-  body(password)
-    .isLength({ min: 8 })
-    .matches(/\d/)
-    .matches('[A-Z]')
-    .trim()
-    .trim();
+    body(password).isLength({ min: 8 }).matches(/\d/).matches('[A-Z]').trim();
 
   const errors = validationResult(req);
 
@@ -96,9 +75,13 @@ const login = async (req, res) => {
     if (!userFound) {
       res.status(404).send('Email not registered');
     }
-    
-    if(comparePassword(password, userFound.password)){
-      const token = await generateJWT(userFound.id, userFound.name, userFound.roleId);
+
+    if (comparePassword(password, userFound.password)) {
+      const token = await generateJWT(
+        userFound.id,
+        userFound.name,
+        userFound.roleId,
+      );
       res.status(201).json({
         message: 'Login successfully',
         data: {
@@ -110,8 +93,8 @@ const login = async (req, res) => {
             image: userFound.image,
             roleId: userFound.roleId,
           },
-          token
-        }
+          token,
+        },
       });
     } else {
       res.status(404).json({
@@ -120,13 +103,14 @@ const login = async (req, res) => {
     }
   } catch (error) {
     res.status(404).json({
-      message: 'Error: please try again later'
+      message: 'Error: please try again later',
     });
   }
 };
 module.exports = {
-  createUser,
-  login
+  register,
+  getUser,
+  login,
 };
 
 // ESLINT TEMPORAL

@@ -5,13 +5,12 @@ module.exports = {
     es2021: true,
   },
   extends: 'airbnb-base',
-  overrides: [
-  ],
+  overrides: [],
   parserOptions: {
     ecmaVersion: 'latest',
   },
   rules: {
     'linebreak-style': 0,
-    treatUndefinedAsUnspecified: false,
+    treatUndefinedAsUnspecified: 0,
   },
 };

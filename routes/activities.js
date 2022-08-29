@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // Default imports
 const { query } = require('express');
 const express = require('express');
