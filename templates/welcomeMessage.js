@@ -1,4 +1,4 @@
-module.exports.htmlTemplate = `
+const htmlTemplate = `
 <!DOCTYPE html>
 <html
   xmlns="http://www.w3.org/1999/xhtml"
@@ -484,3 +484,7 @@ module.exports.htmlTemplate = `
   </body>
 </html>
 `;
+
+module.exports = {
+  htmlTemplate,
+};
