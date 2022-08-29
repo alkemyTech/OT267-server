@@ -9,6 +9,6 @@ const { validateOrganization } = require('../validators/validateOrganization');
 
 /* GET organizations listing. */
 router.get('/public', getAllOrg);
-router.put('/public', [isAuth, isAdmin, validateOrganization], editOrgData);
+router.post('/public', [isAuth, isAdmin, validateOrganization], editOrgData);
 
 module.exports = router;
