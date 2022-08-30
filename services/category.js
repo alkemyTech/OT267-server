@@ -7,4 +7,11 @@ const deleteCategory = async (id) => {
   return response;
 };
 
-module.exports = { deleteCategory };
+const allCategories = async () => {
+  const response = await Category.findAll({
+    attributes: ['name'],
+  });
+  return response;
+};
+
+module.exports = { deleteCategory, allCategories };
