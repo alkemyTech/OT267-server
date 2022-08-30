@@ -1,5 +1,14 @@
 const { Category } = require('../models/index');
 
+// eslint-disable-next-line no-return-await
+const categoryFindById = async (id) => await Category.findByPk(id, {
+  attributes: [
+    'name',
+    'description',
+    'image',
+  ],
+});
+
 const deleteCategory = async (id) => {
   const response = await Category.destroy({
     where: { id },
@@ -14,4 +23,7 @@ const allCategoriesName = async () => {
   return response;
 };
 
-module.exports = { deleteCategory, allCategoriesName };
+module.exports = {
+  deleteCategory, allCategoriesName,
+  categoryFindById,
+};
