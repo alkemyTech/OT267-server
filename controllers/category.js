@@ -6,7 +6,6 @@ const { categoryFindById } = require('../services/category');
 // ESLINT TEMPORAL
 
 // eslint-disable-next-line no-return-await
-const list = async (_req, res) => await res.send('respond with a resource');
 
 const getCategoryById = async (req, res) => {
   const { id } = req.params;
@@ -59,7 +58,6 @@ const getAllCategoriesName = async (req, res) => {
 
 module.exports = {
   deleteSingleCategory,
-  list,
   getCategoryById,
   getAllCategoriesName,
 };
