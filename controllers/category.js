@@ -31,7 +31,10 @@ const update = async (req, res) => {
   const body = req.body;
   try {
     const updateCategory = await updateByPk(id, body);
-    res.status(200).json(updateCategory);
+    res.status(200).json({
+      message: 'Update category',
+      data: updateCategory,
+    });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
