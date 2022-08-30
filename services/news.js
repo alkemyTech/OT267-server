@@ -1,5 +1,10 @@
 const { News } = require('../models/index');
 
+const getNewById = async (id) => News.findByPk(id);
+
+module.exports = {
+};
+
 const deleteNews = async (id) => {
   const response = await News.destroy({
     where: { id },
@@ -26,12 +31,9 @@ const updateNews = async (id, data) => {
   }, { where: { id } });
 };
 
-const findNewsById = async (id) => {
-  const news = await News.findByPk(id);
-
-  return news;
-};
-
 module.exports = {
-  createNews, updateNews, findNewsById, deleteNews,
+  getNewById,
+  createNews,
+  updateNews,
+  deleteNews,
 };

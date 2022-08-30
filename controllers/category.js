@@ -4,7 +4,6 @@
 const { deleteCategory, allCategoriesName } = require('../services/category');
 const { createCategory } = require('../services/category');
 const { categoryFindById } = require('../services/category');
-// ESLINT TEMPORAL
 
 // eslint-disable-next-line no-return-await
 
@@ -46,8 +45,8 @@ const getCategoryById = async (req, res) => {
 
 const deleteSingleCategory = async (req, res) => {
   const { id } = req.params;
-
   // eslint-disable-next-line no-restricted-globals
+
   if (isNaN(id)) {
     return res.status(400).send('The id must be a number');
   }
@@ -87,3 +86,5 @@ module.exports = {
   getAllCategoriesName,
   createNewCategory,
 };
+
+// ESLINT TEMPORAL

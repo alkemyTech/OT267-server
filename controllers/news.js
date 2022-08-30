@@ -1,7 +1,23 @@
 const {
-  createNews, updateNews, findNewsById, deleteNews,
+  createNews, updateNews, getNewById, deleteNews,
 } = require('../services/news');
 
+const getNewDetail = async (req, res) => {
+  const { id } = req.params;
+
+  if (!Number(id)) return res.status(400).json({ message: 'You need to pass an id' });
+
+  let newDetail;
+  try {
+    newDetail = await getNewById(id);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+
+  if (!newDetail) return res.status(404).json({ message: 'New not found' });
+
+  return res.status(200).json({ message: 'New requested succesfully', data: newDetail });
+};
 /* eslint-disable no-console */
 const deleteSingleNews = async (req, res) => {
   const { id } = req.params;
@@ -44,7 +60,7 @@ const updateANews = async (req, res) => {
 
     if (response[0] === 0) return res.status(404).send('news not found');
 
-    const newsUpdated = await findNewsById(id);
+    const newsUpdated = await getNewById(id);
 
     return res.status(201).json({
       menssage: 'news updated',
@@ -56,10 +72,8 @@ const updateANews = async (req, res) => {
 };
 
 module.exports = {
-
+  getNewDetail,
   deleteSingleNews,
-
   createANews,
   updateANews,
-
 };
