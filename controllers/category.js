@@ -26,7 +26,7 @@ const getAllCategoriesName = async (req, res) => {
   try {
     const categoriesName = await allCategoriesName();
     res.status(200).json({
-      message: 'Array with the name of all the registered categories.',
+      message: 'All categories.',
       data: categoriesName,
     });
   } catch (error) {
