@@ -2,19 +2,16 @@ const { User } = require('../models/index');
 
 const { encryptPassword } = require('../helpers/index');
 
-const allUsers = async () => {
-  const users = await User.findAll({
-    attributes: [
-      'id',
-      'firstName',
-      'lastName',
-      'email',
-      'image',
-      'roleId',
-    ],
-  });
-  return users;
-};
+const allUsers = async () => User.findAll({
+  attributes: [
+    'id',
+    'firstName',
+    'lastName',
+    'email',
+    'image',
+    'roleId',
+  ],
+});
 
 const deleteUser = async (id) => {
   const response = await User.destroy({
@@ -31,17 +28,24 @@ const findUsers = async (email) => {
   return null;
 };
 
-const findUserByMail = async (email) => {
-  const user = await User.findOne({ where: { email } });
+const findUserByMail = async (email) => User.findOne({ where: { email } });
 
-  return user;
-};
-
-const findUserById = async (id) => {
+const updatebyPk = async (id, body) => {
   const user = await User.findByPk(id);
 
-  return user;
+  if (!user) return 0;
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const i in body) {
+    if (user[i]) user[i] = body[i];
+  }
+
+  await user.save();
+
+  return 1;
 };
+
+const findUserById = async (id) => User.findByPk(id);
 
 const createUser = async (
   firstName,
@@ -53,7 +57,7 @@ const createUser = async (
 ) => {
   const encrypted = await encryptPassword(password);
 
-  await User.create({
+  return User.create({
     firstName,
     lastName,
     email,
@@ -61,10 +65,6 @@ const createUser = async (
     image,
     roleId: roleId || 2,
   });
-
-  const user = await findUserByMail(email);
-
-  return user;
 };
 
 module.exports = {
@@ -74,4 +74,5 @@ module.exports = {
   createUser,
   findUserByMail,
   findUserById,
+  updatebyPk,
 };

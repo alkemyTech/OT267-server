@@ -11,6 +11,7 @@ module.exports = {
                         'El primer sprint se basa en la modelación de la BBDD',
           image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
           categoryId: 1,
+          type: 'news',
           createdAt: new Date(),
           updatedAt: new Date(),
         },

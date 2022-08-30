@@ -15,10 +15,10 @@ const usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
 const rolesRouter = require('./routes/roles');
 const activitiesRouter = require('./routes/activities');
-const organizationsRouter = require('./routes/organizations');
+const organizationsRouter = require('./routes/organization');
 const testimonialsRouter = require('./routes/testimonials');
 const newsRouter = require('./routes/news');
-const categoriesRouter = require('./routes/categorie');
+const categoriesRouter = require('./routes/categories');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
