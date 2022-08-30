@@ -24,8 +24,16 @@ const deleteCategory = async (id) => {
   return response;
 };
 
+const allCategoriesName = async () => {
+  const response = await Category.findAll({
+    attributes: ['name'],
+  });
+  return response;
+};
+
 module.exports = {
   deleteCategory,
+  allCategoriesName,
   categoryFindById,
 >>>>>>> origin/main
 };
