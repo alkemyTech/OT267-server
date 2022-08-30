@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const {
-  list, getCategoryById, deleteSingleCategory, createNewCategory, getAllCategoriesName,
+  getCategoryById, deleteSingleCategory, createNewCategory, getAllCategoriesName,
 } = require('../controllers/category');
 const { validateCategoryById } = require('../middlewares/category');
 const { isAdmin } = require('../middlewares/isAdmin');
