@@ -9,7 +9,7 @@ const bucketNameDefault = process.env.aws_bucket_name;
  * @param {String} bucketName Name of the bucket.
  * @returns A promise with the file location url.
  */
- const s3UploadFile = (file, bucketName = bucketNameDefault) => {
+const s3UploadFile = (file, bucketName = bucketNameDefault) => {
   // Configure the file stream and obtain the upload parameters
   const fileStream = fs.createReadStream(file.tempFilePath);
   const uploadParams = {
