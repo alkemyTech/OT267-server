@@ -12,7 +12,7 @@ module.exports = {
           name: 'Somos Más',
           image: 'somosmas.jpg',
           address: 'San Isidro, Buenos Aires',
-          phone: 1160112988,
+          phone: '1160112988',
           email: 'somosfundacionmas@gmail.com',
           welcomeText: 'Este es un texto de bienvenida.',
           aboutUsText:
