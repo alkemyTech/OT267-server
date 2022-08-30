@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-return-await
 // ESLINT TEMPORAL
 
-const { deleteCategory, allCategoriesName } = require('../services/category');
+const { deleteCategory, allCategoriesName, updateByPk } = require('../services/category');
 const { createCategory } = require('../services/category');
 const { categoryFindById } = require('../services/category');
 
@@ -80,11 +80,27 @@ const getAllCategoriesName = async (req, res) => {
   }
 };
 
+const update = async (req, res) => {
+  const { id } = req.params;
+  // eslint-disable-next-line prefer-destructuring
+  const body = req.body;
+  try {
+    const updateCategory = await updateByPk(id, body);
+    res.status(200).json({
+      message: 'Update category',
+      data: updateCategory,
+    });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 module.exports = {
   deleteSingleCategory,
   getCategoryById,
   getAllCategoriesName,
   createNewCategory,
+  update,
 };
 
 // ESLINT TEMPORAL
