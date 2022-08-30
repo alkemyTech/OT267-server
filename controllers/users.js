@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 const { body, validationResult } = require('express-validator');
 const { comparePassword } = require('../helpers/bcrypt');
-
 const { allUsers, deleteUser, updatebyPk } = require('../services/user');
 
 const getAllUsers = async (req, res) => {
