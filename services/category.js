@@ -24,6 +24,7 @@ const allCategoriesName = async () => {
 };
 
 module.exports = {
-  deleteCategory, allCategoriesName,
+  deleteCategory,
+  allCategoriesName,
   categoryFindById,
 };
