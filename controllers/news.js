@@ -1,4 +1,6 @@
-const { createNews, updateNews, getNewById } = require('../services/news');
+const {
+  createNews, updateNews, getNewById, deleteNews,
+} = require('../services/news');
 
 const getNewDetail = async (req, res) => {
   const { id } = req.params;
@@ -15,6 +17,17 @@ const getNewDetail = async (req, res) => {
   if (!newDetail) return res.status(404).json({ message: 'New not found' });
 
   return res.status(200).json({ message: 'New requested succesfully', data: newDetail });
+};
+/* eslint-disable no-console */
+const deleteSingleNews = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const response = await deleteNews(id);
+    if (response === 0) res.status(404).json({ message: 'Not found' });
+    else res.status(200).json({ message: 'News deleted succesfuly' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error: Something went wrong. Please try again later.' });
+  }
 };
 
 const createANews = async (req, res) => {
@@ -59,5 +72,8 @@ const updateANews = async (req, res) => {
 };
 
 module.exports = {
-  createANews, updateANews, getNewDetail,
+  getNewDetail,
+  deleteSingleNews,
+  createANews,
+  updateANews,
 };
