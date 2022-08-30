@@ -1,4 +1,23 @@
-const { Activity } = require('../models');
+const { Activity } = require('../models/index');
+
+const allActivities = async () => Activity.findAll({
+  attributes: [
+    'id',
+    'name',
+    'content',
+    'image',
+  ],
+});
+
+const newActivity = async (
+  name,
+  content,
+  image,
+) => Activity.create({
+  name,
+  content,
+  image,
+});
 
 const updateByPk = async (id, body) => {
   const activity = await Activity.findByPk(id);
@@ -14,5 +33,7 @@ const updateByPk = async (id, body) => {
 };
 
 module.exports = {
+  allActivities,
+  newActivity,
   updateByPk,
 };
