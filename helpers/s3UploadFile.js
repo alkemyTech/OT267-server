@@ -27,8 +27,8 @@ const s3UploadFile = (file, bucketName = bucketNameDefault) => {
   return new Promise((resolve, reject) => {
     // call S3 to retrieve upload file to specified bucket
     s3Client.upload(uploadParams, (error, data) => {
-      if (error) reject(error.message);
-      resolve(data.Location);
+      if (!error) resolve(data.Location);
+      reject(error);
     });
   });
 };
