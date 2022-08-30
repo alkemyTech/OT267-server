@@ -1,12 +1,10 @@
 const { createNews } = require('../services/news');
 
 const createANews = async (req, res) => {
-  const {
-    name, content, image, categoryId,
-  } = req.body;
+  const data = req.body;
 
   try {
-    const response = await createNews(name, content, image, categoryId);
+    const response = await createNews(data);
 
     res.status(201).json({
       menssage: 'news created',

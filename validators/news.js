@@ -1,27 +1,27 @@
 const { check } = require('express-validator');
 const { Category } = require('../models/index');
-const { handleResult } = require('../helpers/hendleResultsValidator');
+const { handleResult } = require('../helpers/handleResultsValidator');
 
 const validateNewsFields = [
-  check('name', 'Escriba el nombre de noticia por favor')
+  check('name', 'El campo name es requerido')
     .trim()
     .exists()
     .isLength({ min: 1 })
     .escape(),
 
-  check('content', 'Escriba un contenido de noticia por favor')
+  check('content', 'El campo content es requerido')
     .trim()
     .exists()
     .isLength({ min: 1 })
     .escape(),
 
-  check('image', 'coloque una ruta de imagen válido por favor')
+  check('image', 'El campo image es requerido')
     .trim()
     .exists()
     .isLength({ min: 1 })
     .escape(),
 
-  check('categoryId', 'Escriba un id de categoria valido')
+  check('categoryId', 'La categoria no exite')
     .trim()
     .exists()
     .custom(async (value) => {
