@@ -12,7 +12,7 @@ const { isAuth } = require('../middlewares/isAuth');
 router.get('/', list);
 router.get('/:id', validateCategoryById, getCategoryById);
 
-router.delete('/:id',  isAuth, isAdmin, deleteSingleCategory);
+router.delete('/:id', isAuth, isAdmin, deleteSingleCategory);
 router.get('/', isAuth, isAdmin, getAllCategoriesName);
 
 module.exports = router;
