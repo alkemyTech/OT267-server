@@ -1,5 +1,12 @@
 const { News } = require('../models/index');
 
+const deleteNews = async (id) => {
+  const response = await News.destroy({
+    where: { id },
+  });
+  return response;
+};
+
 const createNews = async (name, content, image, categoryId) => (News.create({
   name,
   content,
@@ -25,4 +32,6 @@ const findNewsById = async (id) => {
   return news;
 };
 
-module.exports = { createNews, updateNews, findNewsById };
+module.exports = {
+  createNews, updateNews, findNewsById, deleteNews,
+};

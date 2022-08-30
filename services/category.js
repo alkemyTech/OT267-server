@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+const { Categorie } = require('../models/index');
+
+const createCategory = async (name) => Categorie.findOrCreate({ where: { name } });
+
+module.exports = {
+  createCategory,
+=======
 const { Category } = require('../models/index');
 
 // eslint-disable-next-line no-return-await
@@ -27,4 +35,5 @@ module.exports = {
   deleteCategory,
   allCategoriesName,
   categoryFindById,
+>>>>>>> origin/main
 };

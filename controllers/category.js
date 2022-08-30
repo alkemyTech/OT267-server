@@ -2,10 +2,35 @@
 // ESLINT TEMPORAL
 
 const { deleteCategory, allCategoriesName } = require('../services/category');
+const { createCategory } = require('../services/category');
 const { categoryFindById } = require('../services/category');
 // ESLINT TEMPORAL
 
 // eslint-disable-next-line no-return-await
+
+const createNewCategory = async (req, res) => {
+  const { name } = req.body;
+
+  if (!name || typeof name !== 'string') return res.status(400).json({ message: 'Name field is invalid', data: {} });
+
+  let newCategory;
+
+  try {
+    newCategory = await createCategory(name.toLowerCase());
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+      data: {},
+    });
+  }
+
+  if (newCategory[1] === false) return res.status(400).json({ message: 'Category already exists' });
+
+  return res.status(201).json({
+    message: 'Category created',
+    data: newCategory[0],
+  });
+};
 
 const getCategoryById = async (req, res) => {
   const { id } = req.params;
@@ -60,4 +85,5 @@ module.exports = {
   deleteSingleCategory,
   getCategoryById,
   getAllCategoriesName,
+  createNewCategory,
 };
