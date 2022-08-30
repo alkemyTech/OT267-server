@@ -1,12 +1,14 @@
 const express = require('express');
 
 const router = express.Router();
-const { updateANews } = require('../controllers/news');
-const { isAuth } = require('../middlewares/isAuth');
-const { isAdmin } = require('../middlewares/isAdmin');
 const { checkCategoryExist } = require('../validators/news');
+const { validateNewsFields } = require('../validators/news');
+const { isAdmin } = require('../middlewares/isAdmin');
+const { isAuth } = require('../middlewares/isAuth');
+const { createANews } = require('../controllers/news');
+const { updateANews } = require('../controllers/news');
 
-router.get('/', (req, res) => res.json('respond with a resource from news'));
+router.post('/', isAuth, isAdmin, validateNewsFields, createANews);
 router.put('/:id', isAuth, isAdmin, checkCategoryExist, updateANews);
 
 module.exports = router;
