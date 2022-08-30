@@ -9,7 +9,7 @@ const isAuth = async (req, res, next) => {
     data: { uid },
   } = validateJWT(token);
 
-  if (!uid) return res.status(400).json({ message, data: {} });
+  if (!uid) return res.status(401).json({ message, data: {} });
 
   // Averiguo si el usuario existe
   let userExists;
@@ -28,7 +28,7 @@ const isAuth = async (req, res, next) => {
   req.roleId = userExists.dataValues.roleId;
   req.userId = userExists.dataValues.id;
 
-  next();
+  return next();
 };
 
 module.exports = { isAuth };
