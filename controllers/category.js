@@ -1,3 +1,6 @@
+// eslint-disable-next-line no-return-await
+// ESLINT TEMPORAL
+
 const { deleteCategory } = require('../services/category');
 
 const deleteSingleCategory = async (req, res) => {
