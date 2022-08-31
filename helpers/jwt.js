@@ -1,9 +1,4 @@
-// ESLINT TEMPORAL
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
-
 const jwt = require('jsonwebtoken');
-const { response } = require('express');
 
 const generateJWT = (uid, name, role) => new Promise((resolve, reject) => {
   const payload = { uid, name, role };
@@ -12,8 +7,7 @@ const generateJWT = (uid, name, role) => new Promise((resolve, reject) => {
     expiresIn: '72h',
   }, (err, token) => {
     if (err) {
-      console.log(err);
-      reject('Err: No se pudo generar el token'); /* reject(Error('No se pudo generar el token')); */
+      reject(Error('No se pudo generar el token'));
     }
 
     resolve(token);

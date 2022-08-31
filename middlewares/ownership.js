@@ -1,13 +1,12 @@
-const { validateJWT } = require('../helpers/jwt');
+const { error } = require('../helpers/requestResponses');
 
 const isCurrentUser = async (req, res, next) => {
-  const token = req.headers.autorization;
   const { id } = req.params;
-  const { data } = validateJWT(token);
+  const { userId, roleId } = req;
 
-  if (data.uid !== id || data.role !== 'Admin') return res.status(403).send('unauthorized user');
+  if (userId === id || roleId === 1) return next();
 
-  next();
+  return error({ res, message: 'unauthorized user', status: 403 });
 };
 
 module.exports = { isCurrentUser };

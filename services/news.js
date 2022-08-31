@@ -2,9 +2,6 @@ const { News } = require('../models/index');
 
 const getNewById = async (id) => News.findByPk(id);
 
-module.exports = {
-};
-
 const deleteNews = async (id) => {
   const response = await News.destroy({
     where: { id },

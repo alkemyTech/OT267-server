@@ -1,15 +1,6 @@
 const { check } = require('express-validator');
 
-const { validationResult } = require('express-validator');
-
-const handleResult = (req, res, next) => {
-  try {
-    validationResult(req).throw();
-    return next();
-  } catch (err) {
-    return res.status(403).send({ errors: err.array() });
-  }
-};
+const { handleResult } = require('../middlewares/validateFields');
 
 const validateOrganization = [
   check('name', 'Ingrese el nombre de la organizacion')
@@ -21,18 +12,18 @@ const validateOrganization = [
   check('email', 'Ingrese un email')
     .optional({ checkFalsy: true })
     .isEmail()
-    .withMessage('Debe ingresar un email valido')
+    .withMessage('Ingrese un email válido')
     .trim()
     .escape(),
 
-  check('phone', 'Ingrese un numero de telefono')
+  check('phone', 'Ingrese un número de teléfono')
     .optional({ checkFalsy: true })
     .isMobilePhone()
-    .withMessage('Debe ingresar un numero de telefono correcto')
+    .withMessage('Debe ingresar un número de teléfono válido')
     .trim()
     .escape(),
 
-  check('address', 'Ingrese una direccion')
+  check('address', 'Ingrese una dirección')
     .optional({ checkFalsy: true })
     .isString()
     .trim()
@@ -41,14 +32,14 @@ const validateOrganization = [
   check('image', 'Ingrese una URL de imagen')
     .optional({ checkFalsy: true })
     .isURL()
-    .withMessage('Debe ingresar URL')
+    .withMessage('Ingresese una URL válida')
     .escape(),
 
   check('aboutUsText', 'Ingrese una descripcion')
     .optional({ checkFalsy: true })
     .isString()
     .isLength({ min: 100 })
-    .withMessage('Debe ingresar una descripcion con un minimo de 100 caracteres')
+    .withMessage('Ingresar una descripcion con 100 caracteres mínimo')
     .trim()
     .escape(),
 
@@ -56,7 +47,7 @@ const validateOrganization = [
     .optional({ checkFalsy: true })
     .isString()
     .isLength({ min: 12 })
-    .withMessage('Debe ingresar un mensaje con un minimo de 20 caracteres')
+    .withMessage('Ingrese un mensaje con  20 caracteres mínimo')
     .trim()
     .escape(),
 

@@ -1,8 +1,9 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-return-await */
-const list = async (_req, res) => await res.send('respond with a list of testimonials');
+const { success, error, serverError } = require('../helpers/requestResponses');
 
-module.exports = {
-  list,
-};
+const getAllTestimonials = async (req, res) => { success({ res, message: 'all testimonials' }); };
+
+module.exports = { getAllTestimonials };
 
 // ESLINT TEMPORAL

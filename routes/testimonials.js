@@ -1,9 +1,9 @@
 const express = require('express');
 
-const router = express.Router();
-const { list } = require('../controllers/testimonials');
+const { getAllTestimonials } = require('../controllers/testimonials');
 
-/* GET testimonials listing. */
-router.get('/', list);
+const router = express.Router();
+
+router.get('/', getAllTestimonials);
 
 module.exports = router;

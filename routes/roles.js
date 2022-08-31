@@ -1,6 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
+
 const {
   getAllRoles, getRoleById, createRole, updateRole, deleteRole,
 } = require('../controllers/roles');

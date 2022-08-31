@@ -1,3 +1,5 @@
+const { success, error, serverError } = require('../helpers/requestResponses');
+
 const {
   createNews, updateNews, getNewById, deleteNews,
 } = require('../services/news');
@@ -5,28 +7,24 @@ const {
 const getNewDetail = async (req, res) => {
   const { id } = req.params;
 
-  if (!Number(id)) return res.status(400).json({ message: 'You need to pass an id' });
-
   let newDetail;
   try {
     newDetail = await getNewById(id);
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
+  } catch (err) {
+    serverError({ res, message: err.message });
   }
-
-  if (!newDetail) return res.status(404).json({ message: 'New not found' });
-
-  return res.status(200).json({ message: 'New requested succesfully', data: newDetail });
+  if (!newDetail) return error({ res, message: 'news not found' });
+  return success({ res, message: 'news detail', data: newDetail });
 };
-/* eslint-disable no-console */
+
 const deleteSingleNews = async (req, res) => {
   const { id } = req.params;
   try {
     const response = await deleteNews(id);
-    if (response === 0) res.status(404).json({ message: 'Not found' });
-    else res.status(200).json({ message: 'News deleted succesfuly' });
-  } catch (error) {
-    res.status(500).json({ message: 'Error: Something went wrong. Please try again later.' });
+    if (response === 0) error({ res, message: 'news not found' });
+    else success({ res, message: 'news deleted' });
+  } catch (err) {
+    serverError({ res, message: err.message });
   }
 };
 
@@ -37,37 +35,29 @@ const createANews = async (req, res) => {
 
   try {
     const response = await createNews(name, content, image, categoryId);
-
-    res.status(201).json({
-      menssage: 'news created',
-      data: response,
+    success({
+      res, message: 'news created', data: response, status: 201,
     });
-  } catch (error) {
-    res.status(500).send(error.message);
+  } catch (err) {
+    serverError({ res, message: err.message });
   }
 };
 
 const updateANews = async (req, res) => {
   const { id } = req.params;
   const data = req.body;
-
-  if (Number.isNaN(Number(id))) {
-    return res.status(400).send('The id must be a number');
-  }
-
   try {
     const response = await updateNews(id, data);
 
-    if (response[0] === 0) return res.status(404).send('news not found');
+    if (response[0] === 0) return error({ res, message: 'news not found' });
 
     const newsUpdated = await getNewById(id);
 
-    return res.status(201).json({
-      menssage: 'news updated',
-      data: newsUpdated,
+    return success({
+      res, message: 'news updated', data: newsUpdated, status: 201,
     });
-  } catch (error) {
-    return res.status(500).send(error.message);
+  } catch (err) {
+    return serverError({ res, message: err.message });
   }
 };
 

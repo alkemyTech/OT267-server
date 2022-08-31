@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
+
+const { success, error, serverError } = require('../helpers/requestResponses');
 
 const { allRoles, findRoleById } = require('../services/role');
 
@@ -8,12 +9,12 @@ const getAllRoles = async (req, res) => {
     const data = await allRoles();
 
     if (data) {
-      res.status(200).json({ message: 'all roles', data });
+      success({ res, message: 'all roles', data });
     } else {
-      res.status(400).send('roles not found');
+      error({ res, message: 'roles not found' });
     }
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    serverError({ res, message: err.message });
   }
 };
 
@@ -21,14 +22,14 @@ const getRoleById = async (req, res) => {
   const { id } = req.params;
   try {
     const data = await findRoleById(id);
-    console.log(data);
+
     if (data) {
-      res.status(200).json({ message: 'role', data });
+      success({ res, message: 'role detail', data });
     } else {
-      res.status(400).send('role not found');
+      error({ res, message: 'role not found' });
     }
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    serverError({ res, message: err.message });
   }
 };
 const createRole = async (req, res) => {};

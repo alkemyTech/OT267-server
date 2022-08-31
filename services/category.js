@@ -1,9 +1,21 @@
 const { Category } = require('../models/index');
 
-const createCategory = async (name) => Category.findOrCreate({ where: { name } });
+const createCategory = async (data) => {
+  const { name, description, image } = data;
 
-// eslint-disable-next-line no-return-await
-const categoryFindById = async (id) => await Category.findByPk(id, {
+  const [category, created] = await Category.findOrCreate({
+    where: { name: name.toLowerCase() },
+    defaults: {
+      description: description ?? '',
+      image: image ?? '',
+    },
+  });
+
+  if (created) return category;
+  return created;
+};
+
+const categoryFindById = async (id) => Category.findByPk(id, {
   attributes: [
     'name',
     'description',
@@ -27,7 +39,6 @@ const allCategoriesName = async () => {
 
 const updateByPk = async (id, body) => {
   const category = await Category.findByPk(id);
-  if (!category || category === null) throw new Error(`Not found category for id: ${id}`);
   category.set(body);
   await category.save();
   return category;

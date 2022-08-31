@@ -1,15 +1,16 @@
 /* eslint-disable no-unused-vars */
 
 const express = require('express');
-const { updateActivity } = require('../controllers/activity');
+
 const { isAdmin } = require('../middlewares/isAdmin');
+
 const { isAuth } = require('../middlewares/isAuth');
 
 const router = express.Router();
 
-const { validateActivity } = require('../middlewares/validateActivity');
+const { validateActivity } = require('../validators/validateActivity');
 
-const { getAllActivities, createActivity } = require('../controllers/activities');
+const { getAllActivities, createActivity, updateActivity } = require('../controllers/activities');
 
 router.get('/', isAuth, isAdmin, getAllActivities);
 

@@ -1,18 +1,21 @@
-/* eslint-disable no-unused-vars */
 const express = require('express');
 
 const router = express.Router();
 
 const { getAllUsers, deleteSingleUser, updateUser } = require('../controllers/users');
 
-// Middlewares prepared for use
 const { isAuth } = require('../middlewares/isAuth');
+
 const { isAdmin } = require('../middlewares/isAdmin');
 
-router.get('/', [isAuth, isAdmin], getAllUsers);
+const { isCurrentUser } = require('../middlewares/ownership');
 
-router.delete('/:id', deleteSingleUser);
+const { validateRoleId } = require('../validators/validateUser');
 
-router.patch('/:id', updateUser);
+router.get('/', isAuth, isAdmin, getAllUsers);
+
+router.delete('/:id', isAuth, isCurrentUser, deleteSingleUser);
+
+router.patch('/:id', isAuth, isCurrentUser, validateRoleId, updateUser);
 
 module.exports = router;
