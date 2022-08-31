@@ -6,8 +6,7 @@ const getAllUsers = async (req, res) => {
   try {
     const data = await allUsers();
 
-    if (data) success({ res, message: 'all users', data });
-
+    if (data) success({ res, message: 'list of all users', data });
     else error({ res, message: 'users not found' });
   } catch (err) {
     serverError({ res, message: err.message });

@@ -9,7 +9,7 @@ const getAllRoles = async (req, res) => {
     const data = await allRoles();
 
     if (data) {
-      success({ res, message: 'all roles', data });
+      success({ res, message: 'list of all roles', data });
     } else {
       error({ res, message: 'roles not found' });
     }
@@ -24,7 +24,7 @@ const getRoleById = async (req, res) => {
     const data = await findRoleById(id);
 
     if (data) {
-      success({ res, message: 'role detail', data });
+      success({ res, message: 'role details', data });
     } else {
       error({ res, message: 'role not found' });
     }
@@ -32,9 +32,9 @@ const getRoleById = async (req, res) => {
     serverError({ res, message: err.message });
   }
 };
-const createRole = async (req, res) => {};
-const updateRole = async (req, res) => {};
-const deleteRole = async (req, res) => {};
+const createRole = async (req, res) => { };
+const updateRole = async (req, res) => { };
+const deleteRole = async (req, res) => { };
 
 module.exports = {
   getAllRoles,

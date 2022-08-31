@@ -4,7 +4,7 @@ const {
   createNews, updateNews, getNewById, deleteNews,
 } = require('../services/news');
 
-const getNewDetail = async (req, res) => {
+const getNewsDetail = async (req, res) => {
   const { id } = req.params;
 
   let newDetail;
@@ -62,7 +62,7 @@ const updateANews = async (req, res) => {
 };
 
 module.exports = {
-  getNewDetail,
+  getNewsDetail,
   deleteSingleNews,
   createANews,
   updateANews,

@@ -1,20 +1,13 @@
 const { generateJWT } = require('../helpers/jwt');
-
 const { comparePassword } = require('../helpers/bcrypt');
-
 const { success, error, serverError } = require('../helpers/requestResponses');
-
 const { createUser, findUserById, findUsers } = require('../services/user');
-
 const { sendMail } = require('../helpers/sendMail');
-
 const { htmlTemplate } = require('../templates/welcomeMessage');
 
 const register = async (req, res) => {
   try {
-    const {
-      email,
-    } = req.body;
+    const { email } = req.body;
 
     const user = await createUser({ ...req.body });
 
@@ -40,7 +33,7 @@ const getUser = async (req, res) => {
 
     const data = await findUserById(userId);
 
-    success({ res, message: 'user', data });
+    success({ res, message: 'user data', data });
   } catch (err) {
     serverError({ res, message: err.message });
   }
@@ -52,13 +45,15 @@ const login = async (req, res) => {
   try {
     const userFound = await findUsers(email);
 
+    if (!userFound) return error({ res, message: 'user not found', status: 404 });
+
     if (comparePassword(password, userFound.password)) {
       const token = await generateJWT(
         userFound.id,
         userFound.name,
         userFound.roleId,
       );
-      success({
+      return success({
         res,
         message: 'successfull login',
         data: {
@@ -74,13 +69,13 @@ const login = async (req, res) => {
         },
         status: 201,
       });
-    } else {
-      error({ res, message: 'invalid user or password', status: 401 });
     }
+    return error({ res, message: 'invalid email or password', status: 401 });
   } catch (err) {
-    serverError({ res, message: err.message });
+    return serverError({ res, message: err.message });
   }
 };
+
 module.exports = {
   register,
   getUser,

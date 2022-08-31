@@ -1,20 +1,17 @@
 /* eslint-disable consistent-return */
 const { success, error, serverError } = require('../helpers/requestResponses');
-
 const { findOrgPublicData, findOrgData } = require('../services/organization');
 
 const getOrg = async (req, res) => {
-  let data;
-
   try {
-    data = await findOrgPublicData();
+    const data = await findOrgPublicData();
+
+    if (data.length === 1) return error({ res, message: 'organization not found' });
+
+    return success({ res, message: 'organization data', data });
   } catch (err) {
     serverError({ res, message: err.message });
   }
-
-  if (data.length === 1) return error({ res, message: 'organization not found' });
-
-  return success({ res, message: 'organization data', data });
 };
 
 const editOrgData = async (req, res) => {
@@ -42,7 +39,7 @@ const editOrgData = async (req, res) => {
 
   await org.save()
     .then((data) => success({
-      res, message: 'organization updated', data, status: 201,
+      res, message: 'data of organization updated', data, status: 201,
     }))
     .catch((err) => serverError({ res, message: err.message }));
 };

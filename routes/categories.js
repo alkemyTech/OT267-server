@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const {
-  getCategoryById, deleteSingleCategory, createNewCategory, getAllCategoriesName, update,
+  getCategoryById, deleteSingleCategory, createNewCategory, getAllCategoriesName, updateACategory,
 } = require('../controllers/categories');
 
 const { validateCategoryId, validateNewsFields } = require('../validators/validateCategory');
@@ -20,6 +20,6 @@ router.delete('/:id', isAuth, isAdmin, validateCategoryId, deleteSingleCategory)
 
 router.get('/', isAuth, isAdmin, getAllCategoriesName);
 
-router.put('/:id', isAuth, isAdmin, validateCategoryId, update);
+router.put('/:id', isAuth, isAdmin, validateCategoryId, updateACategory);
 
 module.exports = router;

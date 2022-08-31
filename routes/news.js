@@ -9,10 +9,10 @@ const { isAuth } = require('../middlewares/isAuth');
 const { isAdmin } = require('../middlewares/isAdmin');
 
 const {
-  getNewDetail, createANews, updateANews, deleteSingleNews,
+  getNewsDetail, createANews, updateANews, deleteSingleNews,
 } = require('../controllers/news');
 
-router.get('/:id', isAuth, isAdmin, validateId, getNewDetail);
+router.get('/:id', isAuth, isAdmin, validateId, getNewsDetail);
 
 router.post('/', isAuth, isAdmin, validateNewsFields, createANews);
 

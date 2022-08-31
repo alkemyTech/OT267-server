@@ -1,7 +1,10 @@
 const { success, error, serverError } = require('../helpers/requestResponses');
-
 const {
-  deleteCategory, allCategoriesName, updateByPk, categoryFindById, createCategory,
+  deleteCategory,
+  allCategoriesName,
+  updateByPk,
+  categoryFindById,
+  createCategory,
 } = require('../services/category');
 
 const createNewCategory = async (req, res) => {
@@ -44,18 +47,18 @@ const deleteSingleCategory = async (req, res) => {
 const getAllCategoriesName = async (req, res) => {
   try {
     const categoriesName = await allCategoriesName();
-    success({ res, message: 'all categories', data: categoriesName });
+    success({ res, message: 'list of the name of all categories', data: categoriesName });
   } catch (err) {
     serverError({ res, message: err.message });
   }
 };
 
-const update = async (req, res) => {
+const updateACategory = async (req, res) => {
   const { id } = req.params;
   try {
     const updateCategory = await updateByPk(id, req.body);
     success({
-      res, message: 'all category updated', data: updateCategory, status: 201,
+      res, message: 'category updated', data: updateCategory, status: 201,
     });
   } catch (err) {
     serverError({ res, message: err.message });
@@ -67,5 +70,5 @@ module.exports = {
   getCategoryById,
   getAllCategoriesName,
   createNewCategory,
-  update,
+  updateACategory,
 };
