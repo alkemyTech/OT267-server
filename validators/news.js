@@ -40,8 +40,8 @@ const validateNewsFields = [
 
 const checkCategoryExist = [
   check('categoryId', 'Escriba un id de categoria valido')
-    .trim()
     .custom(async (value) => {
+      if (value === undefined) return true;
       const category = await Category.findOne({ where: { id: value } });
       if (!category) {
         throw new Error('la categoria no existe');
