@@ -11,10 +11,6 @@ const allRoles = async () => {
   return roles;
 };
 
-const findRoleById = async (id) => {
-  const role = await Role.findByPk(id);
-
-  return role;
-};
+const findRoleById = async (id) => Role.findByPk(id);
 
 module.exports = { allRoles, findRoleById };

@@ -1,5 +1,4 @@
-// ESLINT TEMPORAL
-/* eslint-disable no-unused-vars */
+const { error, serverError } = require('../helpers/requestResponses');
 
 const { Role } = require('../models/index');
 
@@ -10,13 +9,12 @@ const isAdmin = async (req, res, next) => {
 
   try {
     role = await Role.findByPk(roleId);
-  } catch (error) {
-    return res.status(500).json({ message: 'Something went wrong', data: {} });
+  } catch (err) {
+    serverError({ res, message: err.message });
   }
+  if (role?.dataValues.name !== 'Admin') return error({ res, message: 'forbidden: admin access is required', status: 403 });
 
-  if (role?.dataValues.name !== 'Admin') return res.status(404).json({ message: 'Role not founded or not valid', data: {} });
-
-  next();
+  return next();
 };
 
 module.exports = { isAdmin };

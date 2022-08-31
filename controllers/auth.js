@@ -1,44 +1,29 @@
-/* eslint-disable no-console */
-const { body } = require('express-validator');
-
-const { validationResult } = require('express-validator');
-
 const { generateJWT } = require('../helpers/jwt');
-
 const { comparePassword } = require('../helpers/bcrypt');
-
+const { success, error, serverError } = require('../helpers/requestResponses');
 const { createUser, findUserById, findUsers } = require('../services/user');
-
 const { sendMail } = require('../helpers/sendMail');
-
 const { htmlTemplate } = require('../templates/welcomeMessage');
 
 const register = async (req, res) => {
   try {
-    const {
-      firstName, lastName, email, password, image, roleId,
-    } = req.body;
+    const { email } = req.body;
 
-    const user = await createUser(
-      firstName,
-      lastName,
-      email,
-      password,
-      image,
-      roleId,
-    );
+    const user = await createUser({ ...req.body });
 
     const token = await generateJWT(user.id, user.firstName, user.roleId);
 
-    res.status(201).json({
+    success({
+      res,
       message: 'user created',
       data: { user, token },
+      status: 201,
     });
 
     // Send mail of welcome
     await sendMail(email, 'Bienvenido a Somos Más ONG.', '', htmlTemplate);
-  } catch (error) {
-    res.status(500).json({ message: 'server error', error });
+  } catch (err) {
+    serverError({ res, message: err.message });
   }
 };
 
@@ -48,31 +33,19 @@ const getUser = async (req, res) => {
 
     const data = await findUserById(userId);
 
-    res.status(200).json({ message: 'user', data });
-  } catch (error) {
-    res.status(500).json({ message: 'server error', error });
+    success({ res, message: 'user data', data });
+  } catch (err) {
+    serverError({ res, message: err.message });
   }
 };
 
 const login = async (req, res) => {
   const { email, password } = req.body;
 
-  body(email).isEmail(),
-  body(password).isLength({ min: 8 }).matches(/\d/).matches('[A-Z]')
-    .trim();
-
-  const errors = validationResult(req);
-
-  if (!errors.isEmpty()) {
-    res.status(400).json({ errors: errors.array() });
-  }
-
   try {
     const userFound = await findUsers(email);
 
-    if (!userFound) {
-      res.status(404).send('Email not registered');
-    }
+    if (!userFound) return error({ res, message: 'user not found', status: 404 });
 
     if (comparePassword(password, userFound.password)) {
       const token = await generateJWT(
@@ -80,8 +53,9 @@ const login = async (req, res) => {
         userFound.name,
         userFound.roleId,
       );
-      res.status(201).json({
-        message: 'Login successfully',
+      return success({
+        res,
+        message: 'successfull login',
         data: {
           user: {
             id: userFound.id,
@@ -93,22 +67,17 @@ const login = async (req, res) => {
           },
           token,
         },
-      });
-    } else {
-      res.status(404).json({
-        message: 'Invalid user or password',
+        status: 201,
       });
     }
-  } catch (error) {
-    res.status(404).json({
-      message: 'Error: please try again later',
-    });
+    return error({ res, message: 'invalid email or password', status: 401 });
+  } catch (err) {
+    return serverError({ res, message: err.message });
   }
 };
+
 module.exports = {
   register,
   getUser,
   login,
 };
-
-// ESLINT TEMPORAL

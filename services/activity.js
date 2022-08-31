@@ -19,21 +19,21 @@ const newActivity = async (
   image,
 });
 
-const updateByPk = async (id, body) => {
-  const activity = await Activity.findByPk(id);
-  if (!activity) return null;
+const updateActivityByPk = async (id, data) => {
+  const {
+    name, content, image,
+  } = data;
 
-  // eslint-disable-next-line no-restricted-syntax
-  for (const i in body) {
-    if (activity[i]) activity[i] = body[i];
-  }
-  await activity.save();
-
-  return activity;
+  return Activity.update({
+    name, content, image,
+  }, { where: { id } });
 };
+
+const getActivityById = async (id) => Activity.findByPk(id);
 
 module.exports = {
   allActivities,
   newActivity,
-  updateByPk,
+  updateActivityByPk,
+  getActivityById,
 };

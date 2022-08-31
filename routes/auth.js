@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const { validateUser } = require('../middlewares/validators');
+const { validateRegistrationData, validateLoginData } = require('../validators/validateUser');
 
 const { register, getUser, login } = require('../controllers/auth');
 
@@ -10,8 +10,8 @@ const { isAuth } = require('../middlewares/isAuth');
 
 router.get('/me', isAuth, getUser);
 
-router.post('/register', validateUser, register);
+router.post('/register', validateRegistrationData, register);
 
-router.post('/login', login);
+router.post('/login', validateLoginData, login);
 
 module.exports = router;
