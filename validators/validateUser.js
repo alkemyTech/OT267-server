@@ -115,7 +115,47 @@ const validateLoginData = [
   },
 ];
 
-const validateRoleId = [
+const validateFields = [
+  check('firstName', 'Ingrese su nombre')
+    .optional()
+    .isLength({ min: 1 })
+    .withMessage('El nombre debe tener entre 1-30 letras')
+    .isLength({ max: 30 })
+    .withMessage('El nombre debe tener entre 1-30 letras')
+    .trim()
+    .escape(),
+
+  check('lastName', 'Ingrese su apellido')
+    .optional()
+    .isLength({ min: 1 })
+    .withMessage('El apellido debe tener entre 1-30 letras')
+    .isLength({ max: 30 })
+    .withMessage('El apellido debe tener entre 1-30 letras')
+    .trim()
+    .escape(),
+
+  check('email', 'Ingrese un correo')
+    .optional()
+    .isEmail()
+    .withMessage('Ingrese un correo válido')
+    .custom(async (value) => {
+      const matchedMail = await findUserByMail(value);
+      if (matchedMail) {
+        throw new Error('Ya existe un usuario con este correo');
+      } else {
+        return true;
+      }
+    })
+    .trim()
+    .escape()
+    .normalizeEmail(),
+
+  check('image', 'Ingrese una URL de imagen')
+    .optional()
+    .isURL()
+    .withMessage('Ingresese una URL válida')
+    .escape(),
+
   check('roleId').custom(async (value) => {
     if (value) {
       const matchedRole = await findRoleById(value);
@@ -133,4 +173,4 @@ const validateRoleId = [
     handleResult(req, res, next);
   },
 ];
-module.exports = { validateRegistrationData, validateLoginData, validateRoleId };
+module.exports = { validateRegistrationData, validateLoginData, validateFields };

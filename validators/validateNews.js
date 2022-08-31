@@ -2,6 +2,8 @@ const { check } = require('express-validator');
 
 const { Category } = require('../models/index');
 
+const { News } = require('../models/index');
+
 const { handleResult } = require('../middlewares/validateFields');
 
 const validateNewsFields = [
@@ -40,13 +42,21 @@ const validateNewsFields = [
   },
 ];
 
-const checkCategoryExist = [
+const validateUpdate = [
   check('id', 'Ingrese el id de la novedad')
     .exists()
     .withMessage('El id de la novedad es requerido')
     .isNumeric()
     .withMessage('El id de la novedad debe ser un número')
-    .trim(),
+    .trim()
+    .custom(async (value) => {
+      const matchedId = await News.findOne({ where: { id: value } });
+      if (!matchedId) {
+        throw new Error('La novedad no existe');
+      } else {
+        return true;
+      }
+    }),
 
   check('categoryId', 'Ingrese un id de categoría')
     .custom(async (value) => {
@@ -70,11 +80,19 @@ const validateId = [
     .withMessage('El id de la novedad es requerido')
     .isNumeric()
     .withMessage('El id de la novedad debe ser un número')
-    .trim(),
+    .trim()
+    .custom(async (value) => {
+      const matchedId = await News.findOne({ where: { id: value } });
+      if (!matchedId) {
+        throw new Error('La novedad no existe');
+      } else {
+        return true;
+      }
+    }),
 
   (req, res, next) => {
     handleResult(req, res, next);
   },
 ];
 
-module.exports = { validateNewsFields, checkCategoryExist, validateId };
+module.exports = { validateNewsFields, validateUpdate, validateId };

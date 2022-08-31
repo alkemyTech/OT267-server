@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const { validateNewsFields, checkCategoryExist, validateId } = require('../validators/validateNews');
+const { validateNewsFields, validateUpdate, validateId } = require('../validators/validateNews');
 
 const { isAuth } = require('../middlewares/isAuth');
 
@@ -16,7 +16,7 @@ router.get('/:id', isAuth, isAdmin, validateId, getNewsDetail);
 
 router.post('/', isAuth, isAdmin, validateNewsFields, createANews);
 
-router.put('/:id', isAuth, isAdmin, checkCategoryExist, updateANews);
+router.put('/:id', isAuth, isAdmin, validateUpdate, updateANews);
 
 router.delete('/:id', isAuth, isAdmin, validateId, deleteSingleNews);
 
