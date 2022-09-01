@@ -12,10 +12,12 @@ const { isCurrentUser } = require('../middlewares/ownership');
 
 const { validateFields } = require('../validators/validateUser');
 
+const { uploadFile } = require('../middlewares/uploadFile');
+
 router.get('/', isAuth, isAdmin, getAllUsers);
 
 router.delete('/:id', isAuth, isCurrentUser, deleteSingleUser);
 
-router.patch('/:id', isAuth, isCurrentUser, validateFields, updateUser);
+router.patch('/:id', isAuth, isCurrentUser, validateFields, uploadFile, updateUser);
 
 module.exports = router;

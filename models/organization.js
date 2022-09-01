@@ -11,7 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Organization.hasMany(models.Slides, { foreignKey: 'organizationId' });
+      Organization.hasMany(models.Slide, {
+        foreignKey: 'organizationId',
+      });
     }
   }
   Organization.init({
@@ -39,6 +41,18 @@ module.exports = (sequelize, DataTypes) => {
     },
     aboutUsText: {
       type: DataTypes.TEXT,
+    },
+    facebook: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    linkedin: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    instagram: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
   }, {
     sequelize,
