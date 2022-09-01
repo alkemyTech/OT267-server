@@ -1,17 +1,14 @@
-const { Slides } = require('../models/index');
+const { Slide } = require('../models/index');
 
-const getSlides = async () => {
-  const roles = await Slides.findAll({
-    attributes: [
-      'id',
-      'imageURL',
-      'order',
-    ],
-    order: [
-      ['order', 'ASC'],
-    ],
-  });
-  return roles;
-};
+const getSlides = async () => Slide.findAll({
+  attributes: [
+    'id',
+    'image',
+    'order',
+  ],
+  order: [
+    ['order', 'ASC'],
+  ],
+});
 
 module.exports = { getSlides };
