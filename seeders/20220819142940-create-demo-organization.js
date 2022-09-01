@@ -17,6 +17,9 @@ module.exports = {
           welcomeText: 'Este es un texto de bienvenida.',
           aboutUsText:
                         'Desde 1997 en Somos Más trabajamos con los chicos y chicas, mamás y papás, abuelos y vecinos del barrio La Cava generando procesos de crecimiento y de inserción social. Uniendo las manos de todas las familias, las que viven en el barrio y las que viven fuera de ...',
+          facebook: 'Somos_Mas',
+          linkedin: 'https://www.linkedin.com/in/SomosMas/',
+          instagram: 'SomosMas',
           createdAt: new Date(),
           updatedAt: new Date(),
         },

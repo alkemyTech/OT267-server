@@ -40,6 +40,15 @@ module.exports = (sequelize, DataTypes) => {
     aboutUsText: {
       type: DataTypes.TEXT,
     },
+    facebook: {
+      type: DataTypes.STRING,
+    },
+    linkedin: {
+      type: DataTypes.STRING,
+    },
+    instagram: {
+      type: DataTypes.STRING,
+    },
   }, {
     sequelize,
     modelName: 'Organization',
