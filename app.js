@@ -20,6 +20,7 @@ const testimonialsRouter = require('./routes/testimonials');
 const newsRouter = require('./routes/news');
 const categoriesRouter = require('./routes/categories');
 const membersRouter = require('./routes/members');
+const slidesRouter = require('./routes/slides');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -43,6 +44,7 @@ app.use('/testimonials', testimonialsRouter);
 app.use('/news', newsRouter);
 app.use('/categories', categoriesRouter);
 app.use('/members', membersRouter);
+app.use('/slides', slidesRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
