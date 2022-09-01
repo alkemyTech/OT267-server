@@ -10,8 +10,10 @@ const { isAdmin } = require('../middlewares/isAdmin');
 
 const { validateOrganization } = require('../validators/validateOrganization');
 
+const { uploadFile } = require('../middlewares/uploadFile');
+
 router.get('/public', getOrg);
 
-router.post('/public', isAuth, isAdmin, validateOrganization, editOrgData);
+router.post('/public', isAuth, isAdmin, validateOrganization, uploadFile, editOrgData);
 
 module.exports = router;
