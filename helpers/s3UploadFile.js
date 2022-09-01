@@ -10,11 +10,15 @@ const bucketNameDefault = process.env.AWS_BUCKET_NAME;
  * @returns A promise with the file location url.
  */
 const s3UploadFile = (file, bucketName = bucketNameDefault) => {
+  const dateNow = new Date().toLocaleDateString().split('/').join('');
+  const hourNow = new Date().toLocaleTimeString().split(':').join('')
+    .substring(0, 6);
+
   // Configure the file stream and obtain the upload parameters
   const fileStream = fs.createReadStream(file.tempFilePath);
   const uploadParams = {
     Bucket: bucketName,
-    Key: file.name,
+    Key: dateNow + hourNow + file.name,
     Body: fileStream,
   };
 
