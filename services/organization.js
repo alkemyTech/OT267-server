@@ -1,7 +1,7 @@
 const { Organization } = require('../models/index');
 
 const findOrgPublicData = async () => Organization.findOne({
-  attributes: ['name', 'image', 'phone', 'address'],
+  attributes: ['name', 'image', 'phone', 'address', 'facebook', 'linkedin', 'instagram'],
 });
 
 const findOrgData = async () => Organization.findOne({
