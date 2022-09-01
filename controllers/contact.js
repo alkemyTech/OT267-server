@@ -6,9 +6,18 @@ const create = async (req, res) => {
     const { body } = req;
     const newContact = await createUser(body);
     if (!newContact) throw Error('Contacto no creado, por favor intente más tarde');
-    success(res, 'Contacto registrado con éxito', newContact, 201);
+    success({
+      res,
+      message: 'Contacto registrado con éxito',
+      data: newContact,
+      status: 201,
+    });
   } catch (err) {
-    serverError({ res, message: err.message, status: 500 });
+    serverError({
+      res,
+      message: err.message,
+      status: 500,
+    });
   }
 };
 
