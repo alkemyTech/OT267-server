@@ -1,7 +1,7 @@
-const { Slides } = require('../models');
+const { Slide } = require('../models');
 
 const updateSlideByPk = async (id, data) => {
-  const slide = await Slides.update({ ...data }, {
+  const slide = await Slide.update({ ...data }, {
     where: { id },
   });
   return slide;
