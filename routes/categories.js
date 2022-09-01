@@ -12,14 +12,16 @@ const { isAdmin } = require('../middlewares/isAdmin');
 
 const { isAuth } = require('../middlewares/isAuth');
 
+const { uploadFile } = require('../middlewares/uploadFile');
+
 router.get('/:id', isAuth, isAdmin, validateCategoryId, getCategoryById);
 
-router.post('/', isAuth, isAdmin, validateNewsFields, createNewCategory);
+router.post('/', isAuth, isAdmin, validateNewsFields, uploadFile, createNewCategory);
 
 router.delete('/:id', isAuth, isAdmin, validateCategoryId, deleteSingleCategory);
 
 router.get('/', isAuth, isAdmin, getAllCategoriesName);
 
-router.put('/:id', isAuth, isAdmin, validateCategoryId, updateACategory);
+router.put('/:id', isAuth, isAdmin, validateCategoryId, uploadFile, updateACategory);
 
 module.exports = router;
