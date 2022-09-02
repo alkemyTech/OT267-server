@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 const { success, error, serverError } = require('../helpers/requestResponses');
-const { list } = require('../services/members.js')
+const { list } = require('../services/members')
 
 const membersList = async (req, res) => {
 
