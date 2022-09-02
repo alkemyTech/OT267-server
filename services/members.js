@@ -1,4 +1,6 @@
-const { Member } = require('../models/member');
+
+const { Member } = require('../models/index');
+
 
 const list = async () => await Member.findAll()
 
