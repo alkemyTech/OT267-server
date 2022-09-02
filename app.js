@@ -21,6 +21,7 @@ const testimonialsRouter = require('./routes/testimonials');
 const newsRouter = require('./routes/news');
 const categoriesRouter = require('./routes/categories');
 const membersRouter = require('./routes/members');
+const slidesRouter = require('./routes/slides');
 const contactsRouter = require('./routes/contact');
 
 // view engine setup
@@ -49,6 +50,7 @@ app.use('/testimonials', testimonialsRouter);
 app.use('/news', newsRouter);
 app.use('/categories', categoriesRouter);
 app.use('/members', membersRouter);
+app.use('/slides', slidesRouter);
 app.use('/contacts', contactsRouter);
 
 // catch 404 and forward to error handler
