@@ -1,4 +1,15 @@
-const { Slide } = require('../models');
+const { Slide } = require('../models/index');
+
+const getSlides = async () => Slide.findAll({
+  attributes: [
+    'id',
+    'image',
+    'order',
+  ],
+  order: [
+    ['order', 'ASC'],
+  ],
+});
 
 const updateSlideByPk = async (id, data) => {
   const slide = await Slide.update({ ...data }, {
@@ -8,5 +19,6 @@ const updateSlideByPk = async (id, data) => {
 };
 
 module.exports = {
+  getSlides,
   updateSlideByPk,
 };

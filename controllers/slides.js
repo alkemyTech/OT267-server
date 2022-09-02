@@ -1,5 +1,14 @@
 const { success, error, serverError } = require('../helpers/requestResponses');
-const { updateSlideByPk } = require('../services/slide');
+const { getSlides, updateSlideByPk } = require('../services/slide');
+
+const getAllSlides = async (req, res) => {
+  try {
+    const data = await getSlides();
+    success({ res, message: 'list of all slides', data });
+  } catch (err) {
+    serverError({ res, message: err.message });
+  }
+};
 
 const updateSlide = async (req, res) => {
   try {
@@ -22,5 +31,6 @@ const updateSlide = async (req, res) => {
 };
 
 module.exports = {
+  getAllSlides,
   updateSlide,
 };
