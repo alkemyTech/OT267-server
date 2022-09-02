@@ -1,4 +1,15 @@
-const { Slide } = require('../models');
+const { Slide } = require('../models/index');
+
+const getSlides = async () => Slide.findAll({
+  attributes: [
+    'id',
+    'image',
+    'order',
+  ],
+  order: [
+    ['order', 'ASC'],
+  ],
+});
 
 const deleteSlideByPk = async (id) => {
   const deleted = await Slide.destroy({
@@ -8,5 +19,6 @@ const deleteSlideByPk = async (id) => {
 };
 
 module.exports = {
+  getSlides,
   deleteSlideByPk,
 };

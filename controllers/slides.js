@@ -1,5 +1,14 @@
 const { success, error, serverError } = require('../helpers/requestResponses');
-const { deleteSlideByPk } = require('../services/slide');
+const { getSlides, deleteSlideByPk } = require('../services/slide');
+
+const getAllSlides = async (req, res) => {
+  try {
+    const data = await getSlides();
+    success({ res, message: 'list of all slides', data });
+  } catch (err) {
+    serverError({ res, message: err.message });
+  }
+};
 
 const deleteSlide = async (req, res) => {
   try {
@@ -22,5 +31,6 @@ const deleteSlide = async (req, res) => {
 };
 
 module.exports = {
+  getAllSlides,
   deleteSlide,
 };

@@ -1,10 +1,16 @@
-const { Router } = require('express');
+const express = require('express');
 
-const router = Router();
-const { isAuth } = require('../middlewares/isAuth');
+const router = express.Router();
+
 const { isAdmin } = require('../middlewares/isAdmin');
-const { deleteSlide } = require('../controllers/slides');
+const { isAuth } = require('../middlewares/isAuth');
 
+const {
+  getAllSlides,
+  deleteSlide,
+} = require('../controllers/slides');
+
+router.get('/', isAuth, isAdmin, getAllSlides);
 router.delete('/:id', isAuth, isAdmin, deleteSlide);
 
 module.exports = router;
