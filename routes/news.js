@@ -12,11 +12,13 @@ const {
   getNewsDetail, createANews, updateANews, deleteSingleNews,
 } = require('../controllers/news');
 
+const { uploadFile } = require('../middlewares/uploadFile');
+
 router.get('/:id', isAuth, isAdmin, validateId, getNewsDetail);
 
-router.post('/', isAuth, isAdmin, validateNewsFields, createANews);
+router.post('/', isAuth, isAdmin, validateNewsFields, uploadFile, createANews);
 
-router.put('/:id', isAuth, isAdmin, validateUpdate, updateANews);
+router.put('/:id', isAuth, isAdmin, validateUpdate, uploadFile, updateANews);
 
 router.delete('/:id', isAuth, isAdmin, validateId, deleteSingleNews);
 

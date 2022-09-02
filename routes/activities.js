@@ -12,10 +12,12 @@ const { validateActivity } = require('../validators/validateActivity');
 
 const { getAllActivities, createActivity, updateActivity } = require('../controllers/activities');
 
+const { uploadFile } = require('../middlewares/uploadFile');
+
 router.get('/', isAuth, isAdmin, getAllActivities);
 
-router.post('/', isAuth, isAdmin, validateActivity, createActivity);
+router.post('/', isAuth, isAdmin, validateActivity, uploadFile, createActivity);
 
-router.put('/:id', isAuth, isAdmin, updateActivity);
+router.put('/:id', isAuth, isAdmin, uploadFile, updateActivity);
 
 module.exports = router;
