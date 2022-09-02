@@ -1,9 +1,7 @@
-
 const { Member } = require('../models/index');
 
-
-const list = async () => await Member.findAll()
+const list = async () => Member.findAll();
 
 module.exports = {
-    list
-}
+  list,
+};
