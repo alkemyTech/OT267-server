@@ -2,8 +2,8 @@ const express = require('express');
 
 const router = express.Router();
 const { validateContact } = require('../validators/validateContact');
-const { create } = require('../controllers/contact');
+const { createContact } = require('../controllers/contact');
 
-router.post('/', validateContact, create);
+router.post('/', validateContact, createContact);
 
 module.exports = router;

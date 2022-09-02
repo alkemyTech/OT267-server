@@ -1,10 +1,10 @@
-const { createUser } = require('../services/contact');
+const { createNewContact } = require('../services/contact');
 const { success, serverError } = require('../helpers/requestResponses');
 
-const create = async (req, res) => {
+const createContact = async (req, res) => {
   try {
     const { body } = req;
-    const newContact = await createUser(body);
+    const newContact = await createNewContact(body);
     if (!newContact) throw Error('Contacto no creado, por favor intente más tarde');
     success({
       res,
@@ -22,5 +22,5 @@ const create = async (req, res) => {
 };
 
 module.exports = {
-  create,
+  createContact,
 };

@@ -5,7 +5,7 @@ const { Contact } = require('../models');
  * @returns the information about the new contact create in the database.
  */
 // eslint-disable-next-line object-curly-newline
-const createUser = async ({ name, phone, email, message }) => {
+const createNewContact = async ({ name, phone, email, message }) => {
   const newContact = await Contact.create({
     name,
     phone,
@@ -16,5 +16,5 @@ const createUser = async ({ name, phone, email, message }) => {
 };
 
 module.exports = {
-  createUser,
+  createNewContact,
 };
