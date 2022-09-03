@@ -11,4 +11,6 @@ const getSlides = async () => Slide.findAll({
   ],
 });
 
-module.exports = { getSlides };
+const getASlide = async (id) => Slide.findOne({ where: { id } });
+
+module.exports = { getSlides, getASlide };
