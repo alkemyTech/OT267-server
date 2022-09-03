@@ -4,6 +4,7 @@ const { handleResult } = require('../middlewares/validateFields');
 const validateCreateMembers = [
   check('name', 'Ingrese el nombre de la novedad')
     .exists()
+    .isString()
     .isLength({ min: 1 })
     .trim()
     .escape(),
