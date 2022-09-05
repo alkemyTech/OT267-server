@@ -1,4 +1,4 @@
-const Contact = require('../models/index');
+const { Contact } = require('../models/index');
 
 const getContacts = async () => Contact.findAll({
   attributes: [
