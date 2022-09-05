@@ -1,5 +1,10 @@
 const { success, serverError, error } = require('../helpers/requestResponses');
-const { getSlides, getASlide, updateSlideByPk } = require('../services/slide');
+const {
+  getSlides,
+  getASlide,
+  updateSlideByPk,
+  deleteSlideByPk,
+} = require('../services/slide');
 
 const getAllSlides = async (req, res) => {
   try {
@@ -41,8 +46,29 @@ const updateSlide = async (req, res) => {
   }
 };
 
+const deleteSlide = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const response = await deleteSlideByPk(id);
+
+    return response ? success({
+      res,
+      message: 'Slide deleted successfully',
+    }) : error({
+      res,
+      message: 'Slide not found',
+    });
+  } catch (err) {
+    return serverError({
+      res,
+      message: err.message,
+    });
+  }
+};
+
 module.exports = {
   getAllSlides,
   getSlideDetail,
   updateSlide,
+  deleteSlide,
 };

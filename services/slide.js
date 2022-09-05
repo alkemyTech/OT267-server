@@ -20,8 +20,16 @@ const updateSlideByPk = async (id, data) => {
   return slide;
 };
 
+const deleteSlideByPk = async (id) => {
+  const deleted = await Slide.destroy({
+    where: { id },
+  });
+  return deleted;
+};
+
 module.exports = {
   getSlides,
   getASlide,
   updateSlideByPk,
+  deleteSlideByPk,
 };
