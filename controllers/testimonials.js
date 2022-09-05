@@ -1,8 +1,11 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-return-await */
 const { success, error, serverError } = require('../helpers/requestResponses');
 
-const { allTestimonies, createTestimony, destroyTestimony } = require('../services/testimony');
+const {
+  allTestimonies,
+  createTestimony,
+  destroyTestimony,
+  findTestimonyByPk,
+} = require('../services/testimony');
 
 const getAllTestimonials = async (req, res) => {
   try {
@@ -21,10 +24,13 @@ const createATestimony = async (req, res) => {
   try {
     const newTestimony = await createTestimony(name, content);
 
-    if (!newTestimony) return error({ res, message: 'Testimony already exists', status: 400 });
-
+    if (!newTestimony)
+      return error({ res, message: 'Testimony already exists', status: 400 });
     return success({
-      res, message: 'Testimony created', status: 201, data: newTestimony,
+      res,
+      message: 'Testimony created',
+      status: 201,
+      data: newTestimony,
     });
   } catch (err) {
     return serverError({ res, message: err.message });
@@ -33,14 +39,17 @@ const createATestimony = async (req, res) => {
 
 const deleteTestimony = async (req, res) => {
   const { id } = req.params;
+  const matchedId = await findTestimonyByPk(id);
   try {
-    await destroyTestimony(id);
-    return success({ res, message: 'testimony deleted' });
+    if (matchedId) {
+      await destroyTestimony(id);
+      success({ res, message: 'testimony deleted' });
+    } else {
+      error({ res, message: 'Testimony not found' });
+    }
   } catch (err) {
     serverError({ res, message: err.message });
   }
 };
 
 module.exports = { getAllTestimonials, createATestimony, deleteTestimony };
-
-// ESLINT TEMPORAL
