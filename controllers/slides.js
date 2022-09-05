@@ -1,5 +1,5 @@
-const { success, serverError } = require('../helpers/requestResponses');
-const { getSlides } = require('../services/slide');
+const { success, serverError, error } = require('../helpers/requestResponses');
+const { getSlides, getASlide } = require('../services/slide');
 
 const getAllSlides = async (req, res) => {
   try {
@@ -10,4 +10,15 @@ const getAllSlides = async (req, res) => {
   }
 };
 
-module.exports = { getAllSlides };
+const getSlideDetail = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const data = await getASlide(id);
+    if (!data) return error({ res, message: 'slide not found' });
+    return success({ res, message: 'slide detail', data });
+  } catch (err) {
+    return serverError({ res, message: err.message });
+  }
+};
+
+module.exports = { getAllSlides, getSlideDetail };
