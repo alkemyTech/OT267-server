@@ -1,11 +1,11 @@
 /* eslint-disable consistent-return */
 /* eslint-disable no-unused-vars */
 const { success, error, serverError } = require('../helpers/requestResponses');
-const { list, findMember, memberRemoved } = require('../services/members');
+const { findAllMembers, findMember, deleteSingleMember } = require('../services/members');
 
 const membersList = async (_req, res) => {
   try {
-    const data = await list();
+    const data = await findAllMembers();
 
     if (data.length === 0) return error({ res, message: 'No members' });
 
@@ -26,7 +26,7 @@ const removeMember = async (req, res) => {
 
     if (!data) return error({ res, message: 'Member not found' });
 
-    await memberRemoved(idParsed);
+    await deleteSingleMember(idParsed);
   } catch (err) {
     serverError({ res, message: err.message });
   }

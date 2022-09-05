@@ -10,6 +10,6 @@ const { isAuth } = require('../middlewares/isAuth');
 
 router.get('/', isAuth, isAdmin, membersList);
 
-router.delete('/:id', isAuth, isAdmin, removeMember);
+router.delete('/:id', isAuth, removeMember);
 
 module.exports = router;

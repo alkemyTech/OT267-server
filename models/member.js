@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Member',
-    /* paranoid: true, if this is set true it cant be deleted, just update the column deletedAt */
+    paranoid: true,
     timestamps: true,
   });
   return Member;
