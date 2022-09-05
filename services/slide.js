@@ -11,6 +11,8 @@ const getSlides = async () => Slide.findAll({
   ],
 });
 
+const getASlide = async (id) => Slide.findOne({ where: { id } });
+
 const updateSlideByPk = async (id, data) => {
   const slide = await Slide.update({ ...data }, {
     where: { id },
@@ -27,6 +29,7 @@ const deleteSlideByPk = async (id) => {
 
 module.exports = {
   getSlides,
+  getASlide,
   updateSlideByPk,
   deleteSlideByPk,
 };
