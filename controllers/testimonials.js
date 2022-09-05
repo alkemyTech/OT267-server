@@ -22,29 +22,25 @@ const createATestimony = async (req, res) => {
 };
 
 const updateTestimony = async (req, res) => {
-
   const { id } = req.params;
 
   const data = req.body;
 
   try {
+    const testimony = await findTestimony(id);
 
-    const update = await updateTestimonies(id, data);
+    if (!testimony) return error({ res, message: 'Testimony not found' });
 
-    if (!update) return error({ res, message: 'Testimony not found' });
+    await updateTestimonies(id, data);
 
     const testimonyUpdated = await findTestimony(id);
 
     return success({
       res, message: 'Testimony updated', data: testimonyUpdated,
     });
-
   } catch (err) {
-
     return serverError({ res, message: err.message });
-
   }
-
 };
 
 module.exports = { getAllTestimonials, createATestimony, updateTestimony };

@@ -9,6 +9,6 @@ const router = express.Router();
 
 router.get('/', getAllTestimonials);
 router.post('/', [isAuth, isAdmin, validateCreateTestimony], createATestimony);
-router.put('/:id', [isAuth, isAdmin, validateCreateTestimony], updateTestimony);
+router.put('/:id', isAuth, isAdmin, updateTestimony);
 
 module.exports = router;
