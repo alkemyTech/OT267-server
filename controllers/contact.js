@@ -1,5 +1,6 @@
 const { createNewContact } = require('../services/contact');
 const { success, serverError } = require('../helpers/requestResponses');
+const { sendMail } = require('../helpers/sendMail');
 
 const createContact = async (req, res) => {
   try {
@@ -12,6 +13,12 @@ const createContact = async (req, res) => {
       data: newContact,
       status: 201,
     });
+    // Send mail when registred new contact.
+    sendMail(
+      body.email,
+      'Gracias por contactar con Somas Más ONG',
+      'Sus datos de contacto han sido registrado con éxito.',
+    );
   } catch (err) {
     serverError({
       res,
