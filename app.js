@@ -22,7 +22,7 @@ const newsRouter = require('./routes/news');
 const categoriesRouter = require('./routes/categories');
 const membersRouter = require('./routes/members');
 const slidesRouter = require('./routes/slides');
-const contactsRouter = require('./routes/contact');
+const contactsRouter = require('./routes/contacts');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
