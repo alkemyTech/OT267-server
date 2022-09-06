@@ -1,6 +1,6 @@
 const { Member } = require('../models/index');
 
-const list = async () => Member.findAll();
+// eslint-disable-next-line no-return-await
 
 const createMember = async (body) => {
   const [member, created] = await Member.findOrCreate({
@@ -13,7 +13,29 @@ const createMember = async (body) => {
   return created;
 };
 
+const findAllMembers = async () => await Member.findAll();
+
+const findMember = async (id) => {
+  const member = await Member.findOne({
+    where: {
+      id,
+    },
+  });
+
+  return member;
+};
+
+const deleteSingleMember = async (id) => {
+  await Member.destroy({
+    where: {
+      id,
+    },
+  });
+};
+
 module.exports = {
-  list,
   createMember,
+  findAllMembers,
+  findMember,
+  deleteSingleMember
 };
