@@ -1,13 +1,8 @@
 const { success, error, serverError } = require('../helpers/requestResponses');
 
-const {
-  allTestimonies,
-  createTestimony,
-  destroyTestimony,
-  findTestimonyByPk,
-} = require('../services/testimony');
+const { allTestimonies, createTestimony, findTestimonyByPk, findTestimony, updateTestimonies, destroyTestimony } = require('../services/testimony');
 
-const getAllTestimonials = async (req, res) => {
+const getAllTestimonies = async (req, res) => {
   try {
     const data = await allTestimonies();
 
@@ -24,13 +19,35 @@ const createATestimony = async (req, res) => {
   try {
     const newTestimony = await createTestimony(name, content);
 
-    if (!newTestimony)
-      return error({ res, message: 'Testimony already exists', status: 400 });
+    if (!newTestimony) return error({ res, message: 'Testimony already exists', status: 400 });
+    
     return success({
       res,
       message: 'Testimony created',
       status: 201,
       data: newTestimony,
+    });
+  } catch (err) {
+    return serverError({ res, message: err.message });
+  }
+};
+
+const updateTestimony = async (req, res) => {
+  const { id } = req.params;
+
+  const data = req.body;
+
+  try {
+    const testimony = await findTestimony(id);
+
+    if (!testimony) return error({ res, message: 'Testimony not found' });
+
+    await updateTestimonies(id, data);
+
+    const testimonyUpdated = await findTestimony(id);
+
+    return success({
+      res, message: 'Testimony updated', data: testimonyUpdated,
     });
   } catch (err) {
     return serverError({ res, message: err.message });
@@ -52,4 +69,4 @@ const deleteTestimony = async (req, res) => {
   }
 };
 
-module.exports = { getAllTestimonials, createATestimony, deleteTestimony };
+module.exports = { getAllTestimonies, createATestimony, updateTestimony, deleteTestimony };

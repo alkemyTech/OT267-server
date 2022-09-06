@@ -21,6 +21,26 @@ const createTestimony = async (name, content) => {
   return created;
 };
 
+const findTestimony = async (id) => {
+  const testimony = await Testimony.findOne({
+    where: {
+      id,
+    },
+  });
+
+  return testimony;
+};
+
+const updateTestimonies = async (id, data) => {
+  const { name, image, content } = data;
+
+  await Testimony.update({ name, image, content }, {
+    where: {
+      id,
+    },
+  });
+};
+
 const findTestimonyByPk = async (id) => Testimony.findByPk(id);
 
 const destroyTestimony = async (id) => {
@@ -31,5 +51,11 @@ const destroyTestimony = async (id) => {
 };
 
 module.exports = {
-  allTestimonies, createTestimony, findTestimonyByPk, destroyTestimony,
+  allTestimonies, 
+  createTestimony,
+  findTestimony,
+  updateTestimonies,
+  findTestimonyByPk, 
+  destroyTestimony
 };
+
