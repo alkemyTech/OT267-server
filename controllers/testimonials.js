@@ -2,8 +2,9 @@
 /* eslint-disable no-return-await */
 const { success, error, serverError } = require('../helpers/requestResponses');
 
-const getAllTestimonials = async (req, res) => { await success({ res, message: 'all testimonials' }); };
 const { createTestimony, findTestimony, updateTestimonies } = require('../services/testimony');
+
+const getAllTestimonies = async (_req, res) => { await success({ res, message: 'all testimonials' }); };
 
 const createATestimony = async (req, res) => {
   const { name, content } = req.body;
@@ -43,6 +44,6 @@ const updateTestimony = async (req, res) => {
   }
 };
 
-module.exports = { getAllTestimonials, createATestimony, updateTestimony };
+module.exports = { getAllTestimonies, createATestimony, updateTestimony };
 
 // ESLINT TEMPORAL
