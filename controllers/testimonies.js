@@ -1,6 +1,8 @@
 const { success, error, serverError } = require('../helpers/requestResponses');
 
-const { allTestimonies, createTestimony, findTestimonyByPk, findTestimony, updateTestimonies, destroyTestimony } = require('../services/testimony');
+const {
+  allTestimonies, createTestimony, findTestimonyByPk, findTestimony, updateTestimonies, destroyTestimony,
+} = require('../services/testimony');
 
 const getAllTestimonies = async (req, res) => {
   try {
@@ -20,7 +22,7 @@ const createATestimony = async (req, res) => {
     const newTestimony = await createTestimony(name, content);
 
     if (!newTestimony) return error({ res, message: 'Testimony already exists', status: 400 });
-    
+
     return success({
       res,
       message: 'Testimony created',
@@ -69,4 +71,6 @@ const deleteTestimony = async (req, res) => {
   }
 };
 
-module.exports = { getAllTestimonies, createATestimony, updateTestimony, deleteTestimony };
+module.exports = {
+  getAllTestimonies, createATestimony, updateTestimony, deleteTestimony,
+};
