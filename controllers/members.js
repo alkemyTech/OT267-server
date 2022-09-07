@@ -4,7 +4,9 @@
 
 const { success, error, serverError } = require('../helpers/requestResponses');
 
-const { createMember, findAllMembers, findMember, deleteSingleMember } = require('../services/members');
+const {
+  createMember, findAllMembers, findMember, deleteSingleMember,
+} = require('../services/members');
 
 const createAMember = async (req, res) => {
   const {
@@ -18,10 +20,10 @@ const createAMember = async (req, res) => {
   try {
     const newMember = await createMember(body);
 
-    if (!newMember) return error({ res, message: 'Member already exists', status: 409 });
+    if (!newMember) return error({ res, message: 'member already exists', status: 409 });
 
     return success({
-      res, message: 'Member created succesfully', data: newMember, status: 201,
+      res, message: 'member created succesfully', data: newMember, status: 201,
     });
   } catch (err) {
     serverError({ res, message: err.message });
@@ -30,11 +32,11 @@ const createAMember = async (req, res) => {
 
 const membersList = async (_req, res) => {
   try {
-    const data = await findAllMembers(); 
-    
-    if (data.length === 0) return error({ res, message: 'No members' });
+    const data = await findAllMembers();
 
-    return success({ res, message: 'Members list', data });
+    if (data.length === 0) return error({ res, message: 'no members' });
+
+    return success({ res, message: 'members list', data });
   } catch (err) {
     serverError({ res, message: err.message });
   }
@@ -49,7 +51,7 @@ const removeMember = async (req, res) => {
   try {
     const data = await findMember(idParsed);
 
-    if (!data) return error({ res, message: 'Member not found' });
+    if (!data) return error({ res, message: 'member not found' });
 
     await deleteSingleMember(idParsed);
   } catch (err) {
@@ -57,10 +59,10 @@ const removeMember = async (req, res) => {
   }
 
   return success({ res, message: 'member removed' });
- };
+};
 
 module.exports = {
   createAMember,
   membersList,
-  removeMember
+  removeMember,
 };
