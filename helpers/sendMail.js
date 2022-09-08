@@ -1,17 +1,15 @@
-// ESLINT TEMPORAL
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
-
 require('dotenv').config();
 const sgMail = require('@sendgrid/mail');
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-const sendMail = async (email, subject = null, text = null, html = null) => {
-  if (!email) throw new Error('El email es requerido.');
-  if (!subject) subject = 'Contacto - Somos Más-';
-  if (!text) text = 'Hemos recibido su consulta. Muchas gracias.';
-  if (!html) html = `<div>${text}</div>`;
+const sendMail = async (
+  email,
+  subject = 'Contacto - Somos Más-',
+  text = 'Hemos recibido su consulta. Muchas gracias.',
+  html = `<div>${text}</div>`,
+) => {
+  if (!email) throw new Error('th email es requerido.');
   const msg = {
     to: email,
     from: process.env.EMAIL_SOMOSMAS,
