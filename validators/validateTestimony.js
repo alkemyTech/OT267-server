@@ -1,6 +1,6 @@
 const { check } = require('express-validator');
 
-const { handleResult } = require('../middlewares/validateFields');
+const { handleResult } = require('../middlewares');
 
 const validateCreateTestimony = [
   check('name', 'Ingrese un nombre para el testimonio')

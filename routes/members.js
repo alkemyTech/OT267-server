@@ -2,17 +2,14 @@ const express = require('express');
 
 const router = express.Router();
 
-const { createAMember, membersList, removeMember } = require('../controllers/members');
-
-const { isAdmin } = require('../middlewares/isAdmin');
-
-const { isAuth } = require('../middlewares/isAuth');
-
+const { isAdmin, isAuth } = require('../middlewares');
+const { createNewMember, getAllMembers, deleteSingleMember } = require('../controllers/members');
 const { validateCreateMembers } = require('../validators/validateMembers');
 
-router.get('/', isAuth, isAdmin, membersList);
-router.post('/', [isAuth, validateCreateMembers], createAMember);
+router.get('/', isAuth, isAdmin, getAllMembers);
 
-router.delete('/:id', isAuth, removeMember);
+router.post('/', [isAuth, validateCreateMembers], createNewMember);
+
+router.delete('/:id', isAuth, deleteSingleMember);
 
 module.exports = router;

@@ -1,10 +1,8 @@
 const { check } = require('express-validator');
 
 const { findUserByMail } = require('../services/user');
-
 const { findRoleById } = require('../services/role');
-
-const { handleResult } = require('../middlewares/validateFields');
+const { handleResult } = require('../middlewares');
 
 const validateRegistrationData = [
   check('firstName', 'Ingrese su nombre')

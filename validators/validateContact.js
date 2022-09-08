@@ -1,6 +1,6 @@
 const { check } = require('express-validator');
 
-const { handleResult } = require('../middlewares/validateFields');
+const { handleResult } = require('../middlewares');
 
 const validateContact = [
   check('name', 'El campo name es obligatorio.')

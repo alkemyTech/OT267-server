@@ -1,10 +1,7 @@
 const { check } = require('express-validator');
-
+const { handleResult } = require('../middlewares');
 const { Category } = require('../models/index');
-
 const { News } = require('../models/index');
-
-const { handleResult } = require('../middlewares/validateFields');
 
 const validateNewsFields = [
   check('name', 'Ingrese el nombre de la novedad')
