@@ -2,7 +2,7 @@ const { success, error, serverError } = require('../helpers');
 const {
   deleteCategory,
   allCategoriesName,
-  updateCategory,
+  updateCategoryByPk,
   findCategoryById,
   createCategory,
 } = require('../services/category');
@@ -15,7 +15,10 @@ const createNewCategory = async (req, res) => {
       error({ res, message: 'category already exists', status: 400 });
     } else {
       success({
-        res, message: 'category created', data, status: 201,
+        res,
+        message: 'category created',
+        data,
+        status: 201,
       });
     }
   } catch (err) {
@@ -47,7 +50,11 @@ const deleteSingleCategory = async (req, res) => {
 const getAllCategoriesName = async (req, res) => {
   try {
     const categoriesName = await allCategoriesName();
-    success({ res, message: 'list of the name of all categories', data: categoriesName });
+    success({
+      res,
+      message: 'list of the name of all categories',
+      data: categoriesName,
+    });
   } catch (err) {
     serverError({ res, message: err.message });
   }
@@ -56,9 +63,12 @@ const getAllCategoriesName = async (req, res) => {
 const updateSingleCategory = async (req, res) => {
   const { id } = req.params;
   try {
-    const updatedCategory = await updateCategory(id, req.body);
+    const updatedCategory = await updateCategoryByPk(id, req.body);
     success({
-      res, message: 'category updated', data: updatedCategory, status: 201,
+      res,
+      message: 'category updated',
+      data: updatedCategory,
+      status: 201,
     });
   } catch (err) {
     serverError({ res, message: err.message });

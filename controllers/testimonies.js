@@ -3,7 +3,7 @@ const {
   allTestimonies,
   createTestimony,
   findTestimony,
-  updateTestimonies,
+  updateTestimonyByPk,
   destroyTestimony,
 } = require('../services/testimony');
 
@@ -42,12 +42,12 @@ const updateSingleTestimony = async (req, res) => {
   const data = req.body;
 
   try {
-    await updateTestimonies(id, data);
+    await updateTestimonyByPk(id, data);
 
     const testimonyUpdated = await findTestimony(id);
 
     return success({
-      res, message: 'Testimony updated', data: testimonyUpdated,
+      res, message: 'Testimony updated', data: testimonyUpdated, status: 201,
     });
   } catch (err) {
     return serverError({ res, message: err.message });

@@ -18,15 +18,7 @@ const createNews = async (name, content, image, categoryId) => (News.create({
 })
 );
 
-const updateNews = async (id, data) => {
-  const {
-    name, image, content, type, categoryId,
-  } = data;
-
-  return News.update({
-    name, image, content, type, categoryId,
-  }, { where: { id } });
-};
+const updateNews = async (id, data) => News.update({ ...data }, { where: { id } });
 
 module.exports = {
   getNewById,

@@ -30,14 +30,7 @@ const findUsers = async (email) => {
 
 const findUserByMail = async (email) => User.findOne({ where: { email } });
 
-const updatebyPk = async (id, body) => {
-  const {
-    firstName, lastName, email, image, roleId,
-  } = body;
-  return User.update({
-    firstName, lastName, email, image, roleId,
-  }, { where: { id } });
-};
+const updateUserbyPk = async (id, data) => User.update({ ...data }, { where: { id } });
 
 const findUserById = async (id) => User.findByPk(id);
 
@@ -70,5 +63,5 @@ module.exports = {
   createUser,
   findUserByMail,
   findUserById,
-  updatebyPk,
+  updateUserbyPk,
 };

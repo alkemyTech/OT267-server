@@ -19,16 +19,16 @@ const sendMail = async (
   };
   try {
     await sgMail.send(msg);
-    console.log('Message sent succesfully');
+    /*     console.log('Message sent succesfully'); */
     return {
       status: true,
       message: 'Mail enviado existosamente',
     };
   } catch (error) {
     let message = 'Error: No se pudo enviar el mail';
-    console.log(error);
+    /* console.log(error); */
     if (error.response) {
-      console.error(error.response);
+      /* console.error(error.response); */
       message = error.response;
     }
     return {
