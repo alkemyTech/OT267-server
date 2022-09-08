@@ -13,7 +13,7 @@ const createMember = async (body) => {
   return created;
 };
 
-const findAllMembers = async () => await Member.findAll();
+const findAllMembers = () => Member.findAll();
 
 const findMember = async (id) => {
   const member = await Member.findOne({
@@ -33,9 +33,19 @@ const deleteSingleMember = async (id) => {
   });
 };
 
+const updateAMember = async (id, body) => {
+  const response = await Member.update({
+    ...body,
+  }, {
+    where: { id },
+  });
+  return response;
+};
+
 module.exports = {
   createMember,
   findAllMembers,
   findMember,
-  deleteSingleMember
+  deleteSingleMember,
+  updateAMember,
 };

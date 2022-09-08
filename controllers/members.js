@@ -4,7 +4,13 @@
 
 const { success, error, serverError } = require('../helpers/requestResponses');
 
-const { createMember, findAllMembers, findMember, deleteSingleMember } = require('../services/members');
+const {
+  createMember,
+  findAllMembers,
+  findMember,
+  deleteSingleMember,
+  updateAMember,
+} = require('../services/members');
 
 const createAMember = async (req, res) => {
   const {
@@ -30,8 +36,7 @@ const createAMember = async (req, res) => {
 
 const membersList = async (_req, res) => {
   try {
-    const data = await findAllMembers(); 
-    
+    const data = await findAllMembers();
     if (data.length === 0) return error({ res, message: 'No members' });
 
     return success({ res, message: 'Members list', data });
@@ -57,10 +62,23 @@ const removeMember = async (req, res) => {
   }
 
   return success({ res, message: 'member removed' });
- };
+};
+
+const updateMember = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const [data] = await updateAMember(id, req.body);
+    return data
+      ? success({ res, message: 'Member updated successfully' })
+      : error({ res, message: 'Member not found' });
+  } catch (err) {
+    serverError({ res, message: err.message });
+  }
+};
 
 module.exports = {
   createAMember,
   membersList,
-  removeMember
+  removeMember,
+  updateMember,
 };
