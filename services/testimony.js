@@ -43,19 +43,13 @@ const updateTestimonies = async (id, data) => {
 
 const findTestimonyByPk = async (id) => Testimony.findByPk(id);
 
-const destroyTestimony = async (id) => {
-  const response = await Testimony.destroy({
-    where: { id },
-  });
-  return response;
-};
+const destroyTestimony = async (id) => Testimony.destroy({ where: { id } });
 
 module.exports = {
-  allTestimonies, 
+  allTestimonies,
   createTestimony,
   findTestimony,
   updateTestimonies,
-  findTestimonyByPk, 
-  destroyTestimony
+  findTestimonyByPk,
+  destroyTestimony,
 };
-

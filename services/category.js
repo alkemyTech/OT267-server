@@ -15,7 +15,7 @@ const createCategory = async (data) => {
   return created;
 };
 
-const categoryFindById = async (id) => Category.findByPk(id, {
+const findCategoryById = async (id) => Category.findByPk(id, {
   attributes: [
     'name',
     'description',
@@ -37,7 +37,7 @@ const allCategoriesName = async () => {
   return response;
 };
 
-const updateByPk = async (id, body) => {
+const updateCategory = async (id, body) => {
   const category = await Category.findByPk(id);
   category.set(body);
   await category.save();
@@ -47,7 +47,7 @@ const updateByPk = async (id, body) => {
 module.exports = {
   deleteCategory,
   allCategoriesName,
-  categoryFindById,
+  findCategoryById,
   createCategory,
-  updateByPk,
+  updateCategory,
 };

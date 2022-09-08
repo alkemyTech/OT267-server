@@ -27,7 +27,7 @@ const deleteSingleUser = async (req, res) => {
   return success({ res, message: 'user deleted' });
 };
 
-const updateUser = async (req, res) => {
+const updateSingleUser = async (req, res) => {
   try {
     const { id } = req.params;
     const response = await updatebyPk(id, req.body);
@@ -42,5 +42,5 @@ const updateUser = async (req, res) => {
 module.exports = {
   deleteSingleUser,
   getAllUsers,
-  updateUser,
+  updateSingleUser,
 };

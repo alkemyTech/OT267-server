@@ -2,7 +2,7 @@ const { check } = require('express-validator');
 
 const { handleResult } = require('../middlewares/validateFields');
 
-const { categoryFindById } = require('../services/category');
+const { findCategoryById } = require('../services/category');
 
 const validateCategoryId = [
   check('id', 'Ingrese el id de la categoría')
@@ -11,7 +11,7 @@ const validateCategoryId = [
     .isNumeric()
     .withMessage('El id de la categoría debe ser un número')
     .custom(async (value) => {
-      const matchedId = await categoryFindById(value);
+      const matchedId = await findCategoryById(value);
       if (!matchedId) {
         throw new Error('Categoría no existente');
       } else {
@@ -23,6 +23,7 @@ const validateCategoryId = [
     handleResult(req, res, next);
   },
 ];
+
 const validateNewsFields = [
   check('name', 'Ingrese el nombre de la categoría')
     .exists()

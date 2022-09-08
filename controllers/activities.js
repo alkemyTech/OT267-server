@@ -17,7 +17,7 @@ const getAllActivities = async (req, res) => {
   }
 };
 
-const createActivity = async (req, res) => {
+const createNewActivity = async (req, res) => {
   const {
     name, content, image,
   } = req.body;
@@ -35,7 +35,7 @@ const createActivity = async (req, res) => {
   }
 };
 
-const updateActivity = async (req, res) => {
+const updateSingleActivity = async (req, res) => {
   try {
     const { id } = req.params;
     const response = await updateActivityByPk(id, req.body);
@@ -51,4 +51,4 @@ const updateActivity = async (req, res) => {
   }
 };
 
-module.exports = { getAllActivities, createActivity, updateActivity };
+module.exports = { getAllActivities, createNewActivity, updateSingleActivity };

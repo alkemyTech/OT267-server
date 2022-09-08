@@ -1,4 +1,4 @@
-const { success, serverError, error } = require('../helpers/requestResponses');
+const { success, serverError, error } = require('../helpers');
 const {
   getSlides,
   getASlide,
@@ -26,7 +26,7 @@ const getSlideDetail = async (req, res) => {
   }
 };
 
-const updateSlide = async (req, res) => {
+const updateSingleSlide = async (req, res) => {
   try {
     const { id } = req.params;
     const [response] = await updateSlideByPk(id, req.body);
@@ -46,7 +46,7 @@ const updateSlide = async (req, res) => {
   }
 };
 
-const deleteSlide = async (req, res) => {
+const deleteSingleSlide = async (req, res) => {
   try {
     const { id } = req.params;
     const response = await deleteSlideByPk(id);
@@ -69,6 +69,6 @@ const deleteSlide = async (req, res) => {
 module.exports = {
   getAllSlides,
   getSlideDetail,
-  updateSlide,
-  deleteSlide,
+  updateSingleSlide,
+  deleteSingleSlide,
 };

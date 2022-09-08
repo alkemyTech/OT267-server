@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const { getAllUsers, deleteSingleUser, updateUser } = require('../controllers/users');
+const { getAllUsers, deleteSingleUser, updateSingleUser } = require('../controllers/users');
 
 const { isAuth } = require('../middlewares/isAuth');
 
@@ -18,6 +18,6 @@ router.get('/', isAuth, isAdmin, getAllUsers);
 
 router.delete('/:id', isAuth, isCurrentUser, deleteSingleUser);
 
-router.patch('/:id', isAuth, isCurrentUser, validateFields, uploadFile, updateUser);
+router.patch('/:id', isAuth, isCurrentUser, validateFields, uploadFile, updateSingleUser);
 
 module.exports = router;

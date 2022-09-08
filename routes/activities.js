@@ -10,14 +10,14 @@ const router = express.Router();
 
 const { validateActivity } = require('../validators/validateActivity');
 
-const { getAllActivities, createActivity, updateActivity } = require('../controllers/activities');
+const { getAllActivities, createNewActivity, updateSingleActivity } = require('../controllers/activities');
 
 const { uploadFile } = require('../middlewares/uploadFile');
 
 router.get('/', isAuth, isAdmin, getAllActivities);
 
-router.post('/', isAuth, isAdmin, validateActivity, uploadFile, createActivity);
+router.post('/', isAuth, isAdmin, validateActivity, uploadFile, createNewActivity);
 
-router.put('/:id', isAuth, isAdmin, uploadFile, updateActivity);
+router.put('/:id', isAuth, isAdmin, uploadFile, updateSingleActivity);
 
 module.exports = router;
