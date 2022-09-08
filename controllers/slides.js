@@ -1,5 +1,6 @@
 const { success, serverError, error } = require('../helpers/requestResponses');
 const {
+  createASlide,
   getSlides,
   getASlide,
   updateSlideByPk,
@@ -66,7 +67,33 @@ const deleteSlide = async (req, res) => {
   }
 };
 
+const createSlide = async (req, res) => {
+  const { body } = req;
+  body.image = null;
+
+  try {
+    if (!body.order) {
+      const array = await getSlides();
+      body.order = (array[array.length - 1].order) + 1;
+    }
+
+    console.log(body);
+
+    const newSlide = await createASlide(body);
+
+    return success({
+      res, message: 'slide created succesfully', status: 201, data: newSlide,
+    });
+  } catch (err) {
+    return serverError({
+      res,
+      message: err.message,
+    });
+  }
+};
+
 module.exports = {
+  createSlide,
   getAllSlides,
   getSlideDetail,
   updateSlide,

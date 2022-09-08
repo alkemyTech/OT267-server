@@ -9,6 +9,7 @@ const { validateCreateSlide } = require('../validators/validateSlide');
 const { decodeImg } = require('../helpers/decodeImg');
 
 const {
+  createSlide,
   getAllSlides,
   getSlideDetail,
   updateSlide,
@@ -19,6 +20,6 @@ router.get('/', isAuth, isAdmin, getAllSlides);
 router.get('/:id', isAuth, isAdmin, getSlideDetail);
 router.put('/:id', isAuth, isAdmin, updateSlide);
 router.delete('/:id', isAuth, isAdmin, deleteSlide);
-router.post('/', [isAuth, isAdmin, validateCreateSlide, decodeImg]);
+router.post('/', [isAuth, isAdmin, validateCreateSlide, decodeImg], createSlide);
 
 module.exports = router;
