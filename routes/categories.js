@@ -2,17 +2,15 @@ const express = require('express');
 
 const router = express.Router();
 
+const { isAdmin, isAuth, uploadFile } = require('../middlewares');
 const {
-  getCategoryById, deleteSingleCategory, createNewCategory, getAllCategoriesName, updateACategory,
+  getCategoryById,
+  deleteSingleCategory,
+  createNewCategory,
+  getAllCategoriesName,
+  updateSingleCategory,
 } = require('../controllers/categories');
-
 const { validateCategoryId, validateNewsFields } = require('../validators/validateCategory');
-
-const { isAdmin } = require('../middlewares/isAdmin');
-
-const { isAuth } = require('../middlewares/isAuth');
-
-const { uploadFile } = require('../middlewares/uploadFile');
 
 router.get('/:id', isAuth, isAdmin, validateCategoryId, getCategoryById);
 
@@ -22,6 +20,6 @@ router.delete('/:id', isAuth, isAdmin, validateCategoryId, deleteSingleCategory)
 
 router.get('/', isAuth, isAdmin, getAllCategoriesName);
 
-router.put('/:id', isAuth, isAdmin, validateCategoryId, uploadFile, updateACategory);
+router.put('/:id', isAuth, isAdmin, validateCategoryId, uploadFile, updateSingleCategory);
 
 module.exports = router;

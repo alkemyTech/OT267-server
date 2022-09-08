@@ -2,18 +2,22 @@ const express = require('express');
 
 const router = express.Router();
 
-const { getOrg, editOrgData } = require('../controllers/organizations');
-
-const { isAuth } = require('../middlewares/isAuth');
-
-const { isAdmin } = require('../middlewares/isAdmin');
-
+const { isAdmin, isAuth, uploadFile } = require('../middlewares');
+const {
+  getAllOrgData,
+  updateOrgData,
+} = require('../controllers/organizations');
 const { validateOrganization } = require('../validators/validateOrganization');
 
-const { uploadFile } = require('../middlewares/uploadFile');
+router.get('/public', getAllOrgData);
 
-router.get('/public', getOrg);
-
-router.post('/public', isAuth, isAdmin, validateOrganization, uploadFile, editOrgData);
+router.post(
+  '/public',
+  isAuth,
+  isAdmin,
+  validateOrganization,
+  uploadFile,
+  updateOrgData,
+);
 
 module.exports = router;

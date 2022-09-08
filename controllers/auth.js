@@ -1,8 +1,12 @@
-const { generateJWT } = require('../helpers/jwt');
-const { comparePassword } = require('../helpers/bcrypt');
-const { success, error, serverError } = require('../helpers/requestResponses');
+const {
+  sendMail,
+  success,
+  error,
+  serverError,
+  comparePassword,
+  generateJWT,
+} = require('../helpers');
 const { createUser, findUserById, findUsers } = require('../services/user');
-const { sendMail } = require('../helpers/sendMail');
 const { htmlTemplate } = require('../templates/welcomeMessage');
 
 const register = async (req, res) => {
@@ -20,7 +24,7 @@ const register = async (req, res) => {
       status: 201,
     });
 
-    // Send mail of welcome
+    // send welcome email
     await sendMail(email, 'Bienvenido a Somos Más ONG.', '', htmlTemplate);
   } catch (err) {
     serverError({ res, message: err.message });

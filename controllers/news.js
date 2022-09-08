@@ -7,14 +7,13 @@ const {
 const getNewsDetail = async (req, res) => {
   const { id } = req.params;
 
-  let newDetail;
   try {
-    newDetail = await getNewById(id);
+    const newDetail = await getNewById(id);
+    if (!newDetail) error({ res, message: 'news not found' });
+    else success({ res, message: 'news detail', data: newDetail });
   } catch (err) {
     serverError({ res, message: err.message });
   }
-  if (!newDetail) return error({ res, message: 'news not found' });
-  return success({ res, message: 'news detail', data: newDetail });
 };
 
 const deleteSingleNews = async (req, res) => {
@@ -28,7 +27,7 @@ const deleteSingleNews = async (req, res) => {
   }
 };
 
-const createANews = async (req, res) => {
+const createSingleNews = async (req, res) => {
   const {
     name, content, image, categoryId,
   } = req.body;
@@ -43,7 +42,7 @@ const createANews = async (req, res) => {
   }
 };
 
-const updateANews = async (req, res) => {
+const updateSingleNews = async (req, res) => {
   const { id } = req.params;
   const data = req.body;
   try {
@@ -64,6 +63,6 @@ const updateANews = async (req, res) => {
 module.exports = {
   getNewsDetail,
   deleteSingleNews,
-  createANews,
-  updateANews,
+  createSingleNews,
+  updateSingleNews,
 };
