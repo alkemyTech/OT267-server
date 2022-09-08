@@ -5,10 +5,10 @@ const createNewContact = async (req, res) => {
   try {
     const { body } = req;
     const newContact = await createContact(body);
-    if (!newContact) throw Error('Contacto no creado, por favor intente más tarde');
+    if (!newContact) throw Error('Something went wrong during the contact creation, try again later');
     success({
       res,
-      message: 'Contacto registrado con éxito',
+      message: 'contact registered succesfully',
       data: newContact,
       status: 201,
     });

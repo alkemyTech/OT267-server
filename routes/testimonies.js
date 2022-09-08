@@ -1,6 +1,11 @@
 const express = require('express');
 
-const { getAllTestimonies, createNewTestimony, updateSingleTestimony, deleteSingleTestimony } = require('../controllers/testimonials');
+const {
+  getAllTestimonies,
+  createNewTestimony,
+  updateSingleTestimony,
+  deleteSingleTestimony,
+} = require('../controllers/testimonies');
 
 const { validateCreateTestimony } = require('../validators/validateTestimony');
 const { isAuth } = require('../middlewares/isAuth');

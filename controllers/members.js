@@ -20,10 +20,10 @@ const createNewMember = async (req, res) => {
       description,
     });
 
-    if (!newMember) return error({ res, message: 'Member already exists', status: 409 });
+    if (!newMember) return error({ res, message: 'member already exists', status: 409 });
 
     return success({
-      res, message: 'Member created succesfully', data: newMember, status: 201,
+      res, message: 'member created succesfully', data: newMember, status: 201,
     });
   } catch (err) {
     return serverError({ res, message: err.message });
@@ -34,9 +34,9 @@ const getAllMembers = async (_req, res) => {
   try {
     const data = await findAllMembers();
 
-    if (data.length === 0) return error({ res, message: 'No members' });
+    if (data.length === 0) return error({ res, message: 'no members' });
 
-    return success({ res, message: 'Members list', data });
+    return success({ res, message: 'members list', data });
   } catch (err) {
     return serverError({ res, message: err.message });
   }

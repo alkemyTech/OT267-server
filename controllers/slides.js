@@ -33,10 +33,10 @@ const updateSingleSlide = async (req, res) => {
 
     return response ? success({
       res,
-      message: 'Slide updated successfully',
+      message: 'slide updated successfully',
     }) : error({
       res,
-      message: 'Slide not found',
+      message: 'slide not found',
     });
   } catch (err) {
     return serverError({
@@ -53,10 +53,10 @@ const deleteSingleSlide = async (req, res) => {
 
     return response ? success({
       res,
-      message: 'Slide deleted successfully',
+      message: 'slide deleted successfully',
     }) : error({
       res,
-      message: 'Slide not found',
+      message: 'slide not found',
     });
   } catch (err) {
     return serverError({

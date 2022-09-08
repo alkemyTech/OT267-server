@@ -12,7 +12,7 @@ const getAllTestimonies = async (req, res) => {
     const data = await allTestimonies();
 
     if (data) success({ res, message: 'list of all testimonies', data });
-    else error({ res, message: 'tesmimonies not found' });
+    else error({ res, message: 'testimonies not found' });
   } catch (err) {
     serverError({ res, message: err.message });
   }
@@ -24,11 +24,11 @@ const createNewTestimony = async (req, res) => {
   try {
     const newTestimony = await createTestimony(name, content);
 
-    if (!newTestimony) return error({ res, message: 'Testimony already exists', status: 400 });
+    if (!newTestimony) return error({ res, message: 'testimony already exists', status: 400 });
 
     return success({
       res,
-      message: 'Testimony created',
+      message: 'testimony created',
       status: 201,
       data: newTestimony,
     });
