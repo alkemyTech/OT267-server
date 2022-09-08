@@ -10,17 +10,26 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
-
       News.belongsTo(models.Category, { as: 'category' });
+
+      News.hasMany(models.Comment, {
+        foreignKey: 'newsId',
+        sourceKey: 'id',
+      });
     }
   }
   News.init({
-    name: DataTypes.STRING,
-    content: DataTypes.TEXT,
-    image: DataTypes.STRING,
-    type: DataTypes.STRING,
-    categoryId: DataTypes.INTEGER,
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+    },
+    name: { type: DataTypes.STRING },
+    content: { type: DataTypes.TEXT },
+    image: { type: DataTypes.STRING },
+    type: { type: DataTypes.STRING },
+    categoryId: { type: DataTypes.INTEGER },
   }, {
     sequelize,
     modelName: 'News',
