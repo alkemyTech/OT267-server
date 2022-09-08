@@ -23,6 +23,7 @@ const categoriesRouter = require('./routes/categories');
 const membersRouter = require('./routes/members');
 const slidesRouter = require('./routes/slides');
 const contactsRouter = require('./routes/contacts');
+const commentsRouter = require('./routes/comments');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -52,6 +53,7 @@ app.use('/categories', categoriesRouter);
 app.use('/members', membersRouter);
 app.use('/slides', slidesRouter);
 app.use('/contacts', contactsRouter);
+app.use('/comments', commentsRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
