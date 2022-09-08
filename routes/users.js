@@ -2,17 +2,14 @@ const express = require('express');
 
 const router = express.Router();
 
+const {
+  isAuth,
+  isAdmin,
+  isCurrentUser,
+  uploadFile,
+} = require('../middlewares');
 const { getAllUsers, deleteSingleUser, updateSingleUser } = require('../controllers/users');
-
-const { isAuth } = require('../middlewares/isAuth');
-
-const { isAdmin } = require('../middlewares/isAdmin');
-
-const { isCurrentUser } = require('../middlewares/ownership');
-
 const { validateFields } = require('../validators/validateUser');
-
-const { uploadFile } = require('../middlewares/uploadFile');
 
 router.get('/', isAuth, isAdmin, getAllUsers);
 

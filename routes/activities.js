@@ -1,18 +1,10 @@
-/* eslint-disable no-unused-vars */
-
 const express = require('express');
-
-const { isAdmin } = require('../middlewares/isAdmin');
-
-const { isAuth } = require('../middlewares/isAuth');
 
 const router = express.Router();
 
+const { isAdmin, isAuth, uploadFile } = require('../middlewares');
 const { validateActivity } = require('../validators/validateActivity');
-
 const { getAllActivities, createNewActivity, updateSingleActivity } = require('../controllers/activities');
-
-const { uploadFile } = require('../middlewares/uploadFile');
 
 router.get('/', isAuth, isAdmin, getAllActivities);
 

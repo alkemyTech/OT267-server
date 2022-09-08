@@ -3,12 +3,8 @@ const express = require('express');
 const router = express.Router();
 
 const { validateRegistrationData, validateLoginData } = require('../validators/validateUser');
-
 const { register, getUser, login } = require('../controllers/auth');
-
-const { isAuth } = require('../middlewares/isAuth');
-
-const { uploadFile } = require('../middlewares/uploadFile');
+const { isAuth, uploadFile } = require('../middlewares');
 
 router.get('/me', isAuth, getUser);
 

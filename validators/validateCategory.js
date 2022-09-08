@@ -1,7 +1,6 @@
 const { check } = require('express-validator');
 
-const { handleResult } = require('../middlewares/validateFields');
-
+const { handleResult } = require('../middlewares');
 const { findCategoryById } = require('../services/category');
 
 const validateCategoryId = [

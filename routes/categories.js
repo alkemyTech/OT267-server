@@ -2,6 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
+const { isAdmin, isAuth, uploadFile } = require('../middlewares');
 const {
   getCategoryById,
   deleteSingleCategory,
@@ -9,14 +10,7 @@ const {
   getAllCategoriesName,
   updateSingleCategory,
 } = require('../controllers/categories');
-
 const { validateCategoryId, validateNewsFields } = require('../validators/validateCategory');
-
-const { isAdmin } = require('../middlewares/isAdmin');
-
-const { isAuth } = require('../middlewares/isAuth');
-
-const { uploadFile } = require('../middlewares/uploadFile');
 
 router.get('/:id', isAuth, isAdmin, validateCategoryId, getCategoryById);
 
