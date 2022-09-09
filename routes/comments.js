@@ -2,11 +2,13 @@ const express = require('express');
 
 const router = express.Router();
 
-const { isAuth } = require('../middlewares');
+const { isAuth, isAdmin } = require('../middlewares');
 
-const { createNewComment } = require('../controllers/comments');
+const { getAllComments, createNewComment } = require('../controllers/comments');
 
 const { validateFields } = require('../validators/validateComment');
+
+router.get('/', isAuth, isAdmin, getAllComments);
 
 router.post('/', isAuth, validateFields, createNewComment);
 
