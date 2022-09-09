@@ -4,6 +4,7 @@ const { sendMail } = require('./sendMail');
 const { success, error, serverError } = require('./requestResponses');
 const { s3Client } = require('./s3Client');
 const { s3UploadFile } = require('./s3UploadFile');
+const { paginator } = require('./paginator');
 
 module.exports = {
   generateJWT,
@@ -16,4 +17,5 @@ module.exports = {
   serverError,
   s3Client,
   s3UploadFile,
+  paginator,
 };
