@@ -6,9 +6,23 @@ module.exports = {
       'Categories',
       [
         {
-          name: 'Local',
-          description: null,
-          image: null,
+          name: 'Category 1',
+          description: 'Category 1 description',
+          image: 'https://www.designevo.com/res/template-warm-community.png',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: 'Category 2',
+          description: 'Category 2 description',
+          image: 'https://www.designevo.com/res/template-warm-community.png',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: 'Category 3',
+          description: 'Category 3 description',
+          image: 'https://www.designevo.com/res/template-warm-community.png',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
