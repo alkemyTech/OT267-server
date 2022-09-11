@@ -10,7 +10,11 @@ const decodeImg = (req, res, next) => {
     fs.writeFileSync(path.join(__dirname, '..', 'tmp', filePath), buffer);
 
     req.files = {
-      imagePath: filePath,
+      image: {
+        name: filePath,
+        data: buffer,
+        tempFilePath: path.join(__dirname, '..', 'tmp', filePath),
+      },
     };
   }
 
