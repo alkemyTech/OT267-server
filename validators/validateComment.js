@@ -27,5 +27,4 @@ const validateFields = [
     handleResult(req, res, next);
   },
 ];
-
 module.exports = { validateFields };
