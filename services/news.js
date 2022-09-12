@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 const { News, Comment } = require('../models/index');
 
-const getNewById = async (id) => News.findByPk(id);
+const getNewsById = async (id) => News.findByPk(id);
 
 const deleteNews = async (id) => {
   const response = await News.destroy({
@@ -21,7 +21,7 @@ const createNews = async (name, content, image, categoryId) => (News.create({
 
 const updateNews = async (id, data) => News.update({ ...data }, { where: { id } });
 
-const findAllCommentsByNewId = async (id) => {
+const findAllCommentsByNewsId = async (id) => {
   const response = await Comment.findAll({
     where: {
       newsId: id,
@@ -31,9 +31,9 @@ const findAllCommentsByNewId = async (id) => {
 };
 
 module.exports = {
-  getNewById,
+  getNewsById,
   createNews,
   updateNews,
   deleteNews,
-  findAllCommentsByNewId,
+  findAllCommentsByNewsId,
 };
