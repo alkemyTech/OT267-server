@@ -26,3 +26,14 @@ npx sequelize-cli db:seed:all
 ``` bash
 npm start
 ```
+
+
+## Datos de usuarios de prueba
+
+<h4>Los usuarios del 1 al 10 son admins y los del 10 al 20 son regulares</h4>
+
+- El "name" va a ser "Usuario" y el `numero` que elijan (del 1 al 20)
+- El "lastname" va a ser "Demo" y el `mismo numero del usuario`
+- El email utiliza la misma logica test`Numero`@test.com
+- El password seria user `Numero` y `000` Ejemplo para el numero 15 ==> 15000
+
