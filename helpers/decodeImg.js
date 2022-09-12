@@ -16,6 +16,8 @@ const decodeImg = (req, res, next) => {
         tempFilePath: path.join(__dirname, '..', 'tmp', filePath),
       },
     };
+
+    req.body.filePath = path.join(__dirname, '..', 'tmp', filePath);
   }
 
   next();

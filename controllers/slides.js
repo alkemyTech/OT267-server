@@ -1,3 +1,4 @@
+const fs = require('fs');
 const { success, serverError, error } = require('../helpers/requestResponses');
 const {
   createASlide,
@@ -69,15 +70,17 @@ const deleteSlide = async (req, res) => {
 
 const createSlide = async (req, res) => {
   const { body } = req;
-  body.image = null;
 
   try {
+    try {
+      fs.unlinkSync(body.filePath);
+    } catch (err) {
+      return serverError({ res, message: err.message });
+    }
     if (!body.order) {
       const array = await getSlides();
       body.order = (array[array.length - 1].order) + 1;
     }
-
-    console.log(body);
 
     const newSlide = await createASlide(body);
 

@@ -29,8 +29,7 @@ const deleteSlideByPk = async (id) => {
 
 const createASlide = async (body) => Slide.create({
   text: body.text,
-  // image: body.image,
-  image: 'http://sfnasflaisjfioa.com',
+  image: body.image,
   order: body.order,
   organizationId: body.organizationId ?? 1,
 });

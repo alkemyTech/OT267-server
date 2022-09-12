@@ -22,7 +22,7 @@ const validateCreateSlide = [
 
   check('organizationId', 'Ingrese a que organizacion pertenece la slide')
     .exists()
-    .isNumeric()
+    .isInt({ min: 1 })
     .withMessage('Debe ingresar una organizacion valida'),
 
   (req, res, next) => {
