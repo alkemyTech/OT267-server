@@ -2,11 +2,18 @@ const express = require('express');
 
 const router = express.Router();
 
-const { isAuth, validateUserCommentCreatorOrAdmin } = require('../middlewares');
+const { isAuth, isAdmin, validateUserCommentCreatorOrAdmin } = require('../middlewares');
 
-const { createNewComment, updateSingleComment, deleteSingleComment } = require('../controllers/comments');
+const {
+  getAllComments,
+  createNewComment,
+  updateSingleComment,
+  deleteSingleComment,
+} = require('../controllers/comments');
 
 const { validateFields } = require('../validators/validateComment');
+
+router.get('/', isAuth, isAdmin, getAllComments);
 
 router.post('/', isAuth, validateFields, createNewComment);
 router.delete('/:id', isAuth, validateUserCommentCreatorOrAdmin, deleteSingleComment);
