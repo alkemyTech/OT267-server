@@ -1,4 +1,4 @@
-const { allUsers, deleteUser, updatebyPk } = require('../services/user');
+const { allUsers, deleteUser, updateUserbyPk } = require('../services/user');
 
 const { success, error, serverError } = require('../helpers/requestResponses');
 
@@ -27,10 +27,10 @@ const deleteSingleUser = async (req, res) => {
   return success({ res, message: 'user deleted' });
 };
 
-const updateUser = async (req, res) => {
+const updateSingleUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const response = await updatebyPk(id, req.body);
+    const response = await updateUserbyPk(id, req.body);
     return response
       ? success({ res, message: 'user updated', status: 201 })
       : error({ res, message: 'user not found' });
@@ -42,5 +42,5 @@ const updateUser = async (req, res) => {
 module.exports = {
   deleteSingleUser,
   getAllUsers,
-  updateUser,
+  updateSingleUser,
 };

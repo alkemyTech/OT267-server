@@ -21,15 +21,27 @@ const createTestimony = async (name, content) => {
   return created;
 };
 
-const findTestimonyByPk = async (id) => Testimony.findByPk(id);
-
-const destroyTestimony = async (id) => {
-  const response = await Testimony.destroy({
-    where: { id },
+const findTestimony = async (id) => {
+  const testimony = await Testimony.findOne({
+    where: {
+      id,
+    },
   });
-  return response;
+
+  return testimony;
 };
 
+const updateTestimonyByPk = async (id, data) => Testimony.update({ ...data }, { where: { id } });
+
+const findTestimonyByPk = async (id) => Testimony.findByPk(id);
+
+const destroyTestimony = async (id) => Testimony.destroy({ where: { id } });
+
 module.exports = {
-  allTestimonies, createTestimony, findTestimonyByPk, destroyTestimony,
+  allTestimonies,
+  createTestimony,
+  findTestimony,
+  updateTestimonyByPk,
+  findTestimonyByPk,
+  destroyTestimony,
 };

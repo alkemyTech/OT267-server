@@ -17,12 +17,13 @@ const authRouter = require('./routes/auth');
 const rolesRouter = require('./routes/roles');
 const activitiesRouter = require('./routes/activities');
 const organizationsRouter = require('./routes/organizations');
-const testimonialsRouter = require('./routes/testimonials');
+const testimoniesRouter = require('./routes/testimonies');
 const newsRouter = require('./routes/news');
 const categoriesRouter = require('./routes/categories');
 const membersRouter = require('./routes/members');
 const slidesRouter = require('./routes/slides');
-const contactsRouter = require('./routes/contact');
+const contactsRouter = require('./routes/contacts');
+const commentsRouter = require('./routes/comments');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -46,12 +47,13 @@ app.use('/auth', authRouter);
 app.use('/activities', activitiesRouter);
 app.use('/roles', rolesRouter);
 app.use('/organizations', organizationsRouter);
-app.use('/testimonials', testimonialsRouter);
+app.use('/testimonies', testimoniesRouter);
 app.use('/news', newsRouter);
 app.use('/categories', categoriesRouter);
 app.use('/members', membersRouter);
 app.use('/slides', slidesRouter);
 app.use('/contacts', contactsRouter);
+app.use('/comments', commentsRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

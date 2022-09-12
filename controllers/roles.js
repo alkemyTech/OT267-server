@@ -1,7 +1,4 @@
-/* eslint-disable no-unused-vars */
-
 const { success, error, serverError } = require('../helpers/requestResponses');
-
 const { allRoles, findRoleById } = require('../services/role');
 
 const getAllRoles = async (req, res) => {
@@ -18,7 +15,7 @@ const getAllRoles = async (req, res) => {
   }
 };
 
-const getRoleById = async (req, res) => {
+const getSingleRole = async (req, res) => {
   const { id } = req.params;
   try {
     const data = await findRoleById(id);
@@ -32,15 +29,8 @@ const getRoleById = async (req, res) => {
     serverError({ res, message: err.message });
   }
 };
-const createRole = async (req, res) => { };
-const updateRole = async (req, res) => { };
-const deleteRole = async (req, res) => { };
 
 module.exports = {
   getAllRoles,
-  getRoleById,
-  createRole,
-  updateRole,
-  deleteRole,
+  getSingleRole,
 };
-// ESLINT TEMPORAL
