@@ -39,13 +39,13 @@ const deleteSingleComment = async (req, res) => {
     const response = await deleteComment(id);
     if (response === 0) return error({ res, message: 'comment nof found' });
 
-    success({
+    return success({
       res,
       message: 'comment delete',
       status: 200,
     });
   } catch (err) {
-    serverError({
+    return serverError({
       res,
       message: err.message,
       status: 500,
