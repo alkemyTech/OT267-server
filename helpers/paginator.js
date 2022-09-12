@@ -34,7 +34,6 @@ const paginator = async (req, model, urlmodel, moreOptions) => {
     limit,
     ...moreOptions,
   };
-  console.log(options);
 
   const { count, rows } = await model.findAndCountAll(options);
 
