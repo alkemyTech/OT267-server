@@ -1,4 +1,4 @@
-const { success, serverError, error} = require('../helpers');
+const { success, serverError, error } = require('../helpers');
 const { createComment, updateComment, deleteComment } = require('../services/comment');
 
 const createNewComment = async (req, res) => {
