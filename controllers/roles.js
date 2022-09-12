@@ -1,4 +1,4 @@
-const { success, error, serverError } = require('../helpers/requestResponses');
+const { success, error, serverError } = require('../helpers');
 const { allRoles, findRoleById } = require('../services/role');
 
 const getAllRoles = async (req, res) => {

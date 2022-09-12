@@ -9,10 +9,20 @@ module.exports = (sequelize, DataTypes) => {
          */
     static associate(models) {
       User.belongsTo(models.Role, { as: 'role' });
+      User.hasMany(models.Comment, {
+        foreignKey: 'userId',
+        sourceKey: 'id',
+      });
     }
   }
   User.init(
     {
+      id: {
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+        type: DataTypes.INTEGER,
+      },
       firstName: { type: DataTypes.STRING, allowNull: false },
       lastName: { type: DataTypes.STRING, allowNull: false },
       email: { type: DataTypes.STRING, allowNull: false, unique: true },
@@ -24,6 +34,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'User',
+      paranoid: true,
+      timestamps: true,
     },
   );
   return User;

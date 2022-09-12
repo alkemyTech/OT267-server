@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const helmet = require('helmet');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
 require('dotenv').config();
@@ -23,12 +24,14 @@ const categoriesRouter = require('./routes/categories');
 const membersRouter = require('./routes/members');
 const slidesRouter = require('./routes/slides');
 const contactsRouter = require('./routes/contacts');
+const commentsRouter = require('./routes/comments');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // middlewares
+app.use(helmet());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -52,6 +55,7 @@ app.use('/categories', categoriesRouter);
 app.use('/members', membersRouter);
 app.use('/slides', slidesRouter);
 app.use('/contacts', contactsRouter);
+app.use('/comments', commentsRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
