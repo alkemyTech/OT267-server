@@ -1,4 +1,8 @@
-const { success, error, serverError } = require('../helpers/requestResponses');
+const { News } = require('../models');
+
+const {
+  success, error, serverError, paginator,
+} = require('../helpers');
 
 const {
   createNews, updateNews, getNewById, deleteNews,
@@ -60,9 +64,21 @@ const updateSingleNews = async (req, res) => {
   }
 };
 
+const getAllNews = async (req, res) => {
+  try {
+    const data = await paginator(req, News, 'news');
+
+    if (data) success({ res, message: 'list of all news', data });
+    else error({ res, message: 'news not found' });
+  } catch (err) {
+    serverError({ res, message: err.message });
+  }
+};
+
 module.exports = {
   getNewsDetail,
   deleteSingleNews,
   createSingleNews,
   updateSingleNews,
+  getAllNews,
 };

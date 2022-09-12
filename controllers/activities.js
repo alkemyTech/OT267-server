@@ -1,4 +1,4 @@
-const { success, error, serverError } = require('../helpers/requestResponses');
+const { success, error, serverError } = require('../helpers');
 const {
   allActivities,
   newActivity,

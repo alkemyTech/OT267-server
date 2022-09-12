@@ -3,6 +3,7 @@ const { isAuth } = require('./isAuth');
 const { isCurrentUser } = require('./ownership');
 const { uploadFile } = require('./uploadFile');
 const { handleResult } = require('./validateFields');
+const { validateUserCommentCreatorOrAdmin } = require('./validateUserCommentCreatorOrAdmin');
 
 module.exports = {
   isAdmin,
@@ -10,4 +11,5 @@ module.exports = {
   isCurrentUser,
   uploadFile,
   handleResult,
+  validateUserCommentCreatorOrAdmin,
 };
