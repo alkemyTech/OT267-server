@@ -1,10 +1,11 @@
 const { success, error, serverError } = require('../helpers');
 const { paginator } = require('../helpers/paginator');
 const { Member } = require('../models/index');
+
 const {
   createMember,
-  // findAllMembers,
   deleteMember,
+  updateMember,
 } = require('../services/members');
 
 const createNewMember = async (req, res) => {
@@ -34,7 +35,6 @@ const createNewMember = async (req, res) => {
 
 const getAllMembers = async (req, res) => {
   try {
-    // const data = await findAllMembers();
     const data = await paginator(req, Member, 'news');
 
     if (data.length === 0) return error({ res, message: 'no members' });
@@ -59,8 +59,21 @@ const deleteSingleMember = async (req, res) => {
   return success({ res, message: 'member removed' });
 };
 
+const updateSingleMember = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const [data] = await updateMember(id, req.body);
+    return data
+      ? success({ res, message: 'Member updated successfully' })
+      : error({ res, message: 'Member not found' });
+  } catch (err) {
+    return serverError({ res, message: err.message });
+  }
+};
+
 module.exports = {
   createNewMember,
   getAllMembers,
   deleteSingleMember,
+  updateSingleMember,
 };
