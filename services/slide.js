@@ -27,7 +27,15 @@ const deleteSlideByPk = async (id) => {
   return deleted;
 };
 
+const createASlide = async (body) => Slide.create({
+  text: body.text,
+  image: body.image,
+  order: body.order,
+  organizationId: body.organizationId ?? 1,
+});
+
 module.exports = {
+  createASlide,
   getSlides,
   getASlide,
   updateSlideByPk,
