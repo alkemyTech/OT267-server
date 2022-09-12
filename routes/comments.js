@@ -9,7 +9,7 @@ const { createNewComment, updateSingleComment, deleteSingleComment } = require('
 const { validateFields } = require('../validators/validateComment');
 
 router.post('/', isAuth, validateFields, createNewComment);
-router.delete('/:id', isAuth, deleteSingleComment);
+router.delete('/:id', isAuth, validateUserCommentCreatorOrAdmin, deleteSingleComment);
 
 router.put('/:id', isAuth, validateUserCommentCreatorOrAdmin, updateSingleComment);
 
