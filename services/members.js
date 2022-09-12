@@ -15,18 +15,13 @@ const findAllMembers = () => Member.findAll();
 
 const deleteMember = async (id) => Member.destroy({ where: { id } });
 
-const updateAMember = async (id, body) => {
-  const response = await Member.update({
-    ...body,
-  }, {
-    where: { id },
-  });
-  return response;
-};
+const updateMember = (id, body) => Member.update(body, {
+  where: { id },
+});
 
 module.exports = {
   createMember,
   findAllMembers,
   deleteMember,
-  updateAMember,
+  updateMember,
 };

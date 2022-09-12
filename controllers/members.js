@@ -1,10 +1,10 @@
-const { success, error, serverError } = require('../helpers/requestResponses');
+const { success, error, serverError } = require('../helpers');
 
 const {
   createMember,
   findAllMembers,
   deleteMember,
-  updateAMember,
+  updateMember,
 } = require('../services/members');
 
 const createNewMember = async (req, res) => {
@@ -57,10 +57,10 @@ const deleteSingleMember = async (req, res) => {
   return success({ res, message: 'member removed' });
 };
 
-const updateMember = async (req, res) => {
+const updateSingleMember = async (req, res) => {
   try {
     const { id } = req.params;
-    const [data] = await updateAMember(id, req.body);
+    const [data] = await updateMember(id, req.body);
     return data
       ? success({ res, message: 'Member updated successfully' })
       : error({ res, message: 'Member not found' });
@@ -73,5 +73,5 @@ module.exports = {
   createNewMember,
   getAllMembers,
   deleteSingleMember,
-  updateMember,
+  updateSingleMember,
 };

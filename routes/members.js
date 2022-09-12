@@ -6,7 +6,7 @@ const {
   createNewMember,
   getAllMembers,
   deleteSingleMember,
-  updateMember,
+  updateSingleMember,
 } = require('../controllers/members');
 
 const { isAdmin, isAuth } = require('../middlewares');
@@ -17,7 +17,7 @@ router.get('/', isAuth, isAdmin, getAllMembers);
 
 router.post('/', [isAuth, validateCreateMembers], createNewMember);
 
-router.put('/:id', isAuth, updateMember);
+router.put('/:id', isAuth, updateSingleMember);
 
 router.delete('/:id', isAuth, deleteSingleMember);
 
