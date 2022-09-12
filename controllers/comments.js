@@ -1,5 +1,14 @@
-const { success, serverError, error } = require('../helpers');
-const { createComment, updateComment } = require('../services/comment');
+const { success, error, serverError } = require('../helpers');
+const { getComments, createComment, updateComment } = require('../services/comment');
+
+const getAllComments = async (req, res) => {
+  try {
+    const data = await getComments();
+    return success({ res, message: 'List of all comments', data });
+  } catch (err) {
+    return serverError({ res, message: err.message });
+  }
+};
 
 const createNewComment = async (req, res) => {
   try {
@@ -33,4 +42,4 @@ const updateSingleComment = async (req, res) => {
   }
 };
 
-module.exports = { createNewComment, updateSingleComment };
+module.exports = { getAllComments, createNewComment, updateSingleComment };
