@@ -1,5 +1,5 @@
-const { success, serverError } = require('../helpers');
-const { getComments, createComment } = require('../services/comment');
+const { success, error, serverError } = require('../helpers');
+const { getComments, createComment, updateComment } = require('../services/comment');
 
 const getAllComments = async (req, res) => {
   try {
@@ -24,4 +24,22 @@ const createNewComment = async (req, res) => {
   }
 };
 
-module.exports = { getAllComments, createNewComment };
+const updateSingleComment = async (req, res) => {
+  const { id } = req.params;
+  const { body } = req.body;
+  try {
+    const [response] = await updateComment(id, body);
+
+    return response
+      ? success({
+        res,
+        message: 'comment updated',
+        status: 200,
+      })
+      : error({ res, message: 'comment not found' });
+  } catch (err) {
+    return serverError({ res, message: err.message });
+  }
+};
+
+module.exports = { getAllComments, createNewComment, updateSingleComment };
