@@ -1,4 +1,4 @@
-const paginator = async (req, model, urlmodel) => {
+const paginator = async (req, model, urlmodel, moreOptions) => {
   // endpoint
   const url = `http://localhost:3000/${urlmodel}?page=`;
 
@@ -30,6 +30,7 @@ const paginator = async (req, model, urlmodel) => {
   const options = {
     offset: getOffset(page, limit),
     limit,
+    ...moreOptions,
   };
 
   const { count, rows } = await model.findAndCountAll(options);

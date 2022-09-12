@@ -1,11 +1,13 @@
-const { success, error, serverError } = require('../helpers');
+const {
+  success, error, serverError, paginator,
+} = require('../helpers');
 const {
   deleteCategory,
-  allCategoriesName,
   updateCategoryByPk,
   findCategoryById,
   createCategory,
 } = require('../services/category');
+const { Category } = require('../models');
 
 const createNewCategory = async (req, res) => {
   try {
@@ -49,7 +51,7 @@ const deleteSingleCategory = async (req, res) => {
 
 const getAllCategoriesName = async (req, res) => {
   try {
-    const categoriesName = await allCategoriesName();
+    const categoriesName = await paginator(req, Category, 'categories', { attributes: ['id', 'name'] });
     success({
       res,
       message: 'list of the name of all categories',
