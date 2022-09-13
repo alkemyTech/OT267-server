@@ -1,7 +1,6 @@
 const { success, error, serverError } = require('../helpers');
 const { Testimony } = require('../models/index');
 const {
-  allTestimonies,
   createTestimony,
   findTestimony,
   updateTestimonyByPk,
