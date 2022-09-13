@@ -5,14 +5,14 @@ const {
 } = require('../helpers');
 
 const {
-  createNews, updateNews, getNewById, deleteNews,
+  createNews, updateNews, getNewsById, deleteNews, findAllCommentsByNewsId,
 } = require('../services/news');
 
 const getNewsDetail = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const newDetail = await getNewById(id);
+    const newDetail = await getNewsById(id);
     if (!newDetail) error({ res, message: 'news not found' });
     else success({ res, message: 'news detail', data: newDetail });
   } catch (err) {
@@ -54,7 +54,7 @@ const updateSingleNews = async (req, res) => {
 
     if (response[0] === 0) return error({ res, message: 'news not found' });
 
-    const newsUpdated = await getNewById(id);
+    const newsUpdated = await getNewsById(id);
 
     return success({
       res, message: 'news updated', data: newsUpdated, status: 201,
@@ -75,10 +75,27 @@ const getAllNews = async (req, res) => {
   }
 };
 
+const getAllCommentsByNews = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const findNewsByID = await getNewsById(id);
+
+    if (!findNewsByID) error({ res, message: 'new not found' });
+
+    const data = await findAllCommentsByNewsId(id);
+
+    if (data) success({ res, message: `list of all comments from new ${id} `, data });
+  } catch (err) {
+    serverError({ res, message: err.message });
+  }
+};
+
 module.exports = {
   getNewsDetail,
   deleteSingleNews,
   createSingleNews,
   updateSingleNews,
   getAllNews,
+  getAllCommentsByNews,
 };

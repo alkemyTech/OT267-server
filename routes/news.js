@@ -9,6 +9,7 @@ const {
   createSingleNews,
   updateSingleNews,
   deleteSingleNews, getAllNews,
+  getAllCommentsByNews,
 } = require('../controllers/news');
 
 router.get('/:id', isAuth, isAdmin, validateId, getNewsDetail);
@@ -20,5 +21,7 @@ router.put('/:id', isAuth, isAdmin, validateUpdate, uploadFile, updateSingleNews
 router.delete('/:id', isAuth, isAdmin, validateId, deleteSingleNews);
 
 router.get('/', isAuth, getAllNews);
+
+router.get('/:id/comments', isAuth, getAllCommentsByNews);
 
 module.exports = router;
