@@ -1,4 +1,5 @@
 const { success, error, serverError } = require('../helpers');
+const { Testimony } = require('../models/index');
 const {
   allTestimonies,
   createTestimony,
@@ -6,10 +7,11 @@ const {
   updateTestimonyByPk,
   destroyTestimony,
 } = require('../services/testimony');
+const { paginator } = require('../helpers/paginator');
 
 const getAllTestimonies = async (req, res) => {
   try {
-    const data = await allTestimonies();
+    const data = await paginator(req, Testimony);
 
     if (data) success({ res, message: 'list of all testimonies', data });
     else error({ res, message: 'testimonies not found' });
