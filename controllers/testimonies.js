@@ -10,7 +10,19 @@ const { paginator } = require('../helpers/paginator');
 
 const getAllTestimonies = async (req, res) => {
   try {
-    const data = await paginator(req, Testimony);
+    const data = await paginator(
+      req,
+      Testimony,
+      'testimonies',
+      {
+        attributes: [
+          'id',
+          'name',
+          'image',
+          'content',
+        ],
+      },
+    );
 
     if (data) success({ res, message: 'list of all testimonies', data });
     else error({ res, message: 'testimonies not found' });
