@@ -21,14 +21,11 @@ const createNews = async (name, content, image, categoryId) => (News.create({
 
 const updateNews = async (id, data) => News.update({ ...data }, { where: { id } });
 
-const findAllCommentsByNewsId = async (id) => {
-  const response = await Comment.findAll({
-    where: {
-      newsId: id,
-    },
-  });
-  return response;
-};
+const findAllCommentsByNewsId = (id) => Comment.findAll({
+  where: {
+    newsId: id,
+  },
+});
 
 module.exports = {
   getNewsById,
