@@ -16,25 +16,25 @@ const createDonation = async (amount) => {
         unit_price: amount,
       },
     ],
-    payer: {
-      name: 'Mirtha',
-      surname: 'Martinez',
-      /* userId from token to find email?? */
-      /*       email: 'test_user_82921974@testuser.com', */
-      phone: {
-        area_code: '11',
-        number: '22223333',
-      },
-      identification: {
-        type: 'DNI',
-        number: '01111111',
-      },
-      address: {
-        street_name: 'Calle',
-        street_number: 123,
-        zip_code: '1111',
-      },
-    },
+    // payer: {
+    //   name: 'Mirtha',
+    //   surname: 'Martinez',
+    //   /* userId from token to find email?? */
+    //   /*       email: 'test_user_82921974@testuser.com', */
+    //   phone: {
+    //     area_code: '11',
+    //     number: '22223333',
+    //   },
+    //   identification: {
+    //     type: 'DNI',
+    //     number: '01111111',
+    //   },
+    //   address: {
+    //     street_name: 'Calle',
+    //     street_number: 123,
+    //     zip_code: '1111',
+    //   },
+    // },
     /*     back_urls: {
       failure: 'http://localhost:3000/failure',
       pending: 'http://localhost:3000/pending',
@@ -44,7 +44,7 @@ const createDonation = async (amount) => {
     payment_methods: {
       installments: 1,
     },
-    /*       notification_url: 'http://localhost:3000/donations/notifications', */
+    notification_url: `${config.development.ngrokServerUrl}/donations/notification`,
     statement_descriptor: 'Somos Más ONG',
     external_reference: 'smong267',
   };

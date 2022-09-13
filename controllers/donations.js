@@ -20,4 +20,14 @@ const getSubscriptionLink = async (req, res) => {
   }
 };
 
-module.exports = { getDonationLink, getSubscriptionLink };
+const saveDonationData = async (req, res) => {
+  const donationData = req.body;
+  try {
+    // aqui se debe implementar la perseverancia de datos
+    return success({ res, message: 'donation data saved', data: donationData });
+  } catch (err) {
+    return serverError({ res, message: err.message });
+  }
+};
+
+module.exports = { getDonationLink, getSubscriptionLink, saveDonationData };
