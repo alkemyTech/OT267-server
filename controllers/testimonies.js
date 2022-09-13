@@ -1,5 +1,5 @@
 const { success, error, serverError } = require('../helpers');
-const { Testimony } = require('../models/index');
+const { Testimony } = require('../models');
 const {
   createTestimony,
   findTestimony,
