@@ -1,4 +1,4 @@
-const paginator = async (req, model, urlmodel) => {
+const paginator = async (req, model, urlmodel, moreOptions) => {
   // endpoint
   const url = `http://localhost:3000/${urlmodel}?page=`;
 
@@ -11,7 +11,9 @@ const paginator = async (req, model, urlmodel) => {
   };
 
   const getPreviousPage = (page, limit, total) => {
-    if ((total / limit) < page) return url + 1;
+    const maxPages = Math.ceil(total / limit);
+
+    if (maxPages < page) return url + maxPages;
     if (page <= 1) return null;
     return url + (page - 1);
   };
@@ -30,6 +32,7 @@ const paginator = async (req, model, urlmodel) => {
   const options = {
     offset: getOffset(page, limit),
     limit,
+    ...moreOptions,
   };
 
   const { count, rows } = await model.findAndCountAll(options);
