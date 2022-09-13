@@ -2,6 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
+const { isAdmin, isAuth, isCurrentUser } = require('../middlewares');
 const {
   createNewMember,
   getAllMembers,
@@ -9,16 +10,13 @@ const {
   updateSingleMember,
 } = require('../controllers/members');
 
-const { isAdmin, isAuth } = require('../middlewares');
-
 const { validateCreateMembers } = require('../validators/validateMembers');
 
 router.get('/', isAuth, isAdmin, getAllMembers);
 
 router.post('/', [isAuth, validateCreateMembers], createNewMember);
 
+router.delete('/:id', isAuth, isCurrentUser, deleteSingleMember);
 router.put('/:id', isAuth, updateSingleMember);
-
-router.delete('/:id', isAuth, deleteSingleMember);
 
 module.exports = router;
