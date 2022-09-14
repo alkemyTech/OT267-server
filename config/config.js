@@ -11,6 +11,7 @@ module.exports = {
     mpUrl: process.env.MP_URL,
     mpPublicKey: process.env.MP_PUBLIC_KEY,
     mpAccessToken: process.env.MP_ACCESS_TOKEN,
+    ngrokServerUrl: process.env.NGROK_SERVER_URL,
   },
   test: {
     username: process.env.DB_USER,

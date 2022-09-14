@@ -16,35 +16,10 @@ const createDonation = async (amount) => {
         unit_price: amount,
       },
     ],
-    payer: {
-      name: 'Mirtha',
-      surname: 'Martinez',
-      /* userId from token to find email?? */
-      /*       email: 'test_user_82921974@testuser.com', */
-      phone: {
-        area_code: '11',
-        number: '22223333',
-      },
-      identification: {
-        type: 'DNI',
-        number: '01111111',
-      },
-      address: {
-        street_name: 'Calle',
-        street_number: 123,
-        zip_code: '1111',
-      },
-    },
-    /*     back_urls: {
-      failure: 'http://localhost:3000/failure',
-      pending: 'http://localhost:3000/pending',
-      success: 'http://localhost:3000/success',
-    },
-    auto_return: 'approved', */
     payment_methods: {
       installments: 1,
     },
-    /*       notification_url: 'http://localhost:3000/donations/notifications', */
+    notification_url: `${config.development.ngrokServerUrl}/donations/notification`,
     statement_descriptor: 'Somos Más ONG',
     external_reference: 'smong267',
   };
@@ -72,7 +47,6 @@ const createSubscription = async (amount) => {
     },
     payer_email: 'test_user_82921974@testuser.com',
     back_url: 'https://es.wikipedia.org/wiki/%C3%89xito',
-    /* auto_return: 'approved', */
   };
 
   const subscription = await axios.post(url, body, {
