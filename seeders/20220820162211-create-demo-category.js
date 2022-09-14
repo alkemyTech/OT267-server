@@ -6,6 +6,7 @@ module.exports = {
       'Categories',
       [
         {
+          id: 1,
           name: 'Category 1',
           description: 'Category 1 description',
           image: 'https://www.designevo.com/res/template-warm-community.png',
@@ -13,6 +14,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
+          id: 2,
           name: 'Category 2',
           description: 'Category 2 description',
           image: 'https://www.designevo.com/res/template-warm-community.png',
@@ -20,6 +22,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
+          id: 3,
           name: 'Category 3',
           description: 'Category 3 description',
           image: 'https://www.designevo.com/res/template-warm-community.png',

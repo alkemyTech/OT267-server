@@ -3,16 +3,19 @@ const express = require('express');
 const router = express.Router();
 
 const { isAuth, isAdmin, uploadFile } = require('../middlewares');
+
 const { validateNewsFields, validateUpdate, validateId } = require('../validators/validateNews');
+
 const {
-  getNewsDetail,
+  getSingleNews,
+  deleteSingleNews,
   createSingleNews,
   updateSingleNews,
-  deleteSingleNews, getAllNews,
-  getAllCommentsByNews,
+  getAllNews,
+  getByNewsComments,
 } = require('../controllers/news');
 
-router.get('/:id', isAuth, isAdmin, validateId, getNewsDetail);
+router.get('/:id', isAuth, isAdmin, validateId, getSingleNews);
 
 router.post('/', isAuth, isAdmin, validateNewsFields, uploadFile, createSingleNews);
 
@@ -22,6 +25,6 @@ router.delete('/:id', isAuth, isAdmin, validateId, deleteSingleNews);
 
 router.get('/', isAuth, getAllNews);
 
-router.get('/:id/comments', isAuth, getAllCommentsByNews);
+router.get('/:id/comments', isAuth, getByNewsComments);
 
 module.exports = router;

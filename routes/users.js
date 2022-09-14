@@ -8,13 +8,19 @@ const {
   isCurrentUser,
   uploadFile,
 } = require('../middlewares');
-const { getAllUsers, deleteSingleUser, updateSingleUser } = require('../controllers/users');
+
+const {
+  deleteUser,
+  getUsers,
+  updateUser,
+} = require('../controllers/users');
+
 const { validateFields } = require('../validators/validateUser');
 
-router.get('/', isAuth, isAdmin, getAllUsers);
+router.get('/', isAuth, isAdmin, getUsers);
 
-router.delete('/:id', isAuth, isCurrentUser, deleteSingleUser);
+router.delete('/:id', isAuth, isCurrentUser, deleteUser);
 
-router.patch('/:id', isAuth, isCurrentUser, validateFields, uploadFile, updateSingleUser);
+router.patch('/:id', isAuth, isCurrentUser, validateFields, uploadFile, updateUser);
 
 module.exports = router;

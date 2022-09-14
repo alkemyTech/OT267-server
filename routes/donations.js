@@ -4,11 +4,11 @@ const router = express.Router();
 
 const { isAuth } = require('../middlewares');
 
-const { getDonationLink, getSubscriptionLink, saveDonationData } = require('../controllers/donations');
+const { createDonationLink, createSubscriptionLink, saveDonationData } = require('../controllers/donations');
 
-router.post('/singledonation', isAuth, getDonationLink);
+router.post('/singledonation', isAuth, createDonationLink);
 
-router.post('/subscription', isAuth, getSubscriptionLink);
+router.post('/subscription', isAuth, createSubscriptionLink);
 
 router.post('/notification', async (req, res, next) => {
   res.status(200);

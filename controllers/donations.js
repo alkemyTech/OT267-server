@@ -2,7 +2,7 @@ const { success, serverError } = require('../helpers');
 
 const { createDonation, createSubscription } = require('../services/donation');
 
-const getDonationLink = async (req, res) => {
+const createDonationLink = async (req, res) => {
   try {
     const donation = await createDonation(req.body.amount);
     return success({ res, message: 'single donation link', data: donation });
@@ -11,7 +11,7 @@ const getDonationLink = async (req, res) => {
   }
 };
 
-const getSubscriptionLink = async (req, res) => {
+const createSubscriptionLink = async (req, res) => {
   try {
     const subscription = await createSubscription(req.body.amount);
     return success({ res, message: 'recurrent donation link', data: subscription });
@@ -30,4 +30,4 @@ const saveDonationData = async (req, res) => {
   }
 };
 
-module.exports = { getDonationLink, getSubscriptionLink, saveDonationData };
+module.exports = { createDonationLink, createSubscriptionLink, saveDonationData };
