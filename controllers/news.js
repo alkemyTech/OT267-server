@@ -81,13 +81,15 @@ const getAllCommentsByNews = async (req, res) => {
   try {
     const findNewsByID = await getNewsById(id);
 
-    if (!findNewsByID) error({ res, message: 'new not found' });
+    if (!findNewsByID) return error({ res, message: 'new not found' });
 
     const data = await findAllCommentsByNewsId(id);
 
-    if (data) success({ res, message: `list of all comments from new ${id} `, data });
+    if (!data) return error({ res, message: 'Comment not found for this news' });
+
+    return success({ res, message: `list of all comments from new ${id} `, data });
   } catch (err) {
-    serverError({ res, message: err.message });
+    return serverError({ res, message: err.message });
   }
 };
 
