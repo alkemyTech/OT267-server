@@ -2,6 +2,11 @@ const { success, serverError } = require('../helpers');
 
 const { createDonation, createSubscription } = require('../services/donation');
 
+const getAllDonations = async (req, res) => {
+  console.log('first');
+  return res.json({ error: 'none' });
+};
+
 const getDonationLink = async (req, res) => {
   try {
     const donation = await createDonation(req.body.amount);
@@ -30,4 +35,9 @@ const saveDonationData = async (req, res) => {
   }
 };
 
-module.exports = { getDonationLink, getSubscriptionLink, saveDonationData };
+module.exports = {
+  getAllDonations,
+  getDonationLink,
+  getSubscriptionLink,
+  saveDonationData,
+};
