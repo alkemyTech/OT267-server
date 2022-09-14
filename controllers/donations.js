@@ -1,6 +1,6 @@
-const { success, serverError } = require('../helpers');
+const { success, serverError, error } = require('../helpers');
 
-const { createDonation, createSubscription } = require('../services/donation');
+const { createDonation, createSubscription, saveDonationData } = require('../services/donation');
 
 const getDonationLink = async (req, res) => {
   try {
@@ -20,9 +20,11 @@ const getSubscriptionLink = async (req, res) => {
   }
 };
 
-const saveDonationData = async (req, res) => {
-  const donationData = req.body;
+const saveDonation = async (req, res) => {
   try {
+    const donationData = await saveDonationData(req.body);
+
+    if (!donationData) return error({ res, message: 'Payment details were not saved, try again' });
     // aqui se debe implementar la perseverancia de datos
     return success({ res, message: 'donation data saved', data: donationData });
   } catch (err) {
@@ -30,4 +32,4 @@ const saveDonationData = async (req, res) => {
   }
 };
 
-module.exports = { getDonationLink, getSubscriptionLink, saveDonationData };
+module.exports = { getDonationLink, getSubscriptionLink, saveDonation };

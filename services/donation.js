@@ -1,6 +1,8 @@
 const axios = require('axios');
 const config = require('../config/config');
 
+const { Donation } = require('../models/index');
+
 const createDonation = async (amount) => {
   const url = `${config.development.mpUrl}checkout/preferences`;
 
@@ -34,6 +36,14 @@ const createDonation = async (amount) => {
   return donation.data;
 };
 
+const saveDonationData = async (data) => Donation.create({
+  data_id: data.data.id,
+  type: data.type,
+  action: data.action,
+  mp_userId: data.user_id,
+  date_created: data.date_created,
+});
+
 const createSubscription = async (amount) => {
   const url = `${config.development.mpUrl}preapproval`;
 
@@ -59,4 +69,4 @@ const createSubscription = async (amount) => {
   return subscription.data;
 };
 
-module.exports = { createDonation, createSubscription };
+module.exports = { createDonation, createSubscription, saveDonationData };
