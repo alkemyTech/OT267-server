@@ -5,17 +5,17 @@ const { Contact } = require('../models');
  * @returns the information about the new contact create in the database.
  */
 // eslint-disable-next-line object-curly-newline
-const createContact = async ({ name, phone, email, message }) => {
-  const newContact = await Contact.create({
+const newContact = async ({ name, phone, email, message }) => {
+  const contact = await Contact.create({
     name,
     phone,
     email,
     message,
   });
-  return newContact;
+  return contact;
 };
 
-const getContacts = async () => Contact.findAll({
+const findAllContacts = async () => Contact.findAll({
   attributes: [
     'id',
     'name',
@@ -26,6 +26,6 @@ const getContacts = async () => Contact.findAll({
 });
 
 module.exports = {
-  createContact,
-  getContacts,
+  newContact,
+  findAllContacts,
 };

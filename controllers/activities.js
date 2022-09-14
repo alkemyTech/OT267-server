@@ -1,14 +1,15 @@
 const { success, error, serverError } = require('../helpers');
+
 const {
-  allActivities,
+  findAllActivities,
   newActivity,
-  updateActivityByPk,
-  getActivityById,
+  updateByIdActivity,
+  findByPkActivity,
 } = require('../services/activity');
 
-const getAllActivities = async (req, res) => {
+const getActivities = async (req, res) => {
   try {
-    const data = await allActivities();
+    const data = await findAllActivities();
 
     if (data) success({ res, message: 'list of all activities', data });
     else error({ res, message: 'activities not found' });
@@ -17,7 +18,7 @@ const getAllActivities = async (req, res) => {
   }
 };
 
-const createNewActivity = async (req, res) => {
+const createActivity = async (req, res) => {
   const {
     name, content, image,
   } = req.body;
@@ -35,13 +36,13 @@ const createNewActivity = async (req, res) => {
   }
 };
 
-const updateSingleActivity = async (req, res) => {
+const updateActivity = async (req, res) => {
   try {
     const { id } = req.params;
-    const response = await updateActivityByPk(id, req.body);
+    const response = await updateByIdActivity(id, req.body);
     if (response[0] === 0) return error({ res, message: 'activity not found' });
 
-    const activityUpdated = await getActivityById(id);
+    const activityUpdated = await findByPkActivity(id);
 
     return success({
       res, message: 'activity updated', data: activityUpdated, status: 201,
@@ -51,4 +52,4 @@ const updateSingleActivity = async (req, res) => {
   }
 };
 
-module.exports = { getAllActivities, createNewActivity, updateSingleActivity };
+module.exports = { getActivities, createActivity, updateActivity };

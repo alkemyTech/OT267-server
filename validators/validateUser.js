@@ -1,7 +1,9 @@
 const { check } = require('express-validator');
 
-const { findUserByMail } = require('../services/user');
-const { findRoleById } = require('../services/role');
+const { findOneUser } = require('../services/user');
+
+const { findByPkRole } = require('../services/role');
+
 const { handleResult } = require('../middlewares');
 
 const validateRegistrationData = [
@@ -29,7 +31,7 @@ const validateRegistrationData = [
     .isEmail()
     .withMessage('Ingrese un correo válido')
     .custom(async (value) => {
-      const matchedMail = await findUserByMail(value);
+      const matchedMail = await findOneUser(value);
       if (matchedMail) {
         throw new Error('Ya existe un usuario con este correo');
       } else {
@@ -74,7 +76,7 @@ const validateRegistrationData = [
 
   check('roleId').custom(async (value) => {
     if (value) {
-      const matchedRole = await findRoleById(value);
+      const matchedRole = await findByPkRole(value);
       if (matchedRole === null) {
         throw new Error('Rol no existente');
       } else {
@@ -97,7 +99,7 @@ const validateLoginData = [
     .isEmail()
     .withMessage('Ingrese un correo válido')
     .custom(async (value) => {
-      const matchedMail = await findUserByMail(value);
+      const matchedMail = await findOneUser(value);
       if (!matchedMail) {
         throw new Error('No existe un usuario con este correo');
       } else {
@@ -137,7 +139,7 @@ const validateFields = [
     .isEmail()
     .withMessage('Ingrese un correo válido')
     .custom(async (value) => {
-      const matchedMail = await findUserByMail(value);
+      const matchedMail = await findOneUser(value);
       if (matchedMail) {
         throw new Error('Ya existe un usuario con este correo');
       } else {
@@ -156,7 +158,7 @@ const validateFields = [
 
   check('roleId').custom(async (value) => {
     if (value) {
-      const matchedRole = await findRoleById(value);
+      const matchedRole = await findByPkRole(value);
       if (matchedRole === null) {
         throw new Error('Rol no existente');
       } else {

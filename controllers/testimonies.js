@@ -1,19 +1,22 @@
 const { success, error, serverError } = require('../helpers');
+
 const { Testimony } = require('../models');
+
 const {
-  createTestimony,
-  findTestimony,
-  updateTestimonyByPk,
+  findOrCreateTestimony,
+  updateByIdTestimony,
+  findByPkTestimony,
   destroyTestimony,
 } = require('../services/testimony');
+
 const { paginator } = require('../helpers/paginator');
 
-const getAllTestimonies = async (req, res) => {
+const getTestimonies = async (req, res) => {
+  let data = {};
   try {
-    const data = await paginator(
+    data = await paginator(
       req,
       Testimony,
-      'testimonies',
       {
         attributes: [
           'id',
@@ -23,19 +26,19 @@ const getAllTestimonies = async (req, res) => {
         ],
       },
     );
-
-    if (data) success({ res, message: 'list of all testimonies', data });
-    else error({ res, message: 'testimonies not found' });
   } catch (err) {
-    serverError({ res, message: err.message });
+    return serverError({ res, message: err.message });
   }
+  if (data) return success({ res, message: 'list of all testimonies', data });
+
+  return error({ res, message: 'testimonies not found' });
 };
 
-const createNewTestimony = async (req, res) => {
+const createTestimony = async (req, res) => {
   const { name, content } = req.body;
 
   try {
-    const newTestimony = await createTestimony(name, content);
+    const newTestimony = await findOrCreateTestimony(name, content);
 
     if (!newTestimony) return error({ res, message: 'testimony already exists', status: 400 });
 
@@ -50,14 +53,14 @@ const createNewTestimony = async (req, res) => {
   }
 };
 
-const updateSingleTestimony = async (req, res) => {
+const updateTestimony = async (req, res) => {
   const { id } = req.params;
   const data = req.body;
 
   try {
-    await updateTestimonyByPk(id, data);
+    await updateByIdTestimony(id, data);
 
-    const testimonyUpdated = await findTestimony(id);
+    const testimonyUpdated = await findByPkTestimony(id);
 
     return success({
       res, message: 'Testimony updated', data: testimonyUpdated, status: 201,
@@ -67,7 +70,7 @@ const updateSingleTestimony = async (req, res) => {
   }
 };
 
-const deleteSingleTestimony = async (req, res) => {
+const deleteTestimony = async (req, res) => {
   const { id } = req.params;
   try {
     const response = await destroyTestimony(id);
@@ -79,8 +82,8 @@ const deleteSingleTestimony = async (req, res) => {
 };
 
 module.exports = {
-  getAllTestimonies,
-  createNewTestimony,
-  updateSingleTestimony,
-  deleteSingleTestimony,
+  getTestimonies,
+  createTestimony,
+  updateTestimony,
+  deleteTestimony,
 };

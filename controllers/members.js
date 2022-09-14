@@ -1,20 +1,22 @@
 const { success, error, serverError } = require('../helpers');
+
 const { paginator } = require('../helpers/paginator');
+
 const { Member } = require('../models/index');
 
 const {
-  createMember,
-  deleteMember,
-  updateMember,
+  findOrCreateMember,
+  destroyMember,
+  updateByIdMember,
 } = require('../services/members');
 
-const createNewMember = async (req, res) => {
+const createMember = async (req, res) => {
   const {
     name, facebookUrl, instagramUrl, linkedinUrl, image, description,
   } = req.body;
 
   try {
-    const newMember = await createMember({
+    const newMember = await findOrCreateMember({
       name,
       facebookUrl,
       instagramUrl,
@@ -33,9 +35,9 @@ const createNewMember = async (req, res) => {
   }
 };
 
-const getAllMembers = async (req, res) => {
+const getMembers = async (req, res) => {
   try {
-    const data = await paginator(req, Member, 'news');
+    const data = await paginator(req, Member);
 
     if (data.length === 0) return error({ res, message: 'no members' });
 
@@ -45,11 +47,11 @@ const getAllMembers = async (req, res) => {
   }
 };
 
-const deleteSingleMember = async (req, res) => {
+const deleteMember = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const response = await deleteMember(id);
+    const response = await destroyMember(id);
 
     if (response === 0) return error({ res, message: 'Member not found' });
   } catch (err) {
@@ -59,10 +61,10 @@ const deleteSingleMember = async (req, res) => {
   return success({ res, message: 'member removed' });
 };
 
-const updateSingleMember = async (req, res) => {
+const updateMember = async (req, res) => {
   try {
     const { id } = req.params;
-    const [data] = await updateMember(id, req.body);
+    const [data] = await updateByIdMember(id, req.body);
     return data
       ? success({ res, message: 'Member updated successfully' })
       : error({ res, message: 'Member not found' });
@@ -72,8 +74,8 @@ const updateSingleMember = async (req, res) => {
 };
 
 module.exports = {
-  createNewMember,
-  getAllMembers,
-  deleteSingleMember,
-  updateSingleMember,
+  createMember,
+  getMembers,
+  deleteMember,
+  updateMember,
 };
