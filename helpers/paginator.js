@@ -1,4 +1,4 @@
-const paginator = async (req, model, urlmodel, moreOptions) => {
+const paginator = async (req, model, urlmodel, moreOptions, by, order) => {
   // endpoint
   const url = `http://localhost:3000/${urlmodel}?page=`;
 
@@ -32,6 +32,7 @@ const paginator = async (req, model, urlmodel, moreOptions) => {
   const options = {
     offset: getOffset(page, limit),
     limit,
+    order: [[by || 'createdAt', order || 'DESC']],
     ...moreOptions,
   };
 

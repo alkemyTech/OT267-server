@@ -1,4 +1,9 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-empty */
+/* eslint-disable max-len */
 const { News } = require('../models');
+
+const { Comment } = require('../models');
 
 const {
   success, error, serverError, paginator,
@@ -65,11 +70,27 @@ const updateSingleNews = async (req, res) => {
 };
 
 const getAllNews = async (req, res) => {
-  try {
-    const data = await paginator(req, News, 'news');
+  const { by, order } = req.query;
 
-    if (data) success({ res, message: 'list of all news', data });
-    else error({ res, message: 'news not found' });
+  if (by === undefined || by === 'id' || by === 'createdAt' || by === 'name' || by === 'content' || by === 'image' || by === 'categoryId' || by === 'createdAt') { } else {
+    return error({ res, message: 'by parameter not valid', status: 400 });
+  }
+
+  if (order === undefined || order === 'ASC' || order === 'DESC') { } else {
+    return error({ res, message: 'order parameter not valid', status: 400 });
+  }
+
+  try {
+    const data = await paginator(req, News, 'news', {
+      attributes: ['id', 'name', 'content', 'image', 'categoryId', 'createdAt'],
+      include: {
+        model: Comment,
+        attributes: ['userId', 'body'],
+      },
+    }, by, order);
+    if (data) {
+      success({ res, message: 'list of all news', data });
+    } error({ res, message: 'news not found' });
   } catch (err) {
     serverError({ res, message: err.message });
   }

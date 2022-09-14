@@ -9,9 +9,7 @@ const getComments = () => Comment.findAll({
   ],
 });
 
-const createComment = async (data) => Comment.create({
-  ...data,
-});
+const createComment = async (data) => Comment.create(data);
 
 const findComentById = async (id) => Comment.findOne({ where: { id } });
 

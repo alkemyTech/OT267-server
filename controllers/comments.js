@@ -16,8 +16,12 @@ const getAllComments = async (req, res) => {
 };
 
 const createNewComment = async (req, res) => {
+  const { userId } = req;
+  const { body, newsId } = req.body;
+
   try {
-    const data = await createComment(req.body);
+    const data = await createComment({ userId, body, newsId: +newsId });
+
     success({
       res,
       message: 'comment created',

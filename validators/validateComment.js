@@ -2,21 +2,17 @@ const { check } = require('express-validator');
 
 const { handleResult } = require('../middlewares');
 
-const { getNewById } = require('../services/news');
+const { getNewsById } = require('../services/news');
 
 const validateFields = [
   check('body', 'Ingrese el comentario')
     .exists()
     .trim()
     .escape(),
-  check('userId', 'Ingrese el id del usuario')
-    .exists()
-    .trim()
-    .escape(),
   check('newsId', 'Ingrese el id del post')
     .exists()
     .custom(async (value) => {
-      const matchedNews = await getNewById(value);
+      const matchedNews = await getNewsById(value);
       if (value && matchedNews) return true;
       if (value && !matchedNews) throw new Error('No existe un post con este id');
       return true;
