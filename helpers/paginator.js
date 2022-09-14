@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 const paginator = async (req, model, urlmodel, moreOptions) => {
   // endpoint
-  const url = `http://localhost:3000/${urlmodel}?page=`;
+  const url = `${req.protocol}://${req.get('host')}${req.baseUrl}?page=`;
 
   // pages
   const getNextPage = (page, limit, total) => {
