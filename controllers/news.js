@@ -97,7 +97,7 @@ const getByNewsComments = async (req, res) => {
 
     data = await findAllByNewsIdComments(id);
   } catch (err) {
-    serverError({ res, message: err.message });
+    return serverError({ res, message: err.message });
   }
   if (data) {
     return success({ res, message: `list of all comments from new ${id} `, data });
