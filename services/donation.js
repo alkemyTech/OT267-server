@@ -26,7 +26,7 @@ const createDonation = async (amount) => {
     payment_methods: {
       installments: 1,
     },
-    /* notification_url: , */
+    notification_url: `${config.development.ngrokServerUrl}/donations/notification`,
     statement_descriptor: 'Somos Más ONG',
     external_reference: 'smong267',
   };
@@ -54,7 +54,6 @@ const createSubscription = async (amount) => {
     },
     payer_email: 'test_user_82921974@testuser.com',
     back_url: 'https://es.wikipedia.org/wiki/%C3%89xito',
-    /* auto_return: 'approved', */
   };
 
   const subscription = await axios.post(url, body, {

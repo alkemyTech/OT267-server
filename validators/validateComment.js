@@ -2,7 +2,7 @@ const { check } = require('express-validator');
 
 const { handleResult } = require('../middlewares');
 
-const { getNewsById } = require('../services/news');
+const { findByPkNews } = require('../services/news');
 
 const validateFields = [
   check('body', 'Ingrese el comentario')
@@ -12,7 +12,7 @@ const validateFields = [
   check('newsId', 'Ingrese el id del post')
     .exists()
     .custom(async (value) => {
-      const matchedNews = await getNewsById(value);
+      const matchedNews = await findByPkNews(value);
       if (value && matchedNews) return true;
       if (value && !matchedNews) throw new Error('No existe un post con este id');
       return true;

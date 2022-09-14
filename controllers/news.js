@@ -69,30 +69,22 @@ const updateSingleNews = async (req, res) => {
 };
 
 const getAllNews = async (req, res) => {
-  const { by, order } = req.query;
-
-  if (by === undefined || by === 'id' || by === 'createdAt' || by === 'name' || by === 'content' || by === 'image' || by === 'categoryId' || by === 'createdAt') { /* continue regardless of error */ } else {
-    return error({ res, message: 'by parameter not valid', status: 400 });
-  }
-
-  if (order === undefined || order === 'ASC' || order === 'DESC') { /* continue regardless of error */ } else {
-    return error({ res, message: 'order parameter not valid', status: 400 });
-  }
-
+  let data = {};
   try {
-    const data = await paginator(req, News, 'news', {
+    data = await paginator(req, News, {
       attributes: ['id', 'name', 'content', 'image', 'categoryId', 'createdAt'],
       include: {
         model: Comment,
         attributes: ['userId', 'body'],
       },
-    }, by, order);
-    if (data) {
-      success({ res, message: 'list of all news', data });
-    } error({ res, message: 'news not found' });
+    });
   } catch (err) {
-    serverError({ res, message: err.message });
+    return serverError({ res, message: err.message });
   }
+  if (data) {
+    return success({ res, message: 'list of all news', data });
+  }
+  return error({ res, message: 'news not found' });
 };
 
 const getByNewsComments = async (req, res) => {

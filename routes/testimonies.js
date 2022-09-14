@@ -9,6 +9,7 @@ const {
   updateTestimony,
   deleteTestimony,
 } = require('../controllers/testimonies');
+
 const { validateCreateTestimony } = require('../validators/validateTestimony');
 
 router.get('/', isAuth, isAdmin, getTestimonies);

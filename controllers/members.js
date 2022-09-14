@@ -1,5 +1,7 @@
 const { success, error, serverError } = require('../helpers');
+
 const { paginator } = require('../helpers/paginator');
+
 const { Member } = require('../models/index');
 
 const {
@@ -35,7 +37,7 @@ const createMember = async (req, res) => {
 
 const getMembers = async (req, res) => {
   try {
-    const data = await paginator(req, Member, 'news');
+    const data = await paginator(req, Member);
 
     if (data.length === 0) return error({ res, message: 'no members' });
 
