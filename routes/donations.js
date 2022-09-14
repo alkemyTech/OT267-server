@@ -4,10 +4,10 @@ const router = express.Router();
 
 const { isAuth } = require('../middlewares');
 
-const { getDonationLink, getSubscriptionLink } = require('../controllers/donations');
+const { createDonationLink, createSubscriptionLink } = require('../controllers/donations');
 
-router.post('/singledonation', isAuth, getDonationLink);
+router.post('/singledonation', isAuth, createDonationLink);
 
-router.post('/subscription', isAuth, getSubscriptionLink);
+router.post('/subscription', isAuth, createSubscriptionLink);
 
 module.exports = router;

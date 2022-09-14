@@ -1,4 +1,5 @@
 const axios = require('axios');
+
 const config = require('../config/config');
 
 const createDonation = async (amount) => {
@@ -10,41 +11,22 @@ const createDonation = async (amount) => {
         id: '1',
         title: 'Donación única',
         description: 'Donación única para la ONG Somos Más',
-        /* picture_url: 'https://drive.google.com/file/d/1-j70Zmn2B1-0T_67JHJbNLKkI9sACMNi/view?usp=sharing', */
+        /* picture_url: */
         category_id: 'single donation',
         quantity: 1,
         unit_price: amount,
       },
     ],
-    payer: {
-      name: 'Mirtha',
-      surname: 'Martinez',
-      /* userId from token to find email?? */
-      /*       email: 'test_user_82921974@testuser.com', */
-      phone: {
-        area_code: '11',
-        number: '22223333',
-      },
-      identification: {
-        type: 'DNI',
-        number: '01111111',
-      },
-      address: {
-        street_name: 'Calle',
-        street_number: 123,
-        zip_code: '1111',
-      },
-    },
     /*     back_urls: {
-      failure: 'http://localhost:3000/failure',
-      pending: 'http://localhost:3000/pending',
-      success: 'http://localhost:3000/success',
+      failure:,
+      pending:,
+      success:,
     },
     auto_return: 'approved', */
     payment_methods: {
       installments: 1,
     },
-    /*       notification_url: 'http://localhost:3000/donations/notifications', */
+    /* notification_url: , */
     statement_descriptor: 'Somos Más ONG',
     external_reference: 'smong267',
   };

@@ -1,15 +1,15 @@
 const { success, error, serverError } = require('../helpers');
 const {
-  allTestimonies,
-  createTestimony,
-  findTestimony,
-  updateTestimonyByPk,
+  findAllTestimonies,
+  findOrCreateTestimony,
+  updateByIdTestimony,
+  findByPkTestimony,
   destroyTestimony,
 } = require('../services/testimony');
 
-const getAllTestimonies = async (req, res) => {
+const getTestimonies = async (req, res) => {
   try {
-    const data = await allTestimonies();
+    const data = await findAllTestimonies();
 
     if (data) success({ res, message: 'list of all testimonies', data });
     else error({ res, message: 'testimonies not found' });
@@ -18,11 +18,11 @@ const getAllTestimonies = async (req, res) => {
   }
 };
 
-const createNewTestimony = async (req, res) => {
+const createTestimony = async (req, res) => {
   const { name, content } = req.body;
 
   try {
-    const newTestimony = await createTestimony(name, content);
+    const newTestimony = await findOrCreateTestimony(name, content);
 
     if (!newTestimony) return error({ res, message: 'testimony already exists', status: 400 });
 
@@ -37,14 +37,14 @@ const createNewTestimony = async (req, res) => {
   }
 };
 
-const updateSingleTestimony = async (req, res) => {
+const updateTestimony = async (req, res) => {
   const { id } = req.params;
   const data = req.body;
 
   try {
-    await updateTestimonyByPk(id, data);
+    await updateByIdTestimony(id, data);
 
-    const testimonyUpdated = await findTestimony(id);
+    const testimonyUpdated = await findByPkTestimony(id);
 
     return success({
       res, message: 'Testimony updated', data: testimonyUpdated, status: 201,
@@ -54,7 +54,7 @@ const updateSingleTestimony = async (req, res) => {
   }
 };
 
-const deleteSingleTestimony = async (req, res) => {
+const deleteTestimony = async (req, res) => {
   const { id } = req.params;
   try {
     const response = await destroyTestimony(id);
@@ -66,8 +66,8 @@ const deleteSingleTestimony = async (req, res) => {
 };
 
 module.exports = {
-  getAllTestimonies,
-  createNewTestimony,
-  updateSingleTestimony,
-  deleteSingleTestimony,
+  getTestimonies,
+  createTestimony,
+  updateTestimony,
+  deleteTestimony,
 };

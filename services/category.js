@@ -1,6 +1,6 @@
 const { Category } = require('../models/index');
 
-const createCategory = async (data) => {
+const findOrCreateCategory = async (data) => {
   const { name, description, image } = data;
 
   const [category, created] = await Category.findOrCreate({
@@ -15,34 +15,34 @@ const createCategory = async (data) => {
   return created;
 };
 
-const findCategoryById = async (id) => Category.findByPk(id, {
+const findByPkCategory = async (id) => Category.findByPk(id, {
   attributes: ['name', 'description', 'image'],
 });
 
-const deleteCategory = async (id) => {
+const destroyCategory = async (id) => {
   const response = await Category.destroy({
     where: { id },
   });
   return response;
 };
 
-const allCategoriesName = async () => {
+const findByNameCategories = async () => {
   const response = await Category.findAll({
     attributes: ['name'],
   });
   return response;
 };
 
-const updateCategoryByPk = async (id, data) => {
+const updateByIdCategory = async (id, data) => {
   await Category.update({ ...data }, { where: { id } });
 
-  return findCategoryById(id);
+  return findByPkCategory(id);
 };
 
 module.exports = {
-  deleteCategory,
-  allCategoriesName,
-  findCategoryById,
-  createCategory,
-  updateCategoryByPk,
+  destroyCategory,
+  findByNameCategories,
+  findByPkCategory,
+  findOrCreateCategory,
+  updateByIdCategory,
 };

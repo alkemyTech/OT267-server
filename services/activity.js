@@ -1,6 +1,6 @@
 const { Activity } = require('../models/index');
 
-const allActivities = async () => Activity.findAll({
+const findAllActivities = async () => Activity.findAll({
   attributes: ['id', 'name', 'content', 'image'],
 });
 
@@ -10,13 +10,13 @@ const newActivity = async (name, content, image) => Activity.create({
   image,
 });
 
-const updateActivityByPk = async (id, data) => Activity.update({ ...data }, { where: { id } });
+const updateByIdActivity = async (id, data) => Activity.update({ ...data }, { where: { id } });
 
-const getActivityById = async (id) => Activity.findByPk(id);
+const findByPkActivity = async (id) => Activity.findByPk(id);
 
 module.exports = {
-  allActivities,
+  findAllActivities,
   newActivity,
-  updateActivityByPk,
-  getActivityById,
+  updateByIdActivity,
+  findByPkActivity,
 };

@@ -1,10 +1,10 @@
-const { allUsers, deleteUser, updateUserbyPk } = require('../services/user');
+const { findAllUsers, destroyUser, updateByIdUser } = require('../services/user');
 
 const { success, error, serverError } = require('../helpers');
 
-const getAllUsers = async (req, res) => {
+const getUsers = async (req, res) => {
   try {
-    const data = await allUsers();
+    const data = await findAllUsers();
 
     if (data) success({ res, message: 'list of all users', data });
     else error({ res, message: 'users not found' });
@@ -13,10 +13,10 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-const deleteSingleUser = async (req, res) => {
+const deleteUser = async (req, res) => {
   const { id } = req.params;
   try {
-    const data = await deleteUser(id);
+    const data = await destroyUser(id);
 
     if (data === 0) {
       return error({ res, message: 'user not found' });
@@ -27,10 +27,10 @@ const deleteSingleUser = async (req, res) => {
   return success({ res, message: 'user deleted' });
 };
 
-const updateSingleUser = async (req, res) => {
+const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const response = await updateUserbyPk(id, req.body);
+    const response = await updateByIdUser(id, req.body);
     return response
       ? success({ res, message: 'user updated', status: 201 })
       : error({ res, message: 'user not found' });
@@ -40,7 +40,7 @@ const updateSingleUser = async (req, res) => {
 };
 
 module.exports = {
-  deleteSingleUser,
-  getAllUsers,
-  updateSingleUser,
+  deleteUser,
+  getUsers,
+  updateUser,
 };

@@ -1,26 +1,26 @@
 const { success, error, serverError } = require('../helpers');
 const {
-  getComments,
-  createComment,
-  updateComment,
-  deleteComment,
+  findAllComments,
+  newComment,
+  updateByIdComment,
+  destroyComment,
 } = require('../services/comment');
 
-const getAllComments = async (req, res) => {
+const getComments = async (req, res) => {
   try {
-    const data = await getComments();
+    const data = await findAllComments();
     return success({ res, message: 'List of all comments', data });
   } catch (err) {
     return serverError({ res, message: err.message });
   }
 };
 
-const createNewComment = async (req, res) => {
+const createComment = async (req, res) => {
   const { userId } = req;
   const { body, newsId } = req.body;
 
   try {
-    const data = await createComment({ userId, body, newsId: +newsId });
+    const data = await newComment({ userId, body, newsId: +newsId });
 
     success({
       res,
@@ -33,11 +33,11 @@ const createNewComment = async (req, res) => {
   }
 };
 
-const updateSingleComment = async (req, res) => {
+const updateComment = async (req, res) => {
   const { id } = req.params;
   const { body } = req.body;
   try {
-    const [response] = await updateComment(id, body);
+    const [response] = await updateByIdComment(id, body);
 
     return response
       ? success({
@@ -51,10 +51,10 @@ const updateSingleComment = async (req, res) => {
   }
 };
 
-const deleteSingleComment = async (req, res) => {
+const deleteComment = async (req, res) => {
   try {
     const { id } = req.params;
-    const response = await deleteComment(id);
+    const response = await destroyComment(id);
     if (response === 0) return error({ res, message: 'comment nof found' });
 
     return success({
@@ -72,8 +72,8 @@ const deleteSingleComment = async (req, res) => {
 };
 
 module.exports = {
-  getAllComments,
-  createNewComment,
-  updateSingleComment,
-  deleteSingleComment,
+  getComments,
+  createComment,
+  updateComment,
+  deleteComment,
 };

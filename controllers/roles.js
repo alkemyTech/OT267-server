@@ -1,9 +1,9 @@
 const { success, error, serverError } = require('../helpers');
-const { allRoles, findRoleById } = require('../services/role');
+const { findAllRoles, findByPkRole } = require('../services/role');
 
-const getAllRoles = async (req, res) => {
+const getRoles = async (req, res) => {
   try {
-    const data = await allRoles();
+    const data = await findAllRoles();
 
     if (data) {
       success({ res, message: 'list of all roles', data });
@@ -15,10 +15,10 @@ const getAllRoles = async (req, res) => {
   }
 };
 
-const getSingleRole = async (req, res) => {
+const getRole = async (req, res) => {
   const { id } = req.params;
   try {
-    const data = await findRoleById(id);
+    const data = await findByPkRole(id);
 
     if (data) {
       success({ res, message: 'role details', data });
@@ -31,6 +31,6 @@ const getSingleRole = async (req, res) => {
 };
 
 module.exports = {
-  getAllRoles,
-  getSingleRole,
+  getRoles,
+  getRole,
 };

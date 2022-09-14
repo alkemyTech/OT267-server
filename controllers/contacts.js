@@ -1,15 +1,18 @@
 const { sendMail, success, serverError } = require('../helpers');
-const { createContact, getContacts } = require('../services/contact');
+const {
+  newContact,
+  findAllContacts,
+} = require('../services/contact');
 
-const createNewContact = async (req, res) => {
+const createContact = async (req, res) => {
   try {
     const { body } = req;
-    const newContact = await createContact(body);
-    if (!newContact) throw Error('Something went wrong during the contact creation, try again later');
+    const contact = await newContact(body);
+    if (!contact) throw Error('Something went wrong during the contact creation, try again later');
     success({
       res,
       message: 'contact registered succesfully',
-      data: newContact,
+      data: contact,
       status: 201,
     });
     // Send mail when registred new contact.
@@ -27,9 +30,9 @@ const createNewContact = async (req, res) => {
   }
 };
 
-const getAllContacts = async (req, res) => {
+const getContacts = async (req, res) => {
   try {
-    const data = await getContacts();
+    const data = await findAllContacts();
 
     success({ res, message: 'list of all contacts', data });
   } catch (err) {
@@ -37,4 +40,4 @@ const getAllContacts = async (req, res) => {
   }
 };
 
-module.exports = { createNewContact, getAllContacts };
+module.exports = { createContact, getContacts };
