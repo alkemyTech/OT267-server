@@ -6,23 +6,23 @@ module.exports = (sequelize, DataTypes) => {
   class Donation extends Model {
   }
   Donation.init({
-    donationId: {
+    data_id: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    payment_type: {
-      type: DataTypes.String,
+    type: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    payment_status: {
-      type: DataTypes.String,
+    action: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    userId: {
-      type: DataTypes.String,
+    mp_userId: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    payment_date: {
+    data_created: {
       type: DataTypes.DATE,
       allowNull: false,
     },
