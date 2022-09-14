@@ -8,8 +8,24 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       donationId: {
-        allowNull: false,
         type: Sequelize.STRING,
+        allowNull: false,
+      },
+      payment_type: {
+        type: Sequelize.String,
+        allowNull: false,
+      },
+      payment_status: {
+        type: Sequelize.String,
+        allowNull: false,
+      },
+      userId: {
+        type: Sequelize.String,
+        allowNull: false,
+      },
+      payment_date: {
+        type: Sequelize.Date,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
