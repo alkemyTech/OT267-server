@@ -31,9 +31,6 @@ const paginator = async (req, model, moreOptions) => {
 
   // by
   let attribute = 'id';
-  console.log('by', by);
-  console.log('la verdad', Object.keys(model.rawAttributes).includes(by));
-  console.log('attriiiii', Object.keys(model.rawAttributes));
   if (Object.keys(model.rawAttributes).includes(by)) attribute = by;
 
   // order
@@ -42,9 +39,8 @@ const paginator = async (req, model, moreOptions) => {
   const orderNames = ['ASC', 'DESC'];
 
   if (orderNames.includes(order)) direction = order;
-  console.log('order', order);
-  console.log('direction', direction);
-  // request
+
+  // findAndCountAll options
   const options = {
     offset: getOffset(currentPage, limit),
     limit,
@@ -52,7 +48,10 @@ const paginator = async (req, model, moreOptions) => {
     ...moreOptions,
   };
 
-  const { count, rows } = await model.findAndCountAll(options);
+  const { rows } = await model.findAndCountAll(options);
+
+  // rows number
+  const count = Object.keys(rows).length;
 
   // total pages
   const totalPages = Math.ceil(count / limit);
