@@ -2,7 +2,7 @@ const { User } = require('../models/index');
 
 const { encryptPassword } = require('../helpers/index');
 
-const allUsers = async () => User.findAll({
+const findAllUsers = async () => User.findAll({
   attributes: [
     'id',
     'firstName',
@@ -13,28 +13,20 @@ const allUsers = async () => User.findAll({
   ],
 });
 
-const deleteUser = async (id) => {
+const destroyUser = async (id) => {
   const response = await User.destroy({
     where: { id },
   });
   return response;
 };
 
-const findUsers = async (email) => {
-  const user = await User.findOne({ where: { email } });
-  if (user !== null) {
-    return user;
-  }
-  return null;
-};
+const findOneUser = async (email) => User.findOne({ where: { email } });
 
-const findUserByMail = async (email) => User.findOne({ where: { email } });
+const updateByIdUser = async (id, data) => User.update({ ...data }, { where: { id } });
 
-const updateUserbyPk = async (id, data) => User.update({ ...data }, { where: { id } });
+const findByPkUser = async (id) => User.findByPk(id);
 
-const findUserById = async (id) => User.findByPk(id);
-
-const createUser = async (
+const newUser = async (
   {
     firstName,
     lastName,
@@ -57,11 +49,10 @@ const createUser = async (
 };
 
 module.exports = {
-  allUsers,
-  deleteUser,
-  findUsers,
-  createUser,
-  findUserByMail,
-  findUserById,
-  updateUserbyPk,
+  findAllUsers,
+  destroyUser,
+  findOneUser,
+  newUser,
+  updateByIdUser,
+  findByPkUser,
 };

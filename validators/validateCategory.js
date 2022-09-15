@@ -1,7 +1,8 @@
 const { check } = require('express-validator');
 
 const { handleResult } = require('../middlewares');
-const { findCategoryById } = require('../services/category');
+
+const { findByPkCategory } = require('../services/category');
 
 const validateCategoryId = [
   check('id', 'Ingrese el id de la categoría')
@@ -10,7 +11,7 @@ const validateCategoryId = [
     .isNumeric()
     .withMessage('El id de la categoría debe ser un número')
     .custom(async (value) => {
-      const matchedId = await findCategoryById(value);
+      const matchedId = await findByPkCategory(value);
       if (!matchedId) {
         throw new Error('Categoría no existente');
       } else {

@@ -1,4 +1,5 @@
 const axios = require('axios');
+
 const config = require('../config/config');
 
 const createDonation = async (amount) => {
@@ -10,12 +11,18 @@ const createDonation = async (amount) => {
         id: '1',
         title: 'Donación única',
         description: 'Donación única para la ONG Somos Más',
-        /* picture_url: 'https://drive.google.com/file/d/1-j70Zmn2B1-0T_67JHJbNLKkI9sACMNi/view?usp=sharing', */
+        /* picture_url: */
         category_id: 'single donation',
         quantity: 1,
         unit_price: amount,
       },
     ],
+    /*     back_urls: {
+      failure:,
+      pending:,
+      success:,
+    },
+    auto_return: 'approved', */
     payment_methods: {
       installments: 1,
     },

@@ -1,12 +1,11 @@
 const { success, error, serverError } = require('../helpers');
 const {
-  findAllOrgData,
-  updateOrgDataByPk,
+  findOneOrganization, updateByIdOrganization,
 } = require('../services/organization');
 
-const getAllOrgData = async (req, res) => {
+const getOrganization = async (req, res) => {
   try {
-    const data = await findAllOrgData();
+    const data = await findOneOrganization();
 
     if (data.length === 1) error({ res, message: 'organization not found' });
     else success({ res, message: 'organization data', data });
@@ -15,9 +14,9 @@ const getAllOrgData = async (req, res) => {
   }
 };
 
-const updateOrgData = async (req, res) => {
+const updateOrganization = async (req, res) => {
   try {
-    const orgDataUpdated = await updateOrgDataByPk(req.body);
+    const orgDataUpdated = await updateByIdOrganization(req.body);
     success({
       res,
       message: 'organization data updated',
@@ -30,6 +29,6 @@ const updateOrgData = async (req, res) => {
 };
 
 module.exports = {
-  getAllOrgData,
-  updateOrgData,
+  getOrganization,
+  updateOrganization,
 };

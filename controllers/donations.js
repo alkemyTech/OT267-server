@@ -7,7 +7,7 @@ const getAllDonations = async (req, res) => {
   return res.json({ error: 'none' });
 };
 
-const getDonationLink = async (req, res) => {
+const createDonationLink = async (req, res) => {
   try {
     const donation = await createDonation(req.body.amount);
     return success({ res, message: 'single donation link', data: donation });
@@ -16,7 +16,7 @@ const getDonationLink = async (req, res) => {
   }
 };
 
-const getSubscriptionLink = async (req, res) => {
+const createSubscriptionLink = async (req, res) => {
   try {
     const subscription = await createSubscription(req.body.amount);
     return success({ res, message: 'recurrent donation link', data: subscription });
@@ -27,6 +27,7 @@ const getSubscriptionLink = async (req, res) => {
 
 const saveDonationData = async (req, res) => {
   const donationData = req.body;
+  console.log(donationData);
   try {
     // aqui se debe implementar la perseverancia de datos
     return success({ res, message: 'donation data saved', data: donationData });
@@ -37,7 +38,7 @@ const saveDonationData = async (req, res) => {
 
 module.exports = {
   getAllDonations,
-  getDonationLink,
-  getSubscriptionLink,
+  createDonationLink,
+  createSubscriptionLink,
   saveDonationData,
 };
