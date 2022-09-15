@@ -5,13 +5,13 @@ const router = express.Router();
 const { isAuth, isAdmin } = require('../middlewares');
 
 const {
-  getAllDonations,
+  getDonations,
   createDonationLink,
   createSubscriptionLink,
   saveDonationData,
 } = require('../controllers/donations');
 
-router.get('/', isAuth, isAdmin, getAllDonations);
+router.get('/', isAuth, isAdmin, getDonations);
 
 router.post('/singledonation', isAuth, createDonationLink);
 

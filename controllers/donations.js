@@ -1,10 +1,22 @@
-const { success, serverError } = require('../helpers');
+const { success, serverError, paginator } = require('../helpers');
 
 const { createDonation, createSubscription } = require('../services/donation');
+const { Donation } = require('../models');
 
-const getAllDonations = async (req, res) => {
-  console.log('first');
-  return res.json({ error: 'none' });
+const getDonations = async (req, res) => {
+  try {
+    const allDonations = await paginator(req, Donation);
+    return success({
+      res,
+      message: 'All donations',
+      data: allDonations,
+    });
+  } catch (err) {
+    return serverError({
+      res,
+      message: err.message,
+    });
+  }
 };
 
 const createDonationLink = async (req, res) => {
@@ -27,7 +39,6 @@ const createSubscriptionLink = async (req, res) => {
 
 const saveDonationData = async (req, res) => {
   const donationData = req.body;
-  console.log(donationData);
   try {
     // aqui se debe implementar la perseverancia de datos
     return success({ res, message: 'donation data saved', data: donationData });
@@ -37,7 +48,7 @@ const saveDonationData = async (req, res) => {
 };
 
 module.exports = {
-  getAllDonations,
+  getDonations,
   createDonationLink,
   createSubscriptionLink,
   saveDonationData,
