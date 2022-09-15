@@ -6,12 +6,15 @@ const { isAuth, isAdmin } = require('../middlewares');
 
 const {
   getDonations,
+  getSingleDonation,
   createDonationLink,
   createSubscriptionLink,
   saveDonationData,
 } = require('../controllers/donations');
 
 router.get('/', isAuth, isAdmin, getDonations);
+
+router.get('/:id', isAuth, isAdmin, getSingleDonation);
 
 router.post('/singledonation', isAuth, createDonationLink);
 

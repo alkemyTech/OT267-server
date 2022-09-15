@@ -2,6 +2,21 @@ const axios = require('axios');
 
 const config = require('../config/config');
 
+const findOneDonation = async (id) => {
+  try {
+    const donation = await axios.get(`https://api.mercadopago.com/v1/payments/${id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${config.development.mpAccessToken}`,
+      },
+    }).then((r) => r.data);
+
+    return donation;
+  } catch (err) {
+    return err;
+  }
+};
+
 const createDonation = async (amount) => {
   const url = `${config.development.mpUrl}checkout/preferences`;
 
@@ -66,4 +81,4 @@ const createSubscription = async (amount) => {
   return subscription.data;
 };
 
-module.exports = { createDonation, createSubscription };
+module.exports = { findOneDonation, createDonation, createSubscription };
