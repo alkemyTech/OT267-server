@@ -1,6 +1,23 @@
-const { success, serverError } = require('../helpers');
+const { success, serverError, paginator } = require('../helpers');
 
 const { createDonation, createSubscription } = require('../services/donation');
+const { Donation } = require('../models');
+
+const getDonations = async (req, res) => {
+  try {
+    const allDonations = await paginator(req, Donation);
+    return success({
+      res,
+      message: 'All donations',
+      data: allDonations,
+    });
+  } catch (err) {
+    return serverError({
+      res,
+      message: err.message,
+    });
+  }
+};
 
 const createDonationLink = async (req, res) => {
   try {
@@ -30,4 +47,9 @@ const saveDonationData = async (req, res) => {
   }
 };
 
-module.exports = { createDonationLink, createSubscriptionLink, saveDonationData };
+module.exports = {
+  getDonations,
+  createDonationLink,
+  createSubscriptionLink,
+  saveDonationData,
+};
