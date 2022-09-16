@@ -1,6 +1,11 @@
-const { success, serverError, paginator } = require('../helpers');
+const {
+  success,
+  error,
+  serverError,
+  paginator,
+} = require('../helpers');
 
-const { createDonation, createSubscription } = require('../services/donation');
+const { findOneDonation, createDonation, createSubscription } = require('../services/donation');
 const { Donation } = require('../models');
 
 const getDonations = async (req, res) => {
@@ -11,6 +16,29 @@ const getDonations = async (req, res) => {
       message: 'All donations',
       data: allDonations,
     });
+  } catch (err) {
+    return serverError({
+      res,
+      message: err.message,
+    });
+  }
+};
+
+const getSingleDonation = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const donation = await findOneDonation(id);
+    return !donation.message
+      ? success({
+        res,
+        message: 'Donation detail',
+        data: donation,
+      })
+      : error({
+        res,
+        message: donation.message,
+        status: donation.status,
+      });
   } catch (err) {
     return serverError({
       res,
@@ -49,6 +77,7 @@ const saveDonationData = async (req, res) => {
 
 module.exports = {
   getDonations,
+  getSingleDonation,
   createDonationLink,
   createSubscriptionLink,
   saveDonationData,
