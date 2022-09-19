@@ -16,7 +16,9 @@ const findOrCreateCategory = async (data) => {
 };
 
 const findByPkCategory = async (id) => Category.findByPk(id, {
-  attributes: ['name', 'description', 'image'],
+  attributes: {
+    exclude: ['deletedAt'],
+  },
 });
 
 const destroyCategory = async (id) => {

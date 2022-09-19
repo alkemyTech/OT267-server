@@ -366,7 +366,11 @@ router.post('/', isAuth, isAdmin, validateNewsFields, uploadFile, createCategory
  *        content:
  *            application/json:
  *              schema:
+<<<<<<< HEAD
+ *                $ref: '#/components/schemas/CategoryRequest'
+=======
  *                $ref: '#/components/schemas/CategoryPutRequest'
+>>>>>>> ef4c2a982f72c4b3f20792da6d72c30b3067e37f
  *      responses:
  *        201:
  *          $ref: '#/components/responses/update'
