@@ -7,6 +7,26 @@ const helmet = require('helmet');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
 require('dotenv').config();
+const swaggerUI = require('swagger-ui-express');
+const swaggerJsDoc = require('swagger-jsdoc');
+
+const swaggerSpec = {
+  definition: {
+    openapi: '3.0.1',
+    info: {
+      title: 'ONG SOMOS MAS API',
+      version: '1.0.0',
+    },
+    servers: [
+      {
+        url: 'http://localhost:3000',
+      },
+    ],
+  },
+  apis: [
+    `${path.join(__dirname, './routes/*js')}`,
+  ],
+};
 
 // initialization
 const app = express();
@@ -43,6 +63,7 @@ app.use(fileUpload({
   useTempFiles: true,
   tempFileDir: '/tmp/',
 }));
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

@@ -18,12 +18,9 @@ const getTestimonies = async (req, res) => {
       req,
       Testimony,
       {
-        attributes: [
-          'id',
-          'name',
-          'image',
-          'content',
-        ],
+        attributes: {
+          exclude: ['deletedAt'],
+        },
       },
     );
   } catch (err) {
