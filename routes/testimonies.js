@@ -4,19 +4,20 @@ const router = express.Router();
 
 const { isAdmin, isAuth } = require('../middlewares');
 const {
-  getAllTestimonies,
-  createNewTestimony,
-  updateSingleTestimony,
-  deleteSingleTestimony,
+  getTestimonies,
+  createTestimony,
+  updateTestimony,
+  deleteTestimony,
 } = require('../controllers/testimonies');
+
 const { validateCreateTestimony } = require('../validators/validateTestimony');
 
-router.get('/', isAuth, isAdmin, getAllTestimonies);
+router.get('/', isAuth, isAdmin, getTestimonies);
 
-router.post('/', isAuth, isAdmin, validateCreateTestimony, createNewTestimony);
+router.post('/', isAuth, isAdmin, validateCreateTestimony, createTestimony);
 
-router.put('/:id', isAuth, isAdmin, updateSingleTestimony);
+router.put('/:id', isAuth, isAdmin, updateTestimony);
 
-router.delete('/:id', isAuth, isAdmin, deleteSingleTestimony);
+router.delete('/:id', isAuth, isAdmin, deleteTestimony);
 
 module.exports = router;

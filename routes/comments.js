@@ -5,19 +5,20 @@ const router = express.Router();
 const { isAuth, isAdmin, validateUserCommentCreatorOrAdmin } = require('../middlewares');
 
 const {
-  getAllComments,
-  createNewComment,
-  updateSingleComment,
-  deleteSingleComment,
+  getComments,
+  createComment,
+  updateComment,
+  deleteComment,
 } = require('../controllers/comments');
 
 const { validateFields } = require('../validators/validateComment');
 
-router.get('/', isAuth, isAdmin, getAllComments);
+router.get('/', isAuth, isAdmin, getComments);
 
-router.post('/', isAuth, validateFields, createNewComment);
-router.delete('/:id', isAuth, validateUserCommentCreatorOrAdmin, deleteSingleComment);
+router.post('/', isAuth, validateFields, createComment);
 
-router.put('/:id', isAuth, validateUserCommentCreatorOrAdmin, updateSingleComment);
+router.delete('/:id', isAuth, validateUserCommentCreatorOrAdmin, deleteComment);
+
+router.put('/:id', isAuth, validateUserCommentCreatorOrAdmin, updateComment);
 
 module.exports = router;

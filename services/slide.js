@@ -1,6 +1,6 @@
 const { Slide } = require('../models/index');
 
-const getSlides = async () => Slide.findAll({
+const finAllSlides = async () => Slide.findAll({
   attributes: [
     'id',
     'image',
@@ -11,23 +11,23 @@ const getSlides = async () => Slide.findAll({
   ],
 });
 
-const getASlide = async (id) => Slide.findOne({ where: { id } });
+const findOneSlide = async (id) => Slide.findOne({ where: { id } });
 
-const updateSlideByPk = async (id, data) => {
+const updateByIdSlide = async (id, data) => {
   const slide = await Slide.update({ ...data }, {
     where: { id },
   });
   return slide;
 };
 
-const deleteSlideByPk = async (id) => {
+const destroySlide = async (id) => {
   const deleted = await Slide.destroy({
     where: { id },
   });
   return deleted;
 };
 
-const createASlide = async (body) => Slide.create({
+const newSlide = async (body) => Slide.create({
   text: body.text,
   image: body.image,
   order: body.order,
@@ -35,9 +35,9 @@ const createASlide = async (body) => Slide.create({
 });
 
 module.exports = {
-  createASlide,
-  getSlides,
-  getASlide,
-  updateSlideByPk,
-  deleteSlideByPk,
+  newSlide,
+  destroySlide,
+  updateByIdSlide,
+  findOneSlide,
+  finAllSlides,
 };

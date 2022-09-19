@@ -5,11 +5,11 @@ const router = express.Router();
 const { isAdmin, isAuth } = require('../middlewares');
 const { validateContact } = require('../validators/validateContact');
 const {
-  getAllContacts, createNewContact,
+  getContacts, createContact,
 } = require('../controllers/contacts');
 
-router.get('/', isAuth, isAdmin, getAllContacts);
+router.get('/', isAuth, isAdmin, getContacts);
 
-router.post('/', validateContact, createNewContact);
+router.post('/', validateContact, createContact);
 
 module.exports = router;
