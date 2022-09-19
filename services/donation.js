@@ -2,6 +2,8 @@ const axios = require('axios');
 
 const config = require('../config/config');
 
+const { Donation } = require('../models/index');
+
 const findOneDonation = async (id) => {
   try {
     const donation = await axios.get(`https://api.mercadopago.com/v1/payments/${id}`, {
@@ -56,6 +58,14 @@ const createDonation = async (amount) => {
   return donation.data;
 };
 
+const saveDonationData = async (data) => Donation.create({
+  data_id: data.data.id,
+  type: data.type,
+  action: data.action,
+  mp_userId: data.user_id,
+  date_created: data.date_created,
+});
+
 const createSubscription = async (amount) => {
   const url = `${config.development.mpUrl}preapproval`;
 
@@ -81,4 +91,6 @@ const createSubscription = async (amount) => {
   return subscription.data;
 };
 
-module.exports = { findOneDonation, createDonation, createSubscription };
+module.exports = {
+  findOneDonation, createDonation, createSubscription, saveDonationData,
+};

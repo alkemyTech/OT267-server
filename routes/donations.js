@@ -9,7 +9,7 @@ const {
   getSingleDonation,
   createDonationLink,
   createSubscriptionLink,
-  saveDonationData,
+  saveDonation,
 } = require('../controllers/donations');
 
 router.get('/', isAuth, isAdmin, getDonations);
@@ -23,6 +23,6 @@ router.post('/subscription', isAuth, createSubscriptionLink);
 router.post('/notification', async (req, res, next) => {
   res.status(200);
   next();
-}, saveDonationData);
+}, saveDonation);
 
 module.exports = router;
