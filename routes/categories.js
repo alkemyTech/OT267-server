@@ -82,6 +82,23 @@ const { validateCategoryId, validateNewsFields } = require('../validators/valida
  *         name:
  *           type: string
  *           description: category name
+ *           required: true
+ *         description:
+ *           type: string
+ *           description: category description
+ *         image:
+ *           type: string
+ *           description: category image url
+ *       example:
+ *         name: Category name
+ *         description: Category description
+ *         image: https://category-image.jpg
+ *     CategoryPutRequest:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: category name
  *         description:
  *           type: string
  *           description: category description
@@ -349,7 +366,11 @@ router.post('/', isAuth, isAdmin, validateNewsFields, uploadFile, createCategory
  *        content:
  *            application/json:
  *              schema:
+<<<<<<< HEAD
  *                $ref: '#/components/schemas/CategoryRequest'
+=======
+ *                $ref: '#/components/schemas/CategoryPutRequest'
+>>>>>>> ef4c2a982f72c4b3f20792da6d72c30b3067e37f
  *      responses:
  *        201:
  *          $ref: '#/components/responses/update'
