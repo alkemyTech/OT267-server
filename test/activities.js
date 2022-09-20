@@ -49,7 +49,7 @@ describe('Testing activities endpoints', () => {
     });
   });
 
-  describe('#Create activities', () => {
+  describe('#Create activities POST /activities', () => {
 
     it('Should return and error for not auth user or admin', (done) => {
       chai.request(app)
@@ -86,7 +86,7 @@ describe('Testing activities endpoints', () => {
     });
   });
 
-  describe('#Update activities POST /activities', () => {
+  describe('#Update activities PUTT /activities/:id', () => {
 
     it('Should return and error for not auth user or admin', (done) => {
       chai.request(app)
