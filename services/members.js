@@ -1,15 +1,6 @@
 const { Member } = require('../models/index');
 
-const findOrCreateMember = async (body) => {
-  const [member, created] = await Member.findOrCreate({
-    where: {
-      name: body.name,
-    },
-    defaults: body,
-  });
-  if (created) return member;
-  return created;
-};
+const findOrCreateMember = async (body) => Member.create(body);
 
 const findAllMembers = () => Member.findAll();
 
