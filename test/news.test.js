@@ -4,12 +4,6 @@ const { expect } = require('chai');
 const { adminToken } = require('../config/config').test;
 
 const app = require('../app');
-// + router.get('/news', isAuth, getAllNews);
-// +router.get('/news/:id/comments', isAuth, getAllCommentsByNews);
-// +router.get('/news/:id', isAuth, isAdmin, validateId, getNewsDetail);
-// +router.post('/news/', isAuth, isAdmin, validateNewsFields, uploadFile, createSingleNews);
-// +router.put('/news/:id', isAuth, isAdmin, validateUpdate, uploadFile, updateSingleNews);
-// +router.delete('/news/:id', isAuth, isAdmin, validateId, deleteSingleNews);
 
 let newsId;
 
