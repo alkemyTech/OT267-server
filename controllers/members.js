@@ -11,21 +11,10 @@ const {
 } = require('../services/members');
 
 const createMember = async (req, res) => {
-  const {
-    name, facebookUrl, instagramUrl, linkedinUrl, image, description,
-  } = req.body;
+  if (Object.keys(req.body).length < 1) error({ res, message: 'data is required' });
 
   try {
-    const newMember = await findOrCreateMember({
-      name,
-      facebookUrl,
-      instagramUrl,
-      linkedinUrl,
-      image,
-      description,
-    });
-
-    if (!newMember) return error({ res, message: 'member already exists', status: 400 });
+    const newMember = await findOrCreateMember(req.body);
 
     return success({
       res, message: 'member created', data: newMember, status: 201,
@@ -66,11 +55,12 @@ const deleteMember = async (req, res) => {
 };
 
 const updateMember = async (req, res) => {
+  if (Object.keys(req.body).length < 1) error({ res, message: 'data is required' });
+  const { id } = req.params;
   try {
-    const { id } = req.params;
     const [data] = await updateByIdMember(id, req.body);
     return data
-      ? success({ res, message: 'member updated' })
+      ? success({ res, status: 201, message: 'member updated' })
       : error({ res, message: 'member not found' });
   } catch (err) {
     return serverError({ res, message: err.message });
