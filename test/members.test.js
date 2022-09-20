@@ -1,29 +1,15 @@
+/* eslint-disable no-console */
 /* eslint-disable no-undef */
-/* module.exports = {
-  createMember,
-  getMembers,
-  deleteMember,
-  updateMember,
-}; */
 const chai = require('chai');
+
 const chaiHttp = require('chai-http');
+
 const { expect } = require('chai');
+
 const server = require('../app');
-const config = require('../config/config');
 
-const {
-  createMember,
-  getMembers,
-  deleteMember,
-  updateMember,
-} = require('../controllers/members');
-
-// asserstion
 chai.should();
-
 chai.use(chaiHttp);
-
-const { url } = config.development;
 const adminToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjIxLCJuYW1lIjoiVXN1YXJpbzIxIiwicm9sZSI6MSwiaWF0IjoxNjYzNDQ2NzY0LCJleHAiOjE2NjM3MDU5NjR9.uNpntp2twz0XMekt6LRdp7AuesXdDYOJyYvTEXWo1EY';
 const standardToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjIyLCJuYW1lIjoiVXN1YXJpbzIyIiwicm9sZSI6MiwiaWF0IjoxNjYzNDU1NzcwLCJleHAiOjE2NjM3MTQ5NzB9.WgMabI4PWmnCaVWGs3ZG1fiLsUHKOoBu-BNXK8CqVok';
 
