@@ -16,9 +16,8 @@ const validateNewsFields = [
     .trim()
     .escape(),
 
-  check('image', 'Ingrese una URL de imagen')
-    .exists()
-    .isLength({ min: 1 })
+  check('image', 'Ingrese un archivo de imagen')
+    .isURL()
     .trim()
     .escape(),
 
@@ -55,12 +54,39 @@ const validateUpdate = [
       }
     }),
 
+  check('name', 'Ingrese el nombre de la novedad')
+    .optional()
+    .isLength({ min: 1 })
+    .trim()
+    .escape(),
+
+  check('content', 'Ingrese contenido')
+    .optional()
+    .isLength({ min: 1 })
+    .trim()
+    .escape(),
+
+  check('image', 'Ingrese un archivo de imagen')
+    .optional()
+    .isURL()
+    .trim()
+    .escape(),
+
   check('categoryId', 'Ingrese un id de categoría')
     .custom(async (value) => {
       if (!value) return true;
       const category = await Category.findOne({ where: { id: value } });
       if (!category) {
         throw new Error('La categoria no existe');
+      } else {
+        return true;
+      }
+    }),
+
+  check('body')
+    .custom((value, { req }) => {
+      if (Object.entries(req.body).length === 0) {
+        throw new Error('No hay campos para actualizar');
       } else {
         return true;
       }

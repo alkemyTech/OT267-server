@@ -12,11 +12,11 @@ const {
   getAllCommentsByNews,
 } = require('../controllers/news');
 
-router.get('/:id', isAuth, isAdmin, validateId, getNewsDetail);
+router.get('/:id', isAuth, isAdmin, getNewsDetail);
 
-router.post('/', isAuth, isAdmin, validateNewsFields, uploadFile, createSingleNews);
+router.post('/', isAuth, isAdmin, uploadFile, validateNewsFields, createSingleNews);
 
-router.put('/:id', isAuth, isAdmin, validateUpdate, uploadFile, updateSingleNews);
+router.put('/:id', isAuth, isAdmin, uploadFile, validateUpdate, updateSingleNews);
 
 router.delete('/:id', isAuth, isAdmin, validateId, deleteSingleNews);
 

@@ -50,14 +50,12 @@ const updateSingleNews = async (req, res) => {
   const { id } = req.params;
   const data = req.body;
   try {
-    const response = await updateNews(id, data);
-
-    if (response[0] === 0) return error({ res, message: 'news not found' });
+    await updateNews(id, data);
 
     const newsUpdated = await getNewsById(id);
 
     return success({
-      res, message: 'news updated', data: newsUpdated, status: 201,
+      res, message: 'news updated', data: newsUpdated,
     });
   } catch (err) {
     return serverError({ res, message: err.message });
@@ -81,11 +79,11 @@ const getAllCommentsByNews = async (req, res) => {
   try {
     const findNewsByID = await getNewsById(id);
 
-    if (!findNewsByID) error({ res, message: 'new not found' });
+    if (!findNewsByID) error({ res, message: 'news not found' });
 
     const data = await findAllCommentsByNewsId(id);
 
-    if (data) success({ res, message: `list of all comments from new ${id} `, data });
+    if (data) success({ res, message: `list of all comments from news ${id}`, data });
   } catch (err) {
     serverError({ res, message: err.message });
   }
