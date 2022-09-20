@@ -48,10 +48,7 @@ const paginator = async (req, model, moreOptions) => {
     ...moreOptions,
   };
 
-  const { rows } = await model.findAndCountAll(options);
-
-  // rows number
-  const count = Object.keys(rows).length;
+  const { count, rows } = await model.findAndCountAll(options);
 
   // total pages
   const totalPages = Math.ceil(count / limit);
