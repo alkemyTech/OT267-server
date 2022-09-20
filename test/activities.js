@@ -51,7 +51,7 @@ describe('Testing activities endpoints', () => {
 
   describe('#Create activities POST /activities', () => {
 
-    it('Should return and error for not auth user or admin', (done) => {
+    it('Should return an error for not auth user or admin', (done) => {
       chai.request(app)
         .post('/activities')
         .end((error, res) => {
@@ -88,7 +88,7 @@ describe('Testing activities endpoints', () => {
 
   describe('#Update activities PUTT /activities/:id', () => {
 
-    it('Should return and error for not auth user or admin', (done) => {
+    it('Should return an error for not auth user or admin', (done) => {
       chai.request(app)
         .put('/activities/1')
         .end((error, res) => {
@@ -98,7 +98,7 @@ describe('Testing activities endpoints', () => {
         });
     });
 
-    it('Should update an activity using id with all body', (done) => {
+    it('Should update an activity using id', (done) => {
       chai.request(app)
         .put('/activities/7')
         .set({ Authorization: adminToken })
