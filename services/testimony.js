@@ -12,18 +12,22 @@ const findOrCreateTestimony = async (name, content) => {
   return created;
 };
 
-const updateByIdTestimony = async (id, data) => Testimony.update({ ...data }, {
-  where: { id },
-  attributes: {
-    exclude: ['deletedAt'],
-  },
-});
-
 const findByPkTestimony = async (id) => Testimony.findByPk(id, {
   attributes: {
     exclude: ['deletedAt'],
   },
 });
+
+const updateByIdTestimony = async (id, data) => {
+  await Testimony.update({ ...data }, {
+    where: { id },
+    attributes: {
+      exclude: ['deletedAt'],
+    },
+  });
+  const testimony = await findByPkTestimony(id);
+  return testimony;
+};
 
 const destroyTestimony = async (id) => Testimony.destroy({ where: { id } });
 

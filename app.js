@@ -1,14 +1,24 @@
 /* const createError = require('http-errors'); */
 const express = require('express');
+
 const path = require('path');
+
 const cookieParser = require('cookie-parser');
+
 const logger = require('morgan');
+
 const helmet = require('helmet');
+
 const cors = require('cors');
+
 const fileUpload = require('express-fileupload');
+
 require('dotenv').config();
 const swaggerUI = require('swagger-ui-express');
+
 const swaggerJsDoc = require('swagger-jsdoc');
+
+const config = require('./config/config');
 
 const swaggerSpec = {
   definition: {
@@ -19,7 +29,7 @@ const swaggerSpec = {
     },
     servers: [
       {
-        url: 'http://localhost:3000',
+        url: config.development.mainUrl,
       },
     ],
   },
