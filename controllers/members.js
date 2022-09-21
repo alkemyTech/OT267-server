@@ -15,7 +15,7 @@ const createMember = async (req, res) => {
 
   try {
     const newMember = await findOrCreateMember(req.body);
-
+    if (!newMember) return error({ res, message: 'member already exists', status: 400 });
     return success({
       res, message: 'member created', data: newMember, status: 201,
     });
