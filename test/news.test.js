@@ -240,7 +240,7 @@ describe('NEWS TEST', () => {
         });
     });
 
-    it('expected success with status 200 (news updated)', (done) => {
+    it('expected success with status 200 (news deleted)', (done) => {
       chai.request(app)
         .delete(`/news/${newsId}`)
         .set({ Authorization: adminToken })
