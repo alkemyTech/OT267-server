@@ -3,13 +3,15 @@ const express = require('express');
 const router = express.Router();
 
 const { isAdmin, isAuth, uploadFile } = require('../middlewares');
+
 const {
-  getAllOrgData,
-  updateOrgData,
+  getOrganization,
+  updateOrganization,
 } = require('../controllers/organizations');
+
 const { validateOrganization } = require('../validators/validateOrganization');
 
-router.get('/public', getAllOrgData);
+router.get('/public', getOrganization);
 
 router.post(
   '/public',
@@ -17,7 +19,7 @@ router.post(
   isAdmin,
   validateOrganization,
   uploadFile,
-  updateOrgData,
+  updateOrganization,
 );
 
 module.exports = router;

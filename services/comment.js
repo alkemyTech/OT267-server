@@ -1,6 +1,6 @@
 const { Comment } = require('../models/index');
 
-const getComments = () => Comment.findAll({
+const findAllComments = () => Comment.findAll({
   order: [
     ['createdAT', 'ASC'],
   ],
@@ -9,20 +9,18 @@ const getComments = () => Comment.findAll({
   ],
 });
 
-const createComment = async (data) => Comment.create({
-  ...data,
-});
+const newComment = async (data) => Comment.create(data);
 
-const findComentById = async (id) => Comment.findOne({ where: { id } });
+const findOneComent = async (id) => Comment.findOne({ where: { id } });
 
-const updateComment = async (id, body) => Comment.update({ body }, { where: { id } });
+const updateByIdComment = async (id, body) => Comment.update({ body }, { where: { id } });
 
-const deleteComment = async (id) => Comment.destroy({ where: { id } });
+const destroyComment = async (id) => Comment.destroy({ where: { id } });
 
 module.exports = {
-  getComments,
-  findComentById,
-  createComment,
-  updateComment,
-  deleteComment,
+  findAllComments,
+  newComment,
+  updateByIdComment,
+  findOneComent,
+  destroyComment,
 };

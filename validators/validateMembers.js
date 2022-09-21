@@ -1,4 +1,5 @@
 const { check } = require('express-validator');
+
 const { handleResult } = require('../middlewares');
 
 const validateCreateMembers = [

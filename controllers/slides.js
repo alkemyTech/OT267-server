@@ -1,26 +1,26 @@
 const fs = require('fs');
 const { success, serverError, error } = require('../helpers/requestResponses');
 const {
-  createASlide,
-  getSlides,
-  getASlide,
-  updateSlideByPk,
-  deleteSlideByPk,
+  newSlide,
+  destroySlide,
+  updateByIdSlide,
+  findOneSlide,
+  finAllSlides,
 } = require('../services/slide');
 
-const getAllSlides = async (req, res) => {
+const getSlides = async (req, res) => {
   try {
-    const data = await getSlides();
+    const data = await finAllSlides();
     success({ res, message: 'list of all slides', data });
   } catch (err) {
     serverError({ res, message: err.message });
   }
 };
 
-const getSlideDetail = async (req, res) => {
+const getSlide = async (req, res) => {
   const { id } = req.params;
   try {
-    const data = await getASlide(id);
+    const data = await findOneSlide(id);
     if (!data) return error({ res, message: 'slide not found' });
     return success({ res, message: 'slide detail', data });
   } catch (err) {
@@ -28,10 +28,10 @@ const getSlideDetail = async (req, res) => {
   }
 };
 
-const updateSingleSlide = async (req, res) => {
+const updateSlide = async (req, res) => {
   try {
     const { id } = req.params;
-    const [response] = await updateSlideByPk(id, req.body);
+    const [response] = await updateByIdSlide(id, req.body);
 
     return response ? success({
       res,
@@ -48,10 +48,10 @@ const updateSingleSlide = async (req, res) => {
   }
 };
 
-const deleteSingleSlide = async (req, res) => {
+const deleteSlide = async (req, res) => {
   try {
     const { id } = req.params;
-    const response = await deleteSlideByPk(id);
+    const response = await destroySlide(id);
 
     return response ? success({
       res,
@@ -82,10 +82,10 @@ const createSlide = async (req, res) => {
       body.order = (array[array.length - 1].order) + 1;
     }
 
-    const newSlide = await createASlide(body);
+    const slide = await newSlide(body);
 
     return success({
-      res, message: 'slide created succesfully', status: 201, data: newSlide,
+      res, message: 'slide created succesfully', status: 201, data: slide,
     });
   } catch (err) {
     return serverError({
@@ -97,8 +97,8 @@ const createSlide = async (req, res) => {
 
 module.exports = {
   createSlide,
-  getAllSlides,
-  getSlideDetail,
-  updateSingleSlide,
-  deleteSingleSlide,
+  getSlides,
+  getSlide,
+  updateSlide,
+  deleteSlide,
 };

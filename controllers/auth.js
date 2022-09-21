@@ -6,14 +6,16 @@ const {
   comparePassword,
   generateJWT,
 } = require('../helpers');
-const { createUser, findUserById, findUsers } = require('../services/user');
+
+const { newUser, findByPkUser, findOneUser } = require('../services/user');
+
 const { htmlTemplate } = require('../templates/welcomeMessage');
 
 const register = async (req, res) => {
   try {
     const { email } = req.body;
 
-    const user = await createUser({ ...req.body });
+    const user = await newUser({ ...req.body });
 
     const token = await generateJWT(user.id, user.firstName, user.roleId);
 
@@ -35,7 +37,7 @@ const getUser = async (req, res) => {
   try {
     const { userId } = req;
 
-    const data = await findUserById(userId);
+    const data = await findByPkUser(userId);
 
     success({ res, message: 'user data', data });
   } catch (err) {
@@ -47,7 +49,7 @@ const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const userFound = await findUsers(email);
+    const userFound = await findOneUser(email);
 
     if (!userFound) return error({ res, message: 'user not found', status: 404 });
 

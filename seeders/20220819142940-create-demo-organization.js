@@ -9,6 +9,7 @@ module.exports = {
       'Organizations',
       [
         {
+          id: 1,
           name: 'Somos Más',
           image: 'somosmas.jpg',
           address: 'San Isidro, Buenos Aires',

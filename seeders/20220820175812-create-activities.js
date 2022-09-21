@@ -6,6 +6,7 @@ module.exports = {
       'Activities',
       [
         {
+          id: 1,
           name: 'Apoyo Escolar para el nivel Primario',
           content: `El espacio de apoyo escolar es el corazón del área educativa. Se realizan los
           talleres de lunes a jueves de 10 a 12 horas y de 14 a 16 horas en el
@@ -24,6 +25,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
+          id: 2,
           name: 'Apoyo Escolar Nivel Secundaria',
           content: `Del mismo modo que en primaria, este taller es el corazón del área
           secundaria. Se realizan talleres de lunes a viernes de 10 a 12 horas y de 16 a
@@ -38,6 +40,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
+          id: 3,
           name: 'Tutorías',
           content: `Es un programa destinado a jóvenes a partir del tercer año de secundaria,
           cuyo objetivo es garantizar su permanencia en la escuela y construir un

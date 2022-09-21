@@ -1,7 +1,10 @@
 const { check } = require('express-validator');
+
 const { handleResult } = require('../middlewares');
-const { Category } = require('../models/index');
-const { News } = require('../models/index');
+
+const { findByPkCategory } = require('../services/category');
+
+const { findByPkNews } = require('../services/news');
 
 const validateNewsFields = [
   check('name', 'Ingrese el nombre de la novedad')
@@ -25,7 +28,7 @@ const validateNewsFields = [
     .exists()
     .trim()
     .custom(async (value) => {
-      const category = await Category.findOne({ where: { id: value } });
+      const category = await findByPkCategory(value);
       if (!category) {
         throw new Error('La categoría no existe');
       } else {
@@ -46,7 +49,7 @@ const validateUpdate = [
     .withMessage('El id de la novedad debe ser un número')
     .trim()
     .custom(async (value) => {
-      const matchedId = await News.findOne({ where: { id: value } });
+      const matchedId = await findByPkNews(value);
       if (!matchedId) {
         throw new Error('La novedad no existe');
       } else {
@@ -75,7 +78,7 @@ const validateUpdate = [
   check('categoryId', 'Ingrese un id de categoría')
     .custom(async (value) => {
       if (!value) return true;
-      const category = await Category.findOne({ where: { id: value } });
+      const category = await findByPkCategory(value);
       if (!category) {
         throw new Error('La categoria no existe');
       } else {
@@ -105,7 +108,7 @@ const validateId = [
     .withMessage('El id de la novedad debe ser un número')
     .trim()
     .custom(async (value) => {
-      const matchedId = await News.findOne({ where: { id: value } });
+      const matchedId = await await findByPkNews(value);
       if (!matchedId) {
         throw new Error('La novedad no existe');
       } else {
