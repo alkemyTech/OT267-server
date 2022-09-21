@@ -22,8 +22,7 @@ const validateCreateTestimony = [
   check('image', 'Ingrese una URL válida')
     .optional()
     .isURL()
-    .trim()
-    .escape(),
+    .trim(),
 
   (req, res, next) => {
     handleResult(req, res, next);

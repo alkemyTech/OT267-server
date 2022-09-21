@@ -33,10 +33,8 @@ const getTestimonies = async (req, res) => {
 const createTestimony = async (req, res) => {
   if (Object.keys(req.body).length < 1) error({ res, message: 'data is required' });
 
-  const { name, content } = req.body;
-
   try {
-    const newTestimony = await findOrCreateTestimony(name, content);
+    const newTestimony = await findOrCreateTestimony(req.body);
 
     if (!newTestimony) return error({ res, message: 'testimony already exists', status: 400 });
 

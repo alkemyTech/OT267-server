@@ -45,8 +45,7 @@ const validateRegistrationData = [
   check('image', 'Ingrese una URL de imagen')
     .optional()
     .isURL()
-    .withMessage('Ingresese una URL válida')
-    .escape(),
+    .withMessage('Ingresese una URL válida'),
 
   check(
     'password',
@@ -153,8 +152,7 @@ const validateFields = [
   check('image', 'Ingrese una URL de imagen')
     .optional()
     .isURL()
-    .withMessage('Ingresese una URL válida')
-    .escape(),
+    .withMessage('Ingresese una URL válida'),
 
   check('roleId').custom(async (value) => {
     if (value) {

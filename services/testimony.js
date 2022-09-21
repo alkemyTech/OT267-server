@@ -1,11 +1,12 @@
 const { Testimony } = require('../models/index');
 
-const findOrCreateTestimony = async (name, content) => {
+const findOrCreateTestimony = async (body) => {
+  const { name, content, image } = body;
   const [testimony, created] = await Testimony.findOrCreate({
     where: {
       name: name.toLowerCase(),
-      content,
     },
+    defaults: { content, image },
   });
 
   if (created) return testimony;

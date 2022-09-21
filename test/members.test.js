@@ -40,7 +40,7 @@ describe('👦 👩 MEMBERS ENDPOINT', () => {
     const adminRequest = {
       firstName: 'AdminUser',
       lastName: 'lastName',
-      email: 'AdminUser@mail.com',
+      email: 'membersAdminUser@mail.com',
       password: 'adminUser1',
       passwordConfirmation: 'adminUser1',
       image: 'http://adminUserImage.jpg',
@@ -63,7 +63,7 @@ describe('👦 👩 MEMBERS ENDPOINT', () => {
     const standardRequest = {
       firstName: 'StandardUser',
       lastName: 'lastName',
-      email: 'standardUser@mail.com',
+      email: 'membersStandardUser@mail.com',
       password: 'standardUser1',
       passwordConfirmation: 'standardUser1',
       image: 'http://standardUserImage.jpg',
@@ -237,7 +237,7 @@ describe('👦 👩 MEMBERS ENDPOINT', () => {
             done();
           });
       });
-      it('member is not created if member name already exists', (done) => {
+      it('should return a 400 error if member name already exists', (done) => {
         chai.request(server)
           .post('/members/')
           .set('authorization', adminToken)
