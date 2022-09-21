@@ -2,17 +2,27 @@ const express = require('express');
 
 const router = express.Router();
 
-const { isAuth } = require('../middlewares');
+const { isAuth, isAdmin } = require('../middlewares');
 
-const { getDonationLink, getSubscriptionLink, saveDonationData } = require('../controllers/donations');
+const {
+  getDonations,
+  getSingleDonation,
+  createDonationLink,
+  createSubscriptionLink,
+  saveDonation,
+} = require('../controllers/donations');
 
-router.post('/singledonation', isAuth, getDonationLink);
+router.get('/', isAuth, isAdmin, getDonations);
 
-router.post('/subscription', isAuth, getSubscriptionLink);
+router.get('/:id', isAuth, isAdmin, getSingleDonation);
+
+router.post('/singledonation', isAuth, createDonationLink);
+
+router.post('/subscription', isAuth, createSubscriptionLink);
 
 router.post('/notification', async (req, res, next) => {
   res.status(200);
   next();
-}, saveDonationData);
+}, saveDonation);
 
 module.exports = router;

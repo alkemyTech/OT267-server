@@ -1,7 +1,8 @@
 const { Organization } = require('../models/index');
 const { Slide } = require('../models/index');
 
-const findAllOrgData = async () => Organization.findOne({
+const findOneOrganization = async () => Organization.findOne({
+  where: { id: 1 },
   attributes: [
     'name',
     'image',
@@ -21,28 +22,10 @@ const findAllOrgData = async () => Organization.findOne({
   },
 });
 
-const findOrgData = async () => Organization.findOne({
-  attributes: [
-    'id',
-    'name',
-    'image',
-    'phone',
-    'address',
-    'facebook',
-    'linkedin',
-    'instagram',
-    'welcomeText',
-    'email',
-    'aboutUsText',
-  ],
-});
+const updateByIdOrganization = async (data) => {
+  await Organization.update({ ...data }, { where: { id: 1 } });
 
-const updateOrgDataByPk = async (data) => {
-  const org = await findOrgData();
-
-  await Organization.update({ ...data }, { where: { id: org.id } });
-
-  return findOrgData(org.id);
+  return findOneOrganization();
 };
 
-module.exports = { findAllOrgData, findOrgData, updateOrgDataByPk };
+module.exports = { findOneOrganization, updateByIdOrganization };

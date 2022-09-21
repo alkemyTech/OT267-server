@@ -6,10 +6,30 @@ module.exports = (sequelize, DataTypes) => {
   class Donation extends Model {
   }
   Donation.init({
-    donationId: DataTypes.STRING,
+    data_id: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    type: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    action: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    mp_userId: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    date_created: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
   }, {
     sequelize,
     modelName: 'Donation',
+    paranoid: true,
   });
   return Donation;
 };

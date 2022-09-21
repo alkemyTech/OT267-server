@@ -1,6 +1,6 @@
 const { Member } = require('../models/index');
 
-const createMember = async (body) => {
+const findOrCreateMember = async (body) => {
   const [member, created] = await Member.findOrCreate({
     where: {
       name: body.name,
@@ -13,15 +13,15 @@ const createMember = async (body) => {
 
 const findAllMembers = () => Member.findAll();
 
-const deleteMember = async (id) => Member.destroy({ where: { id } });
+const destroyMember = async (id) => Member.destroy({ where: { id } });
 
-const updateMember = (id, body) => Member.update(body, {
+const updateByIdMember = (id, body) => Member.update(body, {
   where: { id },
 });
 
 module.exports = {
-  createMember,
+  findOrCreateMember,
   findAllMembers,
-  deleteMember,
-  updateMember,
+  destroyMember,
+  updateByIdMember,
 };

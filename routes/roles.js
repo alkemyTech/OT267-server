@@ -5,10 +5,10 @@ const router = express.Router();
 const { isAdmin, isAuth } = require('../middlewares');
 
 const {
-  getAllRoles, getSingleRole,
+  getRoles, getRole,
 } = require('../controllers/roles');
 
-router.get('/', isAuth, isAdmin, getAllRoles);
-router.get('/:id', isAuth, isAdmin, getSingleRole);
+router.get('/', isAuth, isAdmin, getRoles);
+router.get('/:id', isAuth, isAdmin, getRole);
 
 module.exports = router;

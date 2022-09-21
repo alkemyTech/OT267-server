@@ -1,6 +1,6 @@
 const { Role } = require('../models/index');
 
-const allRoles = async () => {
+const findAllRoles = async () => {
   const roles = await Role.findAll({
     attributes: [
       'id',
@@ -11,6 +11,6 @@ const allRoles = async () => {
   return roles;
 };
 
-const findRoleById = async (id) => Role.findByPk(id);
+const findByPkRole = async (id) => Role.findByPk(id);
 
-module.exports = { allRoles, findRoleById };
+module.exports = { findAllRoles, findByPkRole };
