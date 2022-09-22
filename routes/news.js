@@ -156,7 +156,7 @@ const {
  *          items:
  *            $ref: '#/components/schemas/Comments'
  *  responses:
- *    getAll:
+ *    getAllNews:
  *      description: list of all news
  *      content:
  *        application/json:
@@ -220,14 +220,14 @@ const {
  *                  comments:
  *                    - id: 2
  *                      body: Woww
- *    getOne:
+ *    getOneNews:
  *      description: news detail
  *      content:
  *        application/json:
  *          schema:
  *            $ref: '#/components/schemas/NewsResponse'
  *          example:
- *            message: category detail
+ *            message: news detail
  *            data:
  *              id: 1
  *              name: A famous person broke up
@@ -253,7 +253,7 @@ const {
  *                body: Such a good news
  *              - userId: 2
  *                body: Very interesting
- *    create:
+ *    created:
  *      description: create a news
  *      content:
  *        application/json:
@@ -268,7 +268,7 @@ const {
  *              image: https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png
  *              type: news
  *              categoryId: 3
- *    update:
+ *    updateNews:
  *      description: update a news
  *      content:
  *        application/json:
@@ -283,7 +283,7 @@ const {
  *              image: https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png
  *              type: news
  *              categoryId: 3
- *    delete:
+ *    deleteNews:
  *      description: news deleted
  *      content:
  *        application/json:
@@ -302,7 +302,7 @@ const {
  *    500:
  *      description: server error
  *  parameters:
- *     id:
+ *     NewsId:
  *       in: path
  *       name: id
  *       schema:
@@ -333,7 +333,7 @@ const {
  *     - $ref: '#/components/parameters/page'
  *    responses:
  *      200:
- *        $ref: '#/components/responses/getAll'
+ *        $ref: '#/components/responses/getAllNews'
  *      401:
  *        $ref: '#/components/responses/401'
  *      500:
@@ -357,7 +357,7 @@ router.get('/', isAuth, getAllNews);
  *            $ref: '#/components/schemas/News'
  *    responses:
  *      201:
- *        $ref: '#/components/responses/create'
+ *        $ref: '#/components/responses/created'
  *      401:
  *        $ref: '#/components/responses/401'
  *      403:
@@ -376,10 +376,10 @@ router.post('/', isAuth, isAdmin, validateNewsFields, uploadFile, createSingleNe
  *    summary: get news detail
  *    tags: [News]
  *    parameters:
- *     - $ref: '#/components/parameters/id'
+ *     - $ref: '#/components/parameters/NewsId'
  *    responses:
  *      200:
- *        $ref: '#/components/responses/getOne'
+ *        $ref: '#/components/responses/getOneNews'
  *      401:
  *        $ref: '#/components/responses/401'
  *      403:
@@ -397,7 +397,7 @@ router.get('/:id', isAuth, isAdmin, validateId, getSingleNews);
  *    summary: Update a news
  *    tags: [News]
  *    parameters:
- *      - $ref: '#/components/parameters/id'
+ *      - $ref: '#/components/parameters/NewsId'
  *    requestBody:
  *      required: true
  *      content:
@@ -407,7 +407,7 @@ router.get('/:id', isAuth, isAdmin, validateId, getSingleNews);
  *            $ref: '#/components/schemas/News'
  *    responses:
  *      201:
- *        $ref: '#/components/responses/update'
+ *        $ref: '#/components/responses/updateNews'
  *      401:
  *        $ref: '#/components/responses/401'
  *      403:
@@ -425,10 +425,10 @@ router.put('/:id', isAuth, isAdmin, validateUpdate, uploadFile, updateSingleNews
  *      summary: Delete a news
  *      tags: [News]
  *      parameters:
- *      - $ref: '#/components/parameters/id'
+ *      - $ref: '#/components/parameters/NewsId'
  *      responses:
  *        200:
- *          $ref: '#/components/responses/delete'
+ *          $ref: '#/components/responses/deleteNews'
  *        401:
  *          $ref: '#/components/responses/401'
  *        403:
