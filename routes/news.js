@@ -50,7 +50,9 @@ const {
  *    News:
  *      type: object
  *      properties:
- *        id: 1
+ *        id:
+ *          type: integer
+ *          description: news id
  *        name:
  *          type: string
  *          description: news name
@@ -88,7 +90,9 @@ const {
  *    NewsAndComments:
  *      type: object
  *      properties:
- *        id: 1
+ *        id:
+ *          type: integer
+ *          description: news id
  *        name:
  *          type: string
  *          description: news name
