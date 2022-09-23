@@ -349,7 +349,7 @@ router.get('/:id', isAuth, isAdmin, validateCategoryId, getCategory);
  *          $ref: '#/components/responses/401'
  *        403:
  *          $ref: '#/components/responses/403'
- *       404:
+ *        404:
  *         $ref: '#/components/responses/404'
  *        500:
  *          $ref: '#/components/responses/500'
@@ -380,7 +380,7 @@ router.post('/', isAuth, isAdmin, validateNewsFields, uploadFile, createCategory
  *          $ref: '#/components/responses/401'
  *        403:
  *          $ref: '#/components/responses/403'
- *       404:
+ *        404:
  *         $ref: '#/components/responses/404'
  *        500:
  *          $ref: '#/components/responses/500'
@@ -405,7 +405,7 @@ router.put('/:id', isAuth, isAdmin, validateCategoryId, uploadFile, updateCatego
  *          $ref: '#/components/responses/401'
  *        403:
  *          $ref: '#/components/responses/403'
- *       404:
+ *        404:
  *         $ref: '#/components/responses/404'
  *        500:
  *          $ref: '#/components/responses/500'
