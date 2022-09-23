@@ -1,8 +1,65 @@
+:root {
+  --red: #db5752;
+  --black: black;
+  --yellow: #fafa88;
+  --sky: #9ac9fb;
+  --green: #2a8b5d;
+  --white: rgb(234, 229, 229);
+  --shadow: rgba(47, 46, 46, 0.955);
+}
+
 body {
+  font-size: 1.6rem;
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Heebo', sans-serif;
+  background-color: var(--shadow);
+  color: var(--white);
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+h1 {
+  color: var(--red);
+  font-size: 4rem;
+}
+
+h2 {
+  text-align: center;
+  font-size: 3rem;
+}
+
+h3 {
+  color: var(--red);
+  font-size: 2.5rem;
+}
+
+p {
+  font-size: 2rem;
+  font-weight: 400;
+  margin: 0 3rem 1rem;
 }
 
 a {
-  color: #00B7FF;
+  color: var(--sky);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--yellow);
+}
+
+.header {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.9rem;
 }

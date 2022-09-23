@@ -151,14 +151,14 @@ const { validateCategoryId, validateNewsFields } = require('../validators/valida
  *               description: current page rows
  *               items:
  *                 $ref: '#/components/schemas/Categories'
- *     MessageResponse:
+ *     CategoryMessageResponse:
  *       type: object
  *       properties:
  *         message:
  *           type: string
  *           description: message
  *   responses:
- *     getAll:
+ *     getAllCategories:
  *       description: list of all categories
  *       content:
  *         application/json:
@@ -178,7 +178,7 @@ const { validateCategoryId, validateNewsFields } = require('../validators/valida
  *                   name: Category name
  *                 - id: 2
  *                   name: Category name
- *     getSingle:
+ *     getSingleCategory:
  *       description: category detail
  *       content:
  *         application/json:
@@ -193,15 +193,15 @@ const { validateCategoryId, validateNewsFields } = require('../validators/valida
  *               image: https://category-image.jpg
  *               createdAt: 2022-09-14T17:09:49.000Z
  *               updatedAt: 2022-09-14T17:09:49.000Z
- *     delete:
+ *     deleteCategory:
  *       description: category deleted
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/MessageResponse'
+ *             $ref: '#/components/schemas/CategoryMessageResponse'
  *           example:
  *             message: category deleted
- *     create:
+ *     createCategory:
  *       description: category created
  *       content:
  *         application/json:
@@ -216,7 +216,7 @@ const { validateCategoryId, validateNewsFields } = require('../validators/valida
  *               image: https://category-image.jpg
  *               createdAt: 2022-09-14T17:09:49.000Z
  *               updatedAt: 2022-09-14T17:09:49.000Z
- *     update:
+ *     updateCategory:
  *       description: category updated
  *       content:
  *         application/json:
@@ -231,18 +231,20 @@ const { validateCategoryId, validateNewsFields } = require('../validators/valida
  *               image: https://category-image.jpg
  *               createdAt: 2022-09-14T17:09:49.000Z
  *               updatedAt: 2022-09-14T17:09:49.000Z
- *     notFound:
+ *     notFoundCategory:
  *       description: category not found
- *     badRequest:
+ *     badRequestCategory:
  *       description: category already exists
  *     401:
  *       description: unauthorized - id is required
  *     403:
  *       description: forbidden - admin access is required - validation error
+ *     404:
+ *       description: user not found
  *     500:
  *       description: server error
  *   parameters:
- *     id:
+ *     idCategory:
  *       in: path
  *       name: id
  *       schema:
@@ -288,11 +290,13 @@ const { validateCategoryId, validateNewsFields } = require('../validators/valida
  *     - $ref: '#/components/parameters/order'
  *     responses:
  *       200:
- *         $ref: '#/components/responses/getAll'
+ *         $ref: '#/components/responses/getAllCategories'
  *       401:
  *         $ref: '#/components/responses/401'
  *       403:
  *         $ref: '#/components/responses/403'
+ *       404:
+ *         $ref: '#/components/responses/404'
  *       500:
  *         $ref: '#/components/responses/500'
  */
@@ -308,10 +312,10 @@ router.get('/', isAuth, isAdmin, getCategories);
  *      summary: Get a category detail
  *      tags: [Category]
  *      parameters:
- *      - $ref: '#/components/parameters/id'
+ *      - $ref: '#/components/parameters/idCategory'
  *      responses:
  *       200:
- *         $ref: '#/components/responses/getSingle'
+ *         $ref: '#/components/responses/getSingleCategory'
  *       401:
  *         $ref: '#/components/responses/401'
  *       403:
@@ -338,13 +342,15 @@ router.get('/:id', isAuth, isAdmin, validateCategoryId, getCategory);
  *              $ref: '#/components/schemas/CategoryRequest'
  *      responses:
  *        201:
- *          $ref: '#/components/responses/create'
+ *          $ref: '#/components/responses/createCategory'
  *        400:
- *          $ref: '#/components/responses/badRequest'
+ *          $ref: '#/components/responses/badRequestCategory'
  *        401:
  *          $ref: '#/components/responses/401'
  *        403:
  *          $ref: '#/components/responses/403'
+ *       404:
+ *         $ref: '#/components/responses/404'
  *        500:
  *          $ref: '#/components/responses/500'
  */
@@ -360,7 +366,7 @@ router.post('/', isAuth, isAdmin, validateNewsFields, uploadFile, createCategory
  *      summary: Update a category
  *      tags: [Category]
  *      parameters:
- *      - $ref: '#/components/parameters/id'
+ *      - $ref: '#/components/parameters/idCategory'
  *      requestBody:
  *        required: true
  *        content:
@@ -369,11 +375,13 @@ router.post('/', isAuth, isAdmin, validateNewsFields, uploadFile, createCategory
  *                $ref: '#/components/schemas/CategoryPutRequest'
  *      responses:
  *        201:
- *          $ref: '#/components/responses/update'
+ *          $ref: '#/components/responses/updateCategory'
  *        401:
  *          $ref: '#/components/responses/401'
  *        403:
  *          $ref: '#/components/responses/403'
+ *       404:
+ *         $ref: '#/components/responses/404'
  *        500:
  *          $ref: '#/components/responses/500'
  */
@@ -389,14 +397,16 @@ router.put('/:id', isAuth, isAdmin, validateCategoryId, uploadFile, updateCatego
  *      summary: Delete a category
  *      tags: [Category]
  *      parameters:
- *      - $ref: '#/components/parameters/id'
+ *      - $ref: '#/components/parameters/idCategory'
  *      responses:
  *        200:
- *          $ref: '#/components/responses/delete'
+ *          $ref: '#/components/responses/deleteCategory'
  *        401:
  *          $ref: '#/components/responses/401'
  *        403:
  *          $ref: '#/components/responses/403'
+ *       404:
+ *         $ref: '#/components/responses/404'
  *        500:
  *          $ref: '#/components/responses/500'
  */

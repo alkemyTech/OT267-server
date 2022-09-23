@@ -13,6 +13,7 @@ module.exports = {
     mpAccessToken: process.env.MP_ACCESS_TOKEN,
     ngrokServerUrl: process.env.NGROK_SERVER_URL,
     mainUrl: process.env.URL,
+    logging: false,
   },
   test: {
     username: process.env.DB_USER,
@@ -20,6 +21,7 @@ module.exports = {
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
     dialect: 'mysql',
+    adminToken: process.env.ADMIN_TOKEN,
   },
   production: {
     username: process.env.DB_USER,

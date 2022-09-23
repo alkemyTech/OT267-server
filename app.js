@@ -80,7 +80,7 @@ app.use('/users', usersRouter);
 app.use('/auth', authRouter);
 app.use('/activities', activitiesRouter);
 app.use('/roles', rolesRouter);
-app.use('/organizations', organizationsRouter);
+app.use('/organization', organizationsRouter);
 app.use('/testimonies', testimoniesRouter);
 app.use('/news', newsRouter);
 app.use('/categories', categoriesRouter);
