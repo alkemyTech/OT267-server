@@ -4,9 +4,12 @@ const isCurrentUser = async (req, res, next) => {
   const { id } = req.params;
   const { userId, roleId } = req;
 
-  if (userId === id || roleId === 1) return next();
+  const newId = Number(id);
 
-  return error({ res, message: 'forbidden: unauthorized user', status: 403 });
+  if (userId !== newId && roleId !== 1) {
+    return error({ res, message: 'unauthorized user', status: 403 });
+  }
+  return next();
 };
 
 module.exports = { isCurrentUser };
