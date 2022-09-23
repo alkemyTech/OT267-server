@@ -54,14 +54,12 @@ const updateSingleNews = async (req, res) => {
   const { id } = req.params;
   const data = req.body;
   try {
-    const response = await updateByIdNews(id, data);
-
-    if (response[0] === 0) return error({ res, message: 'news not found' });
+    await updateByIdNews(id, data);
 
     const newsUpdated = await findByPkNews(id);
 
     return success({
-      res, message: 'news updated', data: newsUpdated, status: 201,
+      res, message: 'news updated', data: newsUpdated,
     });
   } catch (err) {
     return serverError({ res, message: err.message });

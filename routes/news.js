@@ -370,7 +370,7 @@ router.get('/', isAuth, getAllNews);
  *        $ref: '#/components/responses/500'
  *
 */
-router.post('/', isAuth, isAdmin, validateNewsFields, uploadFile, createSingleNews);
+router.post('/', isAuth, isAdmin, uploadFile, validateNewsFields, createSingleNews);
 /**
  * @swagger
  * /news/{id}:
@@ -419,7 +419,7 @@ router.get('/:id', isAuth, isAdmin, validateId, getSingleNews);
  *      500:
  *        $ref: '#/components/responses/500'
 */
-router.put('/:id', isAuth, isAdmin, validateUpdate, uploadFile, updateSingleNews);
+router.put('/:id', isAuth, isAdmin, uploadFile, validateUpdate, updateSingleNews);
 /**
  * @swagger
  * /news/{id}:
