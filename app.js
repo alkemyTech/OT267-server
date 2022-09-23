@@ -1,4 +1,4 @@
-const createError = require('http-errors');
+/* const createError = require('http-errors'); */
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -70,7 +70,7 @@ app.use('/users', usersRouter);
 app.use('/auth', authRouter);
 app.use('/activities', activitiesRouter);
 app.use('/roles', rolesRouter);
-app.use('/organizations', organizationsRouter);
+app.use('/organization', organizationsRouter);
 app.use('/testimonies', testimoniesRouter);
 app.use('/news', newsRouter);
 app.use('/categories', categoriesRouter);
@@ -82,11 +82,11 @@ app.use('/donations', donationsRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-  next(createError(404));
+  next(res.status(404).send('Cannot complete the request'));
 });
 
 // error handler
-app.use((err, req, res) => {
+/* app.use((err, req, res) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -94,6 +94,6 @@ app.use((err, req, res) => {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
-});
+}); */
 
 module.exports = app;
