@@ -73,7 +73,7 @@ const login = async (req, res) => {
           },
           token,
         },
-        status: 201,
+        status: 200,
       });
     }
     return error({ res, message: 'invalid email or password', status: 401 });
