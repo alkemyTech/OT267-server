@@ -239,6 +239,8 @@ const { validateCategoryId, validateNewsFields } = require('../validators/valida
  *       description: unauthorized - id is required
  *     403:
  *       description: forbidden - admin access is required - validation error
+ *     404:
+ *       description: user not found
  *     500:
  *       description: server error
  *   parameters:
@@ -293,6 +295,8 @@ const { validateCategoryId, validateNewsFields } = require('../validators/valida
  *         $ref: '#/components/responses/401'
  *       403:
  *         $ref: '#/components/responses/403'
+ *       404:
+ *         $ref: '#/components/responses/404'
  *       500:
  *         $ref: '#/components/responses/500'
  */
@@ -345,6 +349,8 @@ router.get('/:id', isAuth, isAdmin, validateCategoryId, getCategory);
  *          $ref: '#/components/responses/401'
  *        403:
  *          $ref: '#/components/responses/403'
+ *       404:
+ *         $ref: '#/components/responses/404'
  *        500:
  *          $ref: '#/components/responses/500'
  */
@@ -374,6 +380,8 @@ router.post('/', isAuth, isAdmin, validateNewsFields, uploadFile, createCategory
  *          $ref: '#/components/responses/401'
  *        403:
  *          $ref: '#/components/responses/403'
+ *       404:
+ *         $ref: '#/components/responses/404'
  *        500:
  *          $ref: '#/components/responses/500'
  */
@@ -397,6 +405,8 @@ router.put('/:id', isAuth, isAdmin, validateCategoryId, uploadFile, updateCatego
  *          $ref: '#/components/responses/401'
  *        403:
  *          $ref: '#/components/responses/403'
+ *       404:
+ *         $ref: '#/components/responses/404'
  *        500:
  *          $ref: '#/components/responses/500'
  */
