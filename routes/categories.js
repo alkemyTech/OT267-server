@@ -366,21 +366,10 @@ router.post('/', isAuth, isAdmin, validateNewsFields, uploadFile, createCategory
  *        content:
  *            application/json:
  *              schema:
-<<<<<<< HEAD
  *                $ref: '#/components/schemas/CategoryPutRequest'
  *      responses:
  *        201:
  *          $ref: '#/components/responses/updateCategory'
-=======
-<<<<<<< HEAD
- *                $ref: '#/components/schemas/CategoryRequest'
-=======
- *                $ref: '#/components/schemas/CategoryPutRequest'
->>>>>>> ef4c2a982f72c4b3f20792da6d72c30b3067e37f
- *      responses:
- *        201:
- *          $ref: '#/components/responses/update'
->>>>>>> ff70d868c338253742483be3d2dce40aa4ed5d84
  *        401:
  *          $ref: '#/components/responses/401'
  *        403:
@@ -400,17 +389,10 @@ router.put('/:id', isAuth, isAdmin, validateCategoryId, uploadFile, updateCatego
  *      summary: Delete a category
  *      tags: [Category]
  *      parameters:
-<<<<<<< HEAD
  *      - $ref: '#/components/parameters/idCategory'
  *      responses:
  *        200:
  *          $ref: '#/components/responses/deleteCategory'
-=======
- *      - $ref: '#/components/parameters/id'
- *      responses:
- *        200:
- *          $ref: '#/components/responses/delete'
->>>>>>> ff70d868c338253742483be3d2dce40aa4ed5d84
  *        401:
  *          $ref: '#/components/responses/401'
  *        403:
