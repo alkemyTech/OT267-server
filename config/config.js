@@ -7,6 +7,7 @@ module.exports = {
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
+    url: process.env.URL,
     dialect: 'mysql',
     mpUrl: process.env.MP_URL,
     mpPublicKey: process.env.MP_PUBLIC_KEY,
