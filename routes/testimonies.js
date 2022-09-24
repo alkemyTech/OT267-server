@@ -165,15 +165,15 @@ const { validateCreateTestimony } = require('../validators/validateTestimony');
  *               description: current page rows
  *               items:
  *                 $ref: '#/components/schemas/Testimonies'
- *     MessageResponse:
+ *     TestimonyMessageResponse:
  *       type: object
  *       properties:
  *         message:
  *           type: string
  *           description: message
  *   responses:
- *     getAll:
- *       description: list of all categories
+ *     getAllTestimonies:
+ *       description: list of all testimonies
  *       content:
  *         application/json:
  *           schema:
@@ -200,12 +200,12 @@ const { validateCreateTestimony } = require('../validators/validateTestimony');
  *                   image: https://testimony-image.jpg
  *                   createdAt: 2022-09-14T17:09:49.000Z
  *                   updatedAt: 2022-09-14T17:09:49.000Z
- *     getSingle:
+ *     getSingleTestimony:
  *       description: testimony detail
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/CategoryResponse'
+ *             $ref: '#/components/schemas/TestimonyResponse'
  *           example:
  *             message: testimony detail
  *             data:
@@ -215,15 +215,15 @@ const { validateCreateTestimony } = require('../validators/validateTestimony');
  *               image: https://testimony-image.jpg
  *               createdAt: 2022-09-14T17:09:49.000Z
  *               updatedAt: 2022-09-14T17:09:49.000Z
- *     delete:
+ *     deleteTestimony:
  *       description: testimony deleted
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/MessageResponse'
+ *             $ref: '#/components/schemas/TestimonyMessageResponse'
  *           example:
  *             message: testimony deleted
- *     create:
+ *     createTestimony:
  *       description: testimony created
  *       content:
  *         application/json:
@@ -238,7 +238,7 @@ const { validateCreateTestimony } = require('../validators/validateTestimony');
  *               image: https://testimony-image.jpg
  *               createdAt: 2022-09-14T17:09:49.000Z
  *               updatedAt: 2022-09-14T17:09:49.000Z
- *     update:
+ *     updateTestimony:
  *       description: testimony updated
  *       content:
  *         application/json:
@@ -253,9 +253,9 @@ const { validateCreateTestimony } = require('../validators/validateTestimony');
  *               image: https://testimony-image.jpg
  *               createdAt: 2022-09-14T17:09:49.000Z
  *               updatedAt: 2022-09-14T17:09:49.000Z
- *     notFound:
+ *     notFoundTestimony:
  *       description: testimony not found
- *     badRequest:
+ *     badRequestTestimony:
  *       description: testimony already exists
  *     401:
  *       description: unauthorized - id is required
@@ -264,7 +264,7 @@ const { validateCreateTestimony } = require('../validators/validateTestimony');
  *     500:
  *       description: server error
  *   parameters:
- *     id:
+ *     idTestimony:
  *       in: path
  *       name: id
  *       schema:
@@ -310,7 +310,7 @@ const { validateCreateTestimony } = require('../validators/validateTestimony');
  *     - $ref: '#/components/parameters/order'
  *     responses:
  *       200:
- *         $ref: '#/components/responses/getAll'
+ *         $ref: '#/components/responses/getAllTestimonies'
  *       401:
  *         $ref: '#/components/responses/401'
  *       403:
@@ -337,9 +337,9 @@ router.get('/', isAuth, isAdmin, getTestimonies);
  *              $ref: '#/components/schemas/TestimonyRequest'
  *      responses:
  *        201:
- *          $ref: '#/components/responses/create'
+ *          $ref: '#/components/responses/createTestimony'
  *        400:
- *          $ref: '#/components/responses/badRequest'
+ *          $ref: '#/components/responses/badRequestTestimony'
  *        401:
  *          $ref: '#/components/responses/401'
  *        403:
@@ -359,7 +359,7 @@ router.post('/', isAuth, isAdmin, validateCreateTestimony, createTestimony);
  *      summary: Update a testimony
  *      tags: [Testimony]
  *      parameters:
- *      - $ref: '#/components/parameters/id'
+ *      - $ref: '#/components/parameters/idTestimony'
  *      requestBody:
  *        required: true
  *        content:
@@ -368,7 +368,7 @@ router.post('/', isAuth, isAdmin, validateCreateTestimony, createTestimony);
  *                $ref: '#/components/schemas/TestimonyPutRequest'
  *      responses:
  *        201:
- *          $ref: '#/components/responses/update'
+ *          $ref: '#/components/responses/updateTestimony'
  *        401:
  *          $ref: '#/components/responses/401'
  *        403:
@@ -388,10 +388,10 @@ router.put('/:id', isAuth, isAdmin, updateTestimony);
  *      summary: Delete a testimony
  *      tags: [Testimony]
  *      parameters:
- *      - $ref: '#/components/parameters/id'
+ *      - $ref: '#/components/parameters/idTestimony'
  *      responses:
  *        200:
- *          $ref: '#/components/responses/delete'
+ *          $ref: '#/components/responses/deleteTestimony'
  *        401:
  *          $ref: '#/components/responses/401'
  *        403:

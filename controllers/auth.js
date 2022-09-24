@@ -9,25 +9,23 @@ const {
 
 const { newUser, findByPkUser, findOneUser } = require('../services/user');
 
-const { htmlTemplate } = require('../templates/welcomeMessage');
-
 const register = async (req, res) => {
+  const { email } = req.body;
   try {
-    const { email } = req.body;
-
     const user = await newUser({ ...req.body });
 
     const token = await generateJWT(user.id, user.firstName, user.roleId);
 
-    success({
-      res,
-      message: 'user created',
-      data: { user, token },
-      status: 201,
-    });
+    const sent = await sendMail(email);
 
-    // send welcome email
-    await sendMail(email, 'Bienvenido a Somos Más ONG.', '', htmlTemplate);
+    if (sent) {
+      success({
+        res,
+        message: 'user created',
+        data: { user, token },
+        status: 201,
+      });
+    } else { error({ message: 'Bad request' }); }
   } catch (err) {
     serverError({ res, message: err.message });
   }
@@ -47,7 +45,7 @@ const getUser = async (req, res) => {
 
 const login = async (req, res) => {
   const { email, password } = req.body;
-
+  console.log(email);
   try {
     const userFound = await findOneUser(email);
 
@@ -73,7 +71,7 @@ const login = async (req, res) => {
           },
           token,
         },
-        status: 201,
+        status: 200,
       });
     }
     return error({ res, message: 'invalid email or password', status: 401 });

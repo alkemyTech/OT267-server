@@ -1,7 +1,6 @@
 const axios = require('axios');
 
 const config = require('../config/config');
-
 const { Donation } = require('../models/index');
 
 const findOneDonation = async (id) => {
@@ -58,7 +57,7 @@ const createDonation = async (amount) => {
   return donation.data;
 };
 
-const saveDonationData = async (donation) => Donation
+const saveDonation = async (donation) => Donation
   .findOne(donation.data_id)
   .then((obj) => {
     if (obj) return obj.update(donation);
@@ -91,5 +90,5 @@ const createSubscription = async (amount) => {
 };
 
 module.exports = {
-  findOneDonation, createDonation, createSubscription, saveDonationData,
+  findOneDonation, createDonation, createSubscription, saveDonation,
 };

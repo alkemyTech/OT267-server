@@ -20,8 +20,7 @@ const validateActivity = [
   check('image', 'Ingrese una URL de imagen')
     .optional()
     .isURL()
-    .withMessage('Ingresese una URL válida')
-    .escape(),
+    .withMessage('Ingresese una URL válida'),
 
   (req, res, next) => {
     handleResult(req, res, next);

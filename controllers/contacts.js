@@ -34,7 +34,7 @@ const getContacts = async (req, res) => {
   try {
     const data = await findAllContacts();
 
-    success({ res, message: 'list of all contacts', data });
+    success({ res, message: 'list of all contacts', data, status: 200 });
   } catch (err) {
     serverError({ res, message: err.message });
   }

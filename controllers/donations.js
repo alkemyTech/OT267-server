@@ -1,14 +1,13 @@
 const {
-  findOneDonation, createDonation, createSubscription, saveDonationData,
-} = require('../services/donation');
-
-const {
   success,
   error,
   serverError,
   paginator,
 } = require('../helpers');
 
+const {
+  findOneDonation, createDonation, createSubscription, saveDonation,
+} = require('../services/donation');
 const { Donation } = require('../models');
 
 const getDonations = async (req, res) => {
@@ -68,8 +67,8 @@ const createSubscriptionLink = async (req, res) => {
   }
 };
 
-const saveDonation = async (req, res) => {
-  const { body } = req
+const saveDonationData = async (req, res) => {
+  const { body } = req;
 
   const donation = {
     data_id: body.data.id,
@@ -77,10 +76,10 @@ const saveDonation = async (req, res) => {
     action: body.action,
     mp_userId: body.user_id,
     date_created: body.date_created,
-  }
+  };
 
-  try {    
-    const donationData = await saveDonationData(donation);
+  try {
+    const donationData = await saveDonation(donation);
 
     if (!donationData) return error({ res, message: 'Payment details were not saved, try again' });
 
@@ -92,9 +91,9 @@ const saveDonation = async (req, res) => {
 };
 
 module.exports = {
-  saveDonation,
   getDonations,
   getSingleDonation,
   createDonationLink,
   createSubscriptionLink,
+  saveDonationData,
 };
