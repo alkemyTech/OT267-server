@@ -13,8 +13,7 @@ const validateCreateMembers = [
   check(['linkedinUrl', 'instagramUrl, facebookurl', 'image'], 'Ingrese una url valida')
     .optional({ checkFalsy: true })
     .isURL()
-    .trim()
-    .escape(),
+    .trim(),
 
   check('description', 'Ingrese una descripcion')
     .exists()

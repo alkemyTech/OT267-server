@@ -39,14 +39,12 @@ const validateRegistrationData = [
       }
     })
     .trim()
-    .escape()
-    .normalizeEmail(),
+    .escape(),
 
   check('image', 'Ingrese una URL de imagen')
     .optional()
     .isURL()
-    .withMessage('Ingresese una URL válida')
-    .escape(),
+    .withMessage('Ingresese una URL válida'),
 
   check(
     'password',
@@ -107,9 +105,9 @@ const validateLoginData = [
       }
     })
     .trim()
-    .escape()
-    .normalizeEmail(),
-
+    .escape(),
+  check('password', 'Ingrese una contraseña')
+    .exists(),
   (req, res, next) => {
     handleResult(req, res, next);
   },
@@ -153,8 +151,7 @@ const validateFields = [
   check('image', 'Ingrese una URL de imagen')
     .optional()
     .isURL()
-    .withMessage('Ingresese una URL válida')
-    .escape(),
+    .withMessage('Ingresese una URL válida'),
 
   check('roleId').custom(async (value) => {
     if (value) {

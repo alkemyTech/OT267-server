@@ -5,7 +5,6 @@ const { Testimony } = require('../models');
 const {
   findOrCreateTestimony,
   updateByIdTestimony,
-  findByPkTestimony,
   destroyTestimony,
 } = require('../services/testimony');
 
@@ -32,10 +31,10 @@ const getTestimonies = async (req, res) => {
 };
 
 const createTestimony = async (req, res) => {
-  const { name, content } = req.body;
+  if (Object.keys(req.body).length < 1) error({ res, message: 'data is required' });
 
   try {
-    const newTestimony = await findOrCreateTestimony(name, content);
+    const newTestimony = await findOrCreateTestimony(req.body);
 
     if (!newTestimony) return error({ res, message: 'testimony already exists', status: 400 });
 
@@ -51,16 +50,16 @@ const createTestimony = async (req, res) => {
 };
 
 const updateTestimony = async (req, res) => {
+  if (Object.keys(req.body).length < 1) return error({ res, message: 'data is required' });
+
   const { id } = req.params;
   const data = req.body;
 
   try {
-    await updateByIdTestimony(id, data);
-
-    const testimonyUpdated = await findByPkTestimony(id);
-
+    const testimonyUpdated = await updateByIdTestimony(id, data);
+    if (testimonyUpdated === null) return error({ res, message: 'testimony not found' });
     return success({
-      res, message: 'Testimony updated', data: testimonyUpdated, status: 201,
+      res, message: 'testimony updated', status: 201,
     });
   } catch (err) {
     return serverError({ res, message: err.message });
@@ -71,7 +70,7 @@ const deleteTestimony = async (req, res) => {
   const { id } = req.params;
   try {
     const response = await destroyTestimony(id);
-    if (response === 0) error({ res, message: 'Testimony not found' });
+    if (response === 0) error({ res, message: 'testimony not found' });
     else success({ res, message: 'testimony deleted' });
   } catch (err) {
     serverError({ res, message: err.message });

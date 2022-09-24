@@ -56,6 +56,7 @@ const deleteMember = async (req, res) => {
 
 const updateMember = async (req, res) => {
   if (Object.keys(req.body).length < 1) error({ res, message: 'data is required' });
+
   const { id } = req.params;
   try {
     const [data] = await updateByIdMember(id, req.body);
