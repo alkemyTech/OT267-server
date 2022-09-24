@@ -14,6 +14,9 @@ module.exports = {
     ngrokServerUrl: process.env.NGROK_SERVER_URL,
     mainUrl: process.env.URL,
     logging: false,
+    sgApiKey: process.env.SENDGRID_API_KEY,
+    sgSender: process.env.SENDGRID_SENDER,
+
   },
   test: {
     username: process.env.DB_USER,

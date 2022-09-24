@@ -39,8 +39,7 @@ const validateRegistrationData = [
       }
     })
     .trim()
-    .escape()
-    .normalizeEmail(),
+    .escape(),
 
   check('image', 'Ingrese una URL de imagen')
     .optional()
@@ -106,9 +105,9 @@ const validateLoginData = [
       }
     })
     .trim()
-    .escape()
-    .normalizeEmail(),
-
+    .escape(),
+  check('password', 'Ingrese una contraseña')
+    .exists(),
   (req, res, next) => {
     handleResult(req, res, next);
   },

@@ -398,20 +398,17 @@ const htmlTemplate = `
                           "
                         >
                         <h2 style="text-align: center;">Datos de contacto:</h2>
-                          <p style="text-align: center; display: flex; flex-direction: column; font-size: 16px;">
-                            <a href="mailto:somosfunfacionmas@gmail.com">
-                                <i class="fa-solid fa-envelope"></i>
-                                somosfunfacionmas@gmail.com
-                            </a>
+                          <pre style="text-align: center; display: flex; flex-direction: column; font-size: 12px;">
+                            <a href="mailto:ong267mailer@gmail.com">
+                                <span class="fa-solid fa-envelope">ong267mailer@gmail.com<span>
+                              </a>
                             <a href="#instragram">
-                                <i class="fa-brands fa-square-instagram"></i> @SomosMás
+                                <span class="fa-brands fa-square-instagram"> Ig: @SomosMás </span>
                             </a>
                             <a href="#facebook">
-                                <i class="fa-brands fa-square-facebook"></i>
-                                Somos_Más
+                                <span class="fa-brands fa-square-facebook"> Fb: Somos_Más </span>
                             </a>
-                            <span><i class="fa-solid fa-phone"></i> 1160112988</span>
-                          </p>
+                          </pre> 
                         </div>
                       </td>
                     </tr>

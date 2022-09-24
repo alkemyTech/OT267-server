@@ -16,6 +16,9 @@ const {
 } = require('../controllers/news');
 /**
  * @swagger
+ * tags:
+ *   - name: News
+ *     description: ONG News
  * components:
  *  schemas:
  *    News Model:
@@ -71,6 +74,8 @@ const {
  *        comments:
  *          type: array
  *          description: all comments
+ *          items:
+ *            $ref: '#/components/schemas/Comments'
  *      example:
  *        id: 1
  *        name: A famous person broke up
@@ -111,6 +116,8 @@ const {
  *        comments:
  *          type: array
  *          description: array of all comments
+ *          items:
+ *            $ref: '#/components/schemas/Comments'
  *      example:
  *        id: 1
  *        name: A famous person broke up
@@ -148,6 +155,8 @@ const {
  *            comments:
  *              type: array
  *              description: all comments
+ *              items:
+ *                $ref: '#/components/schemas/Comments'
  *    NewsCommentsResponse:
  *      type: object
  *      properties:

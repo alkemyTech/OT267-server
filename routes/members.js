@@ -16,8 +16,8 @@ const { validateCreateMembers } = require('../validators/validateMembers');
  *
  * @swagger
  * tags:
- *   - name: Members
- *   - description: ONG Members
+ *   - name: Member
+ *     description: ONG Members
  * components:
  *   schemas:
  *     Members Model:
@@ -34,10 +34,13 @@ const { validateCreateMembers } = require('../validators/validateMembers');
  *           description: member image url
  *         facebookUrl:
  *           type: string
+ *           description: member facebook url
  *         instagramUrl:
  *           type: string
+ *           description: member instagram url
  *         linkedinUrl:
  *           type: string
+ *           description: member linkedIn url
  *         deletedAt:
  *           type: date
  *           description: delete date - softdelete
@@ -63,34 +66,34 @@ const { validateCreateMembers } = require('../validators/validateMembers');
  *         data:
  *           type: object
  *           description: response content
- *         properties:
- *           id:
- *             type: integer
- *             description: member
- *           name:
- *             type: string
- *             description: member name
- *           description:
- *             type: string
- *             description: member description
- *           image:
- *             type: string
- *             description: member image url
- *           facebookUrl:
- *             type: string
- *           instagramUrl:
- *             type: string
- *           linkedinUrl:
- *             type: string
- *           deletedAt:
- *             type: date
- *             description: delete date - softdelete
- *           createdAt:
- *             type: date
- *             description: creation date
- *           updatedAt:
- *             type: date
- *             description: update date
+ *           properties:
+ *             id:
+ *               type: integer
+ *               description: member
+ *             name:
+ *               type: string
+ *               description: member name
+ *             description:
+ *               type: string
+ *               description: member description
+ *             image:
+ *               type: string
+ *               description: member image url
+ *             facebookUrl:
+ *               type: string
+ *             instagramUrl:
+ *               type: string
+ *             linkedinUrl:
+ *               type: string
+ *             deletedAt:
+ *               type: date
+ *               description: delete date - softdelete
+ *             createdAt:
+ *               type: date
+ *               description: creation date
+ *             updatedAt:
+ *               type: date
+ *               description: update date
  *     MemberRequest:
  *       type: object
  *       properties:
@@ -105,9 +108,12 @@ const { validateCreateMembers } = require('../validators/validateMembers');
  *           description: member image url
  *         facebookUrl:
  *           type: string
+ *           description: member facebook url
  *         instagramUrl:
  *           type: string
+ *           description: member instagram url
  *         linkedinUrl:
+ *           description: member linkedIn url
  *           type: string
  *       example:
  *         name: Member name
@@ -126,10 +132,13 @@ const { validateCreateMembers } = require('../validators/validateMembers');
  *           description: member image url
  *         facebookUrl:
  *           type: string
+ *           description: member facebook url
  *         instagramUrl:
  *           type: string
+ *           description: member instagram url
  *         linkedinUrl:
  *           type: string
+ *           description: member linkedIn image url
  *       example:
  *         name: Member name
  *         description: Member description
@@ -172,8 +181,8 @@ const { validateCreateMembers } = require('../validators/validateMembers');
  *         rows:
  *           type: array
  *           description: current page rows
- *         items:
- *           $ref: '#/components/schemas/Members'
+ *           items:
+ *             $ref: '#/components/schemas/Members'
  *     MessageResponse:
  *       type: object
  *       properties:
