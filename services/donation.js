@@ -58,13 +58,12 @@ const createDonation = async (amount) => {
   return donation.data;
 };
 
-const saveDonationData = async (data) => Donation.create({
-  data_id: data.data.id,
-  type: data.type,
-  action: data.action,
-  mp_userId: data.user_id,
-  date_created: data.date_created,
-});
+const saveDonationData = async (donation) => Donation
+  .findOne(donation.data_id)
+  .then((obj) => {
+    if (obj) return obj.update(donation);
+    return Donation.create(donation);
+  });
 
 const createSubscription = async (amount) => {
   const url = `${config.development.mpUrl}preapproval`;
