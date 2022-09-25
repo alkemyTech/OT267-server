@@ -64,7 +64,6 @@ const {
  *          description: news content
  *        image:
  *          type: string
- *          format: binary
  *          description: the news image
  *        type:
  *          type: string
@@ -365,7 +364,7 @@ router.get('/', isAuth, getAllNews);
  *    requestBody:
  *      required: true
  *      content:
- *        multipart/form-data:
+ *        application/json:
  *          schema:
  *            type: object
  *            $ref: '#/components/schemas/News'
@@ -415,7 +414,7 @@ router.get('/:id', isAuth, isAdmin, validateId, getSingleNews);
  *    requestBody:
  *      required: true
  *      content:
- *        multipart/form-data:
+ *        application/json:
  *          schema:
  *            type: object
  *            $ref: '#/components/schemas/News'
