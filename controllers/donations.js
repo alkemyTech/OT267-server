@@ -13,7 +13,7 @@ const getDonations = async (req, res) => {
     const allDonations = await paginator(req, Donation);
     return success({
       res,
-      message: 'All donations',
+      message: 'list of all donations',
       data: allDonations,
     });
   } catch (err) {
@@ -31,7 +31,7 @@ const getSingleDonation = async (req, res) => {
     return !donation.message
       ? success({
         res,
-        message: 'Donation detail',
+        message: 'donation detail',
         data: donation,
       })
       : error({
@@ -49,10 +49,10 @@ const getSingleDonation = async (req, res) => {
 
 const createDonationLink = async (req, res) => {
   try {
-    const donation = await createDonation(req.body.amount);
+    const donation = await createDonation(+req.body.amount);
     return success({ res, message: 'single donation link', data: donation });
   } catch (err) {
-    return serverError({ res, message: err.message || 'Failed to create donation' });
+    return serverError({ res, message: err.message || 'failed to create donation' });
   }
 };
 
@@ -61,15 +61,18 @@ const createSubscriptionLink = async (req, res) => {
     const subscription = await createSubscription(req.body.amount);
     return success({ res, message: 'recurrent donation link', data: subscription });
   } catch (err) {
-    return serverError({ res, message: err.message || 'Failed to create donation' });
+    return serverError({ res, message: err.message || 'failed to create donation' });
   }
 };
 
 const saveDonationData = async (req, res) => {
   const donationData = req.body;
+  console.log('req en save', req);
   try {
     // aqui se debe implementar la perseverancia de datos
-    return success({ res, message: 'donation data saved', data: donationData });
+    return success({
+      res, message: 'donation data saved', data: donationData, status: 201,
+    });
   } catch (err) {
     return serverError({ res, message: err.message });
   }
