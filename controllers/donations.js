@@ -70,21 +70,19 @@ const createSubscriptionLink = async (req, res) => {
 const saveDonationData = async (req, res) => {
   const { body } = req;
 
-  const donation = {
-    data_id: body.data.id,
-    type: body.type,
-    action: body.action,
-    mp_userId: body.user_id,
-    date_created: body.date_created,
-  };
+  console.log(body);
+
+  if (body.topic) return res.status(200).send('OK');
 
   try {
-    const donationData = await saveDonation(donation);
+    const donationData = await saveDonation(body);
+
+    console.log('llegue');
+    console.log(donationData);
 
     if (!donationData) return error({ res, message: 'Payment details were not saved, try again' });
 
-    // aqui se debe implementar la perseverancia de datos
-    return success({ res, message: 'donation data saved', data: donationData });
+    return res.status(200).send('OK');
   } catch (err) {
     return serverError({ res, message: err.message });
   }
