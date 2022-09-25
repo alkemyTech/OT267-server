@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const { expect } = require('chai');
@@ -10,6 +11,7 @@ let newsId = 4;
 chai.use(chaiHttp);
 describe('NEWS TEST', () => {
   let adminToken;
+  let adminId;
   before(async () => {
     try {
       await axios.post('http://localhost:3000/auth/register', {
@@ -31,6 +33,18 @@ describe('NEWS TEST', () => {
         password: 'SuperUser1000',
       }).then((r) => r.data);
       adminToken = info.data.token;
+      adminId = info.data.user.id;
+    } catch (err) {
+      console.log(err);
+    }
+  });
+  after(async () => {
+    try {
+      await axios.delete(`http://localhost:3000/users/${adminId}`, {
+        headers: {
+          Authorization: `${adminToken}`,
+        },
+      });
     } catch (err) {
       console.log(err);
     }
