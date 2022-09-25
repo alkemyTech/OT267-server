@@ -16,7 +16,7 @@ const getSingleNews = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const newDetail = await newSingleNews(id);
+    const newDetail = await findByPkNews(id);
     if (!newDetail) error({ res, message: 'news not found' });
     else success({ res, message: 'news detail', data: newDetail });
   } catch (err) {
