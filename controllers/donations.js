@@ -70,15 +70,10 @@ const createSubscriptionLink = async (req, res) => {
 const saveDonationData = async (req, res) => {
   const { body } = req;
 
-  console.log(body);
-
   if (body.topic) return res.status(200).send('OK');
 
   try {
     const donationData = await saveDonation(body);
-
-    console.log('llegue');
-    console.log(donationData);
 
     if (!donationData) return error({ res, message: 'Payment details were not saved, try again' });
 
