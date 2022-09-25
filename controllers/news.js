@@ -98,7 +98,7 @@ const getByNewsComments = async (req, res) => {
     return serverError({ res, message: err.message });
   }
   if (data) {
-    return success({ res, message: `list of all comments from new ${id} `, data });
+    return success({ res, message: `list of all comments from news ${id}`, data });
   } error({ res, message: 'comments not found' });
 };
 

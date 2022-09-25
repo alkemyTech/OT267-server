@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 const { News, Comment } = require('../models/index');
 
-const findByPkNews = async (id) => News.findByPk(id);
+const findByPkNews = async (id) => News.findByPk(id, { include: Comment });
 
 const destroySingleNews = async (id) => {
   const response = await News.destroy({
