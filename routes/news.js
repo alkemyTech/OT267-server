@@ -415,7 +415,7 @@ router.get('/:id', isAuth, isAdmin, validateId, getSingleNews);
  *    requestBody:
  *      required: true
  *      content:
- *        application/json:
+ *        multipart/form-data:
  *          schema:
  *            type: object
  *            $ref: '#/components/schemas/News'
