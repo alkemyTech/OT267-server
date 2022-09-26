@@ -28,8 +28,8 @@ const getDonations = async (req, res) => {
 
 const getSingleDonation = async (req, res) => {
   try {
-    const { id } = req.params;
-    const donation = await findOneDonation(id);
+    const donation = await findOneDonation(req.params.id);
+
     return !donation.message
       ? success({
         res,
@@ -75,7 +75,7 @@ const saveDonationData = async (req, res) => {
   try {
     const donationData = await saveDonation(body);
 
-    if (!donationData) return error({ res, message: 'Payment details were not saved, try again' });
+    if (!donationData) return error({ res, message: 'payment details were not saved, try again' });
 
     return res.status(200).send('OK');
   } catch (err) {

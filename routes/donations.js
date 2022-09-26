@@ -94,6 +94,30 @@ const { validateDonationData } = require('../validators/validateDonation');
  *               description: current page rows
  *               items:
  *                 $ref: '#/components/schemas/Donation'
+ *     PaymentItem:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           description: donation id
+ *         category_id:
+ *           type: string
+ *           description: donation category
+ *         currency_id:
+ *           type: string
+ *           description: currency
+ *         description:
+ *           type: string
+ *           description: donation description
+ *         title:
+ *           type: string
+ *           description: title
+ *         quantity:
+ *           type: integer
+ *           description: quantity
+ *         unit_price:
+ *           type: integer
+ *           description: donation amount
  *     SingleDonationResponse:
  *       type: object
  *       properties:
@@ -171,30 +195,7 @@ const { validateDonationData } = require('../validators/validateDonation');
  *               description: internal metadata
  *               nullable: true
  *             items:
- *               type: array
- *               description: donation
- *               items:
- *                 id:
- *                   type: string
- *                   description: donation id
- *                 category_id:
- *                   type: string
- *                   description: donation category
- *                 currency_id:
- *                   type: string
- *                   description: currency
- *                 description:
- *                   type: string
- *                   description: donation description
- *                 title:
- *                   type: string
- *                   description: title
- *                 quantity:
- *                   type: integer
- *                   description: quantity
- *                 unit_price:
- *                   type: integer
- *                   description: donation amount
+ *               $ref: '#/components/schemas/PaymentItem'
  *             marketplace:
  *               type: string
  *               description: marketplace
@@ -548,7 +549,7 @@ const { validateDonationData } = require('../validators/validateDonation');
  *               external_reference: 'smong267'
  *               id: '1196390096-4fc17421-fe5b-4a6c-8088-3f7a141bd764'
  *               init_point: 'https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=1196390096-4fc17421-fe5b-4a6c-8088-3f7a141bd764'
- *               internal_metadata: null,
+ *               internal_metadata: null
  *               items:
  *                 id: '1'
  *                 category_id: 'single donation'
@@ -576,7 +577,7 @@ const { validateDonationData } = require('../validators/validateDonation');
  *                   type: ""
  *                 name: ""
  *                 surname: ""
- *                 date_created: null,
+ *                 date_created: null
  *                 last_purchase: null
  *               payment_methods:
  *                 default_card_id: null
@@ -643,6 +644,127 @@ const { validateDonationData } = require('../validators/validateDonation');
  *                   createdAt: 2022-09-14T17:09:49.000Z
  *                   updatedAt: 2022-09-14T17:09:49.000Z
  *                   deletedAt: null
+ *     getSingleDonation:
+ *       description: donation detail
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/PaymentItem'
+ *           example:
+ *             message: donation detail
+ *             data:
+ *               acquirer_reconciliation: null
+ *               additional_info:
+ *                 authentication_code: null
+ *                 available_balance: null
+ *                 ip_address: "190.231.220.25"
+ *                 items:
+ *                   - category_id: "single donation"
+ *                     description: "Donación única para la ONG Somos Más"
+ *                     id: "1"
+ *                     picture_url: null
+ *                     quantity: "1"
+ *                     title: "Donación única"
+ *                     unit_price: "1000.0"
+ *                 nsu_processadora: null
+ *               authorization_code: null
+ *               binary_mode: false
+ *               brand_id: null
+ *               build_version: "2.111.2-hotfix-1"
+ *               call_for_authorize_id: null
+ *               captured: true
+ *               card:
+ *                 cardholder:
+ *                   identification:
+ *                     number: "01111111"
+ *                     type: "DNI"
+ *                   name: "APRO"
+ *                 date_created: "2022-09-25T15:06:17.000-04:00"
+ *                 date_last_updated: "2022-09-25T15:06:17.000-04:00"
+ *                 expiration_month: 11
+ *                 expiration_year: 2025
+ *                 first_six_digits: "450995"
+ *                 id: null
+ *                 last_four_digits: "3704"
+ *               charges_details: []
+ *               collector_id": 1196390096
+ *               corporation_id": null
+ *               counter_currency": null
+ *               coupon_amount": 0
+ *               currency_id": "ARS"
+ *               date_approved": "2022-09-25T15:06:17.187-04:00"
+ *               date_created": "2022-09-25T15:06:17.009-04:00"
+ *               date_last_updated: "2022-09-25T15:06:17.187-04:00"
+ *               date_of_expiration: null
+ *               deduction_schema: null
+ *               description: "Donación única"
+ *               differential_pricing_id: null
+ *               external_reference: "smong267"
+ *               fee_details:
+ *                 amount: 41
+ *                 fee_payer: "collector"
+ *                 type: "mercadopago_fee"
+ *               id: 1308232596
+ *               installments: 1
+ *               integrator_id: null
+ *               issuer_id: "310"
+ *               live_mode: false
+ *               marketplace_owner: null
+ *               merchant_account_id: null
+ *               merchant_number: null
+ *               metadata: {}
+ *               money_release_date: "2022-10-13T15:06:17.187-04:00"
+ *               money_release_schema: null
+ *               money_release_status: null
+ *               notification_url: "https://b99e-190-231-220-25.sa.ngrok.io/donations/notification"
+ *               operation_type: "regular_payment"
+ *               order:
+ *                 id": "5939368200"
+ *                 type": "mercadopago"
+ *               payer":
+ *                 first_name": null
+ *                 last_name": null
+ *                 email": "test_user_80507629@testuser.com"
+ *                 identification":
+ *                   number": "32659430"
+ *                   type": "DNI"
+ *                 phone":
+ *                   area_code": null
+ *                   number": null
+ *                   extension": null
+ *                 type: null
+ *                 entity_type: null
+ *                 id": "1196391210"
+ *               payment_method_id": "visa"
+ *               payment_type_id": "credit_card"
+ *               platform_id": null
+ *               point_of_interaction:
+ *                 business_info:
+ *                   sub_unit: "checkout_pro"
+ *                   unit: "online_payments"
+ *                 type: "UNSPECIFIED"
+ *               pos_id: null
+ *               processing_mode: "aggregator"
+ *               refunds: []
+ *               shipping_amount: 0
+ *               sponsor_id: null
+ *               statement_descriptor: "SOMOSMASONG"
+ *               status: "approved"
+ *               status_detail": "accredited"
+ *               store_id: null
+ *               taxes_amount": 0
+ *               transaction_amount": 1000
+ *               transaction_amount_refunded": 0
+ *               transaction_details:
+ *                 acquirer_reference: null
+ *                 external_resource_url: null
+ *                 financial_institution: null
+ *                 installment_amount: 1000
+ *                 net_received_amount: 959
+ *                 overpaid_amount: 0
+ *                 payable_deferral_period: null
+ *                 payment_method_reference_id: null
+ *                 total_paid_amount: 1000
  *     401:
  *       description: unauthorized - id is required
  *     403:
@@ -650,13 +772,13 @@ const { validateDonationData } = require('../validators/validateDonation');
  *     500:
  *       description: server error
  *   parameters:
- *     idDonation:
+ *     mp_userId:
  *       in: path
  *       name: id
  *       schema:
  *         type: integer
  *       required: true
- *       description: donation id
+ *       description: mercado pago user id
  *     page:
  *       in: query
  *       name: page
@@ -688,7 +810,7 @@ const { validateDonationData } = require('../validators/validateDonation');
  *   get:
  *     security:
  *       - ApiKeyAuth: []
- *     summary: Get all donations
+ *     summary: Get all donations into our db
  *     tags: [Donation]
  *     parameters:
  *     - $ref: '#/components/parameters/page'
@@ -706,6 +828,26 @@ const { validateDonationData } = require('../validators/validateDonation');
  */
 router.get('/', isAuth, isAdmin, getDonations);
 
+/**
+ * @swagger
+ * /donations/{id}:
+ *   get:
+ *     security:
+ *       - ApiKeyAuth: []
+ *     summary: Get donation detail searching by mercado pago user id
+ *     tags: [Donation]
+ *     parameters:
+ *     - $ref: '#/components/parameters/mp_userId'
+ *     responses:
+ *       200:
+ *         $ref: '#/components/responses/getSingleDonation'
+ *       401:
+ *         $ref: '#/components/responses/401'
+ *       403:
+ *         $ref: '#/components/responses/403'
+ *       500:
+ *         $ref: '#/components/responses/500'
+ */
 router.get('/:id', isAuth, isAdmin, getSingleDonation);
 
 /**
@@ -763,7 +905,6 @@ router.post('/singledonation', isAuth, validateDonationData, createDonationLink)
 router.post('/subscription', isAuth, validateDonationData, createSubscriptionLink);
 
 router.post('/notification', async (req, res, next) => {
-  console.log('REQUEST', req);
   res.status(201);
   next();
 }, saveDonationData);

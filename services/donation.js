@@ -11,7 +11,6 @@ const findOneDonation = async (id) => {
         Authorization: `Bearer ${config.development.mpAccessToken}`,
       },
     }).then((r) => r.data);
-
     return donation;
   } catch (err) {
     return err;
