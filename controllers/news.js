@@ -85,7 +85,7 @@ const getAllNews = async (req, res) => {
   return error({ res, message: 'news not found' });
 };
 
-const getByNewsComments = async (req, res) => {
+const getCommentsOfSingleNews = async (req, res) => {
   const { id } = req.params;
   let data = {};
   try {
@@ -97,7 +97,7 @@ const getByNewsComments = async (req, res) => {
   } catch (err) {
     return serverError({ res, message: err.message });
   }
-  if (data) {
+  if (data[0] !== undefined) {
     return success({ res, message: `list of all comments from new ${id} `, data });
   } error({ res, message: 'comments not found' });
 };
@@ -108,5 +108,5 @@ module.exports = {
   createSingleNews,
   updateSingleNews,
   getAllNews,
-  getByNewsComments,
+  getCommentsOfSingleNews,
 };
