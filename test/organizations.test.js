@@ -14,24 +14,20 @@ describe('ORGANIZATIONS ENDPOINT', () => {
   let adminToken;
   let adminId;
   before(async () => {
-    try {
-      await axios.post('http://localhost:3000/auth/register', {
-        firstName: 'Super',
-        lastName: 'User',
-        email: 'superuser@mail.com',
-        password: 'SuperUser1000',
-        passwordConfirmation: 'SuperUser1000',
-        roleId: 1,
-      });
-      const info = await axios.post('http://localhost:3000/auth/login', {
-        email: 'superuser@mail.com',
-        password: 'SuperUser1000',
-      }).then((r) => r.data);
-      adminToken = info.data.token;
-      adminId = info.data.user.id;
-    } catch (err) {
-      console.log(err);
-    }
+    await axios.post('http://localhost:3000/auth/register', {
+      firstName: 'Super',
+      lastName: 'User',
+      email: 'superuser@mail.com',
+      password: 'SuperUser1000',
+      passwordConfirmation: 'SuperUser1000',
+      roleId: 1,
+    });
+    const info = await axios.post('http://localhost:3000/auth/login', {
+      email: 'superuser@mail.com',
+      password: 'SuperUser1000',
+    }).then((r) => r.data);
+    adminToken = info.data.token;
+    adminId = info.data.user.id;
   });
 
   after(async () => {

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /**
  * Test para los endpoints del CRUD de activities.
  * End points a testear
