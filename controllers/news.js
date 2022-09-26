@@ -87,19 +87,19 @@ const getAllNews = async (req, res) => {
 
 const getCommentsOfSingleNews = async (req, res) => {
   const { id } = req.params;
-  let data = {};
+  let data = [];
   try {
     const news = await findByPkNews(id);
 
-    if (!news) error({ res, message: 'news not found' });
+    if (!news) return error({ res, message: 'news not found' });
 
     data = await findAllByNewsIdComments(id);
   } catch (err) {
     return serverError({ res, message: err.message });
   }
-  if (data[0] !== undefined) {
-    return success({ res, message: `list of all comments from new ${id} `, data });
-  } error({ res, message: 'comments not found' });
+  return (data[0] !== undefined)
+    ? success({ res, message: `list of all comments from new ${id} `, data })
+    : error({ res, message: 'comments not found' });
 };
 
 module.exports = {
