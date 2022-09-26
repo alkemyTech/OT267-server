@@ -64,6 +64,7 @@ const {
  *          description: news content
  *        image:
  *          type: string
+ *          format: binary
  *          description: the news image
  *        type:
  *          type: string
@@ -77,10 +78,8 @@ const {
  *          items:
  *            $ref: '#/components/schemas/Comments'
  *      example:
- *        id: 1
  *        name: A famous person broke up
  *        content: this person is ..., he was dating ..., but finally they broke up
- *        image: https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png
  *        type: news
  *        categoryId: 3
  *    Comments:
@@ -328,6 +327,18 @@ const {
  *       schema:
  *         type: integer
  *       description: page required
+ *     by:
+ *       in: query
+ *       name: by
+ *       schema:
+ *         type: string
+ *       description: criteria to order rows
+ *     order:
+ *       in: query
+ *       name: order
+ *       schema:
+ *         type: string
+ *       description: direction to order rows
  *  securitySchemes:
  *     ApiKeyAuth:
  *       in: header
@@ -344,6 +355,8 @@ const {
  *    tags: [News]
  *    parameters:
  *     - $ref: '#/components/parameters/page'
+ *     - $ref: '#/components/parameters/by'
+ *     - $ref: '#/components/parameters/order'
  *    responses:
  *      200:
  *        $ref: '#/components/responses/getAllNews'
@@ -364,7 +377,7 @@ router.get('/', isAuth, getAllNews);
  *    requestBody:
  *      required: true
  *      content:
- *        application/json:
+ *        multipart/form-data:
  *          schema:
  *            type: object
  *            $ref: '#/components/schemas/News'
