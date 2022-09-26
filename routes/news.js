@@ -78,10 +78,10 @@ const {
  *          items:
  *            $ref: '#/components/schemas/Comments'
  *      example:
+ *        id: 1
  *        name: A famous person broke up
  *        content: this person is ..., he was dating ..., but finally they broke up
- *        type: news
- *        categoryId: 3
+ *        image: https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png
  *    Comments:
  *      type: object
  *      properties:
