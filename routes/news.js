@@ -82,6 +82,8 @@ const {
  *        name: A famous person broke up
  *        content: this person is ..., he was dating ..., but finally they broke up
  *        image: https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png
+ *        type: news
+ *        categoryId: 3
  *    Comments:
  *      type: object
  *      properties:
