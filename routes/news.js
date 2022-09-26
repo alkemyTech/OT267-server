@@ -12,7 +12,7 @@ const {
   createSingleNews,
   updateSingleNews,
   getAllNews,
-  getByNewsComments,
+  getCommentsOfSingleNews,
 } = require('../controllers/news');
 /**
  * @swagger
@@ -469,6 +469,7 @@ router.delete('/:id', isAuth, isAdmin, validateId, deleteSingleNews);
  *    tags: [News]
  *    parameters:
  *     - $ref: '#/components/parameters/page'
+ *     - $ref: '#/components/parameters/NewsId'
  *    responses:
  *      200:
  *        $ref: '#/components/responses/getComments'
@@ -479,6 +480,6 @@ router.delete('/:id', isAuth, isAdmin, validateId, deleteSingleNews);
  *      500:
  *        $ref: '#/components/responses/500'
 */
-router.get('/:id/comments', isAuth, getByNewsComments);
+router.get('/:id/comments', isAuth, getCommentsOfSingleNews);
 
 module.exports = router;
