@@ -21,34 +21,33 @@ const {
  *     description: ONG News
  * components:
  *  schemas:
- *    News Model:
+ *    NewsModel:
  *      type: object
  *      properties:
  *        name:
  *          type: string
  *          description: news name
+ *          example: A famous person broke up
  *        content:
  *          type: text
  *          description: news content
+ *          example:  this person is ..., he was dating ..., but finally they broke up
  *        image:
  *          type: string
+ *          format: binary
  *          description: the news image
- *        type:
- *          type: string
- *          description: news type
  *        categoryId:
  *          type: integer
  *          description: id of the category
+ *          example: 3
  *      required:
  *        - name
  *        - content
  *        - image
- *        - type
+ *        - categoryId
  *      example:
  *        name: A famous person broke up
  *        content: this person is ..., he was dating ..., but finally they broke up
- *        image: https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png
- *        type: news
  *        categoryId: 3
  *    News:
  *      type: object
@@ -78,12 +77,7 @@ const {
  *          items:
  *            $ref: '#/components/schemas/Comments'
  *      example:
- *        id: 1
- *        name: A famous person broke up
- *        content: this person is ..., he was dating ..., but finally they broke up
- *        image: https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png
- *        type: news
- *        categoryId: 3
+ *        name: Name of news updated
  *    Comments:
  *      type: object
  *      properties:
@@ -382,7 +376,7 @@ router.get('/', isAuth, getAllNews);
  *        multipart/form-data:
  *          schema:
  *            type: object
- *            $ref: '#/components/schemas/News'
+ *            $ref: '#/components/schemas/NewsModel'
  *    responses:
  *      201:
  *        $ref: '#/components/responses/created'
