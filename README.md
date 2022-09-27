@@ -24,6 +24,7 @@ It will be deployed soon!
 ## Contributors contact info
 
 * Zayra Velasco linkedIn ☞ <a href="https://www.linkedin.com/in/zayra-velasco">linkedIn</a> / <a href="mailto:zayra.contacto@gmail.com">email</a>
+* Bruno Bohlmann [Linkedin](https://www.linkedin.com/in/bruno-bohlmann/) / [Email](mailto:brunobohlman25@gmail.com)
 
 ## Snips
 
