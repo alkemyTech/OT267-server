@@ -15,7 +15,7 @@ const getDonations = async (req, res) => {
     const allDonations = await paginator(req, Donation);
     return success({
       res,
-      message: 'All donations',
+      message: 'list of all donations',
       data: allDonations,
     });
   } catch (err) {
@@ -28,12 +28,12 @@ const getDonations = async (req, res) => {
 
 const getSingleDonation = async (req, res) => {
   try {
-    const { id } = req.params;
-    const donation = await findOneDonation(id);
+    const donation = await findOneDonation(req.params.id);
+
     return !donation.message
       ? success({
         res,
-        message: 'Donation detail',
+        message: 'donation detail',
         data: donation,
       })
       : error({
@@ -51,10 +51,10 @@ const getSingleDonation = async (req, res) => {
 
 const createDonationLink = async (req, res) => {
   try {
-    const donation = await createDonation(req.body.amount);
+    const donation = await createDonation(+req.body.amount);
     return success({ res, message: 'single donation link', data: donation });
   } catch (err) {
-    return serverError({ res, message: err.message || 'Failed to create donation' });
+    return serverError({ res, message: err.message || 'failed to create donation' });
   }
 };
 
@@ -63,7 +63,7 @@ const createSubscriptionLink = async (req, res) => {
     const subscription = await createSubscription(req.body.amount);
     return success({ res, message: 'recurrent donation link', data: subscription });
   } catch (err) {
-    return serverError({ res, message: err.message || 'Failed to create donation' });
+    return serverError({ res, message: err.message || 'failed to create donation' });
   }
 };
 
@@ -75,7 +75,7 @@ const saveDonationData = async (req, res) => {
   try {
     const donationData = await saveDonation(body);
 
-    if (!donationData) return error({ res, message: 'Payment details were not saved, try again' });
+    if (!donationData) return error({ res, message: 'payment details were not saved, try again' });
 
     return res.status(200).send('OK');
   } catch (err) {

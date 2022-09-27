@@ -20,7 +20,6 @@ const newSingleNews = async (name, content, image, categoryId) => (News.create({
 );
 
 const updateByIdNews = async (id, data) => News.update({ ...data }, { where: { id } });
-
 const findAllByNewsIdComments = (id) => Comment.findAll({
   where: {
     newsId: id,

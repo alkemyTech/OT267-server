@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /**
  * Test para los endpoints del CRUD de activities.
  * End points a testear
@@ -19,7 +20,6 @@ const adminToken = process.env.TEST_ADMIN_TOKEN;
 
 // eslint-disable-next-line no-undef
 describe('Testing activities endpoints', () => {
-
   describe('#Get activities, GET /activities', () => {
     // Test auth
     it('Should return and error for not auth user or admin', (done) => {
@@ -50,7 +50,6 @@ describe('Testing activities endpoints', () => {
   });
 
   describe('#Create activities POST /activities', () => {
-
     it('Should return an error for not auth user or admin', (done) => {
       chai.request(app)
         .post('/activities')
@@ -87,7 +86,6 @@ describe('Testing activities endpoints', () => {
   });
 
   describe('#Update activities PUTT /activities/:id', () => {
-
     it('Should return an error for not auth user or admin', (done) => {
       chai.request(app)
         .put('/activities/1')
@@ -142,6 +140,5 @@ describe('Testing activities endpoints', () => {
           done();
         });
     });
-
   });
 });

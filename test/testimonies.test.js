@@ -42,7 +42,7 @@ describe('✍️ TESTIMONIES ENDPOINT', () => {
     const adminRequest = {
       firstName: 'AdminUser',
       lastName: 'lastName',
-      email: 'testimoniesAdminUser@mail.com',
+      email: 'testimoniesAdminUser@gmail.com',
       password: 'adminUser1',
       passwordConfirmation: 'adminUser1',
       image: 'http://adminUserImage.jpg',
@@ -65,7 +65,7 @@ describe('✍️ TESTIMONIES ENDPOINT', () => {
     const standardRequest = {
       firstName: 'StandardUser',
       lastName: 'lastName',
-      email: 'testimoniesStandardUser@mail.com',
+      email: 'testimoniesStandardUser@gmail.com',
       password: 'standardUser1',
       passwordConfirmation: 'standardUser1',
       image: 'http://standardUserImage.jpg',
