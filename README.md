@@ -26,7 +26,7 @@ It will be deployed soon!
 * Zayra Velasco linkedIn ☞ <a href="https://www.linkedin.com/in/zayra-velasco">linkedIn</a> / <a href="mailto:zayra.contacto@gmail.com">email</a>
 * Bruno Bohlmann [Linkedin](https://www.linkedin.com/in/bruno-bohlmann/) / [Email](mailto:brunobohlman25@gmail.com)
 * Francisco Lynch [Linkedin](https://www.linkedin.com/in/franciscolynch-/) / [Email](mailto:lynch_francisco_w@hotmail.com)
-* William Toro [Linkedin](www.linkedin.com/in/william-ancizar-toro-benavides) / [Email](mailto:wtorobenavides@gmail.com)
+* William Toro [Linkedin](https://www.linkedin.com/in/william-ancizar-toro-benavides) / [Email](mailto:wtorobenavides@gmail.com)
 
 ## Snips
 
