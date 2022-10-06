@@ -27,6 +27,7 @@ It will be deployed soon!
 * Bruno Bohlmann [Linkedin](https://www.linkedin.com/in/bruno-bohlmann/) / [Email](mailto:brunobohlman25@gmail.com)
 * Francisco Lynch [Linkedin](https://www.linkedin.com/in/franciscolynch-/) / [Email](mailto:lynch_francisco_w@hotmail.com)
 * William Toro [Linkedin](https://www.linkedin.com/in/william-ancizar-toro-benavides) / [Email](mailto:wtorobenavides@gmail.com)
+* Elias Pedevilla [Linkedin](https://www.linkedin.com/in/elias-pedevilla-54ab1023a/) / [Email](mailto:pedevillae@gmail.com)
 
 ## Snips
 
